@@ -9,13 +9,9 @@
   "license": "ISC",
   "scripts": {
     "start": "NODE_ENV=production node ./server",
-    "client": "react-scripts start",
+    "client": "NODE_ENV=development react-scripts start",
     "build": "react-scripts build",
     "server": "NODE_ENV=development nodemon server/index",
-    "deploy:prod": "git push umbler master",
-    "deploy:homolog": "git push heroku master",
-    "git:prod": "git remote add umbler https://kamino.deploy.umbler.com/0ko5o38j/narutoquest-com.git",
-    "git:homolog": "git remote add heroku https://gitlab.com/gabrielgrs/naruto-quest.git",
     "loadtest": "loadtest -c 10 --rps 100"
   },
   "dependencies": {

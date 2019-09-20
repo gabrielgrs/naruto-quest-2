@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import 'react-toastify/dist/ReactToastify.css'
 import Router from './router'
@@ -20,7 +19,8 @@ import {
 import { getUserByToken, clearSession } from '../redux/users'
 import * as storageHelper from '../helpers/storage'
 
-export const StyledActionButton = styled(Link)`
+export const StyledActionButton = styled.div`
+  cursor: pointer;
   text-decoration: none;
   position: fixed;
   bottom: 0;
@@ -46,13 +46,16 @@ export const StyledTag = styled.div`
   cursor: default;
   color: #fff;
   position: fixed;
-  bottom: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 3px 10px 3px 10px;
+  top: 20px;
   left: 10px;
   z-index: 999;
   cursor: default;
 `
 
 export default () => {
+  const [showOnboarding, setShowonboarding] = useState(false)
   const {
     isAuthenticated,
     selectedCharacter,
@@ -122,7 +125,11 @@ export default () => {
         </StyledActionButton>
       )
 
-    return <StyledActionButton to="/tutorial"> Tutorial </StyledActionButton>
+    return (
+      <StyledActionButton onClick={() => setShowonboarding(true)}>
+        Tutorial
+      </StyledActionButton>
+    )
   }
 
   document.addEventListener(
@@ -138,7 +145,7 @@ export default () => {
   return (
     <ThemeProvider theme={theme(selectedCharacter.village)}>
       <OverlayLoader loading={loadingScreen}>
-        {window.location.href.includes('herokuapp') && (
+        {process.env.NODE_ENV !== 'production' && (
           <StyledTag>Servidor de Testes</StyledTag>
         )}
         <Row>
@@ -170,7 +177,12 @@ export default () => {
         <div>Developed 4Fun</div>
       </Footer> */}
           {renderActionButton()}
-          {isAuthenticated && !!selectedCharacter.name && <Onboarding />}
+          {
+            <Onboarding
+              isOpen={showOnboarding}
+              onLastStep={() => setShowonboarding(false)}
+            />
+          }
           <Toast />
         </Row>
       </OverlayLoader>
