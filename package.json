@@ -9,6 +9,7 @@
   "license": "ISC",
   "scripts": {
     "start": "NODE_ENV=production node ./server",
+    "test": "echo \"\n[ Skip tests ]\n\"",
     "client": "react-scripts start",
     "build": "react-scripts build",
     "server": "NODE_ENV=development nodemon server/index",
