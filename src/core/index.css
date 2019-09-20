@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css?family=Bangers|Blinker|Raleway&display=swap');
+
+* {
+  transition: opacity 0.5s ease-out;
+  -moz-transition: opacity 0.5s ease-out;
+  -webkit-transition: opacity 0.5s ease-out;
+  -o-transition: opacity 0.5s ease-out;
+}
+
+html {
+  background: url('https://res.cloudinary.com/dbmnsavja/image/upload/v1567981106/Naruto%20Game/assets/wallpaper.png')
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body {
+  margin: 0 auto;
+  box-sizing: border-box;
+  font-family: 'Blinker';
+  /* background-image: url('https://design.wegalvanize.io/416a4b4f3c55cc1f18fcfed19e55664b.png'); */
+
+  background: rgba(0, 0, 0, 0.8);
+}
+
+input,
+button {
+  font-size: inherit;
+  /* -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box; */
+}
+
+input {
+  height: 30px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #bdbdbd;
+  border-radius: 100px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: white;
+}
+
+button:focus {
+  outline: 0;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.5);
+}
