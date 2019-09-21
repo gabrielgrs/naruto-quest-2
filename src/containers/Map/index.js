@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { moveCharacter } from '../../redux/characters'
+import { enterInBattle } from '../../redux/battle'
 // import { texts } from '../../helpers/texts'
 import { generateMap } from '../../helpers/map'
 
@@ -119,7 +121,7 @@ const MapPart = ({ isCharacterHere, coordX, coordY, content, itemsPerRow }) => {
   )
 }
 
-export default ({ isLoading }) => {
+const Map = ({ isLoading, ...props }) => {
   const dispatch = useDispatch()
   const [accessAction, setAccessAction] = useState(undefined)
   const { selectedCharacter } = useSelector(({ user }) => ({ ...user }))
@@ -178,9 +180,44 @@ export default ({ isLoading }) => {
 
     const currentArea = generatedMap.find(m => m.coordX === x && m.coordY === y)
 
-    if (currentArea.content) {
+    if (currentArea && currentArea.content) {
+      const mockEnemy = {
+        attributes: { attack: 0, intelligence: 0, vitality: 0 },
+        inStory: false,
+        _id: '5d81473dc4632e26a8f7f720',
+        code: 0,
+        name: 'Denka de Treinamento',
+        image:
+          'https://res.cloudinary.com/dbmnsavja/image/upload/v1566237351/Naruto%20Game/Characters/denka.png',
+        level: 1,
+        element: 'neutral',
+        exp: 20,
+        gold: 0,
+        __v: 0
+      }
+      if (
+        !selectedCharacter.currentBattle &&
+        currentArea.content.type === 'enemy'
+      ) {
+        dispatch(enterInBattle(selectedCharacter, mockEnemy))
+        // TODO
+        setPosition(0, 1)
+      }
+
       const current = actions[currentArea.content.type]
       setAccessAction(current)
+      props.history.push(current)
+    } else {
+      setAccessAction(undefined)
+
+      // TODO
+      if (
+        currentArea &&
+        currentArea.content &&
+        currentArea.content.type !== 'enemy'
+      ) {
+        props.history.push('/')
+      }
     }
   }
 
@@ -265,3 +302,5 @@ export default ({ isLoading }) => {
     </StyledWrapper>
   )
 }
+
+export default withRouter(Map)

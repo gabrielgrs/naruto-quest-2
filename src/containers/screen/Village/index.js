@@ -20,17 +20,17 @@ export default () => {
       title={`Vila da ${getVillage(selectedCharacter.village).label}`}
       description="Se aventure pela Vila"
       representantImage="https://res.cloudinary.com/dbmnsavja/image/upload/v1567454394/Naruto%20Game/Chibis/Sai.png"
-      helperText="Escolha entre o campo de batalha, loja ou hospital!"
+      helperText="Escolha entre as missões, loja ou hospital!"
     >
       <Container>
         <Row>
           <Col sm={4}>
-            <h3>Campo de Batalha</h3>
-            <Link to="/campo">
+            <h3>Missões</h3>
+            <Link to="/missoes">
               <StyledCard>
                 <img
                   src="https://res.cloudinary.com/dbmnsavja/image/upload/v1567016421/entrance_wryv1v.png"
-                  alt="Campo de Batalha"
+                  alt="Missões"
                 />
               </StyledCard>
             </Link>

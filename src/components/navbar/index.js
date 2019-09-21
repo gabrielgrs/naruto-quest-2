@@ -49,60 +49,11 @@ export default ({
       <StyledNavLinks navbarIsOpen={navbarIsOpen}>
         <NavItem
           onClick={() => setNavbarIsOpen(false)}
-          hidden={
-            !isAuthenticated || dontHaveCharacters || inBattle || currentQuest
-          }
-          path="/vila"
-        >
-          Vila
-        </NavItem>
-        <NavItem
-          onClick={() => setNavbarIsOpen(false)}
-          hidden={!isAuthenticated || dontHaveCharacters || inBattle}
-          path="/missoes"
-        >
-          Missões
-        </NavItem>
-        {inBattle && (
-          <NavItem
-            onClick={() => setNavbarIsOpen(false)}
-            hidden={
-              ((!isAuthenticated || dontHaveCharacters) && !inBattle) ||
-              currentQuest
-            }
-            path="/campo"
-          >
-            Campo
-          </NavItem>
-        )}
-        <NavItem
-          onClick={() => setNavbarIsOpen(false)}
           hidden={!isAuthenticated || dontHaveCharacters || inBattle}
           path="/treinamento"
         >
           Treino
         </NavItem>
-        {/* <NavItem
-          onClick={() => setNavbarIsOpen(false)}
-          hidden={!isAuthenticated || dontHaveCharacters || inBattle}
-          path="/loja"
-        >
-          Loja
-        </NavItem> */}
-        {/* <NavItem
-          onClick={() => setNavbarIsOpen(false)}
-          hidden={!isAuthenticated || dontHaveCharacters || inBattle}
-          path="/hospital"
-        >
-          Hospital
-        </NavItem> */}
-        {/* <NavItem
-          onClick={() => setNavbarIsOpen(false)}
-          hidden={!isAuthenticated || dontHaveCharacters}
-          path="/treino"
-        >
-          Treino
-        </NavItem> */}
         <NavItem
           onClick={() => setNavbarIsOpen(false)}
           hidden={
@@ -112,20 +63,6 @@ export default ({
         >
           Times
         </NavItem>
-        {/* <NavItem
-          onClick={() => setNavbarIsOpen(false)}
-          hidden={!isAuthenticated || dontHaveCharacters}
-          path="/time"
-        >
-          Time
-        </NavItem> */}
-        {/* <NavItem
-          onClick={() => setNavbarIsOpen(false)}
-          hidden={!isAuthenticated || dontHaveCharacters}
-          path="/time"
-        >
-          Missões
-        </NavItem> */}
         <NavItem
           onClick={() => setNavbarIsOpen(false)}
           hidden={!isAuthenticated || inBattle || selectedCharacter.selectedJob}

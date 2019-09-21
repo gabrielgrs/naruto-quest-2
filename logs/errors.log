@@ -1,2 +1,6 @@
 {"message":"TypeError: Cannot read property 'selectedCharacter' of null","status":500,"level":"error","date":"2019-09-21T21:16:41.771Z"}
 {"message":"TypeError: validator.moveCharacter is not a function","status":500,"level":"error","date":"2019-09-21T21:19:23.690Z"}
+{"message":"TypeError: Cannot destructure property `attributes` of 'undefined' or 'null'.","status":500,"level":"error","date":"2019-09-21T23:19:11.842Z"}
+{"message":"TypeError: Cannot destructure property `attributes` of 'undefined' or 'null'.","status":500,"level":"error","date":"2019-09-21T23:19:52.852Z"}
+{"message":"TypeError: Cannot destructure property `attributes` of 'undefined' or 'null'.","status":500,"level":"error","date":"2019-09-21T23:20:12.307Z"}
+{"message":"TypeError: Cannot destructure property `attributes` of 'undefined' or 'null'.","status":500,"level":"error","date":"2019-09-21T23:20:36.256Z"}
