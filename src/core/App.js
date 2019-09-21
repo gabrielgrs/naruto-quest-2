@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import Map from '../containers/Map'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import 'react-toastify/dist/ReactToastify.css'
@@ -150,18 +151,16 @@ export default () => {
               selectedCharacter={selectedCharacter}
             />
           )}
-          {/* {isAuthenticated && !selectedCharacter.inBattle && (
-          <Col sm={3}>
-            <Sidebar />
-          </Col>
-        )} */}
           <StyledWrapper>
             <Col sm={12}>
               {isAuthenticated && !selectedCharacter.inBattle && (
                 <CharacterBar selectedCharacter={selectedCharacter} />
               )}
             </Col>
-            <Col sm={12}>
+            <Col sm={3}>
+              {selectedCharacter && selectedCharacter.coordinates && <Map />}
+            </Col>
+            <Col sm={9}>
               <Router />
             </Col>
           </StyledWrapper>

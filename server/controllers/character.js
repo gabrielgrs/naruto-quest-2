@@ -309,6 +309,27 @@ async function learnElement(req, res) {
   }
 }
 
+async function moveCharacter(req, res) {
+  try {
+    const { x, y } = req.body
+
+    const { _id } = await res.getCurrentUser()
+    const { selectedCharacter } = await userRepository.getById(_id)
+
+    const errorMessage = await validator.moveCharacter(x, y, selectedCharacter)
+
+    if (errorMessage) {
+      return res.status(400).send({ message: errorMessage })
+    }
+
+    const data = await repository.moveCharacter(selectedCharacter._id, { x, y })
+
+    res.status(200).send(data)
+  } catch (error) {
+    res.handleError(500, error)
+  }
+}
+
 async function remove(req, res) {
   try {
     const { id } = req.params
@@ -340,5 +361,6 @@ module.exports = {
   finishQuest,
   leaveQuest,
   learnElement,
-  remove
+  remove,
+  moveCharacter
 }

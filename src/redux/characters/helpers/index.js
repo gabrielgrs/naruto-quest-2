@@ -16,5 +16,6 @@ export const actionTypes = {
   LEAVE_FROM_QUEST: createActionType('leave_from_quest', base),
   LEARN_ELEMENT: createActionType('learn_element', base),
   USE_EQUIPMENT: createActionType('use_equipment', base),
+  MOVE_CHARACTER: createActionType('move_character', base),
   CLEAR_STATE: createActionType('clear_state', base)
 }

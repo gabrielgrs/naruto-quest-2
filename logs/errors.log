@@ -1,0 +1,2 @@
+{"message":"TypeError: Cannot read property 'selectedCharacter' of null","status":500,"level":"error","date":"2019-09-21T21:16:41.771Z"}
+{"message":"TypeError: validator.moveCharacter is not a function","status":500,"level":"error","date":"2019-09-21T21:19:23.690Z"}

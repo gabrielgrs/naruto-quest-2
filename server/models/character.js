@@ -5,6 +5,16 @@ const schema = new Schema({
     type: String,
     unique: true
   },
+  coordinates: {
+    x: {
+      type: Number,
+      default: 0
+    },
+    y: {
+      type: Number,
+      default: 0
+    }
+  },
   level: { type: Number, default: 1 },
   exp: { type: Number, default: 0 },
   gold: { Type: Number, default: 0 },

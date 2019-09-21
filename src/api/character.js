@@ -33,3 +33,6 @@ export const learnElement = element =>
 
 export const setEquipment = equipment =>
   axios.put(`${BASE}/setEquipment`, { equipment })
+
+export const moveCharacter = (x, y) =>
+  axios.put(`${BASE}/moveCharacter`, { x, y })

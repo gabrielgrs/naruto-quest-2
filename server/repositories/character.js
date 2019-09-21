@@ -174,6 +174,15 @@ const learnElement = (_id, element) => {
   return model.findOneAndUpdate({ _id }, { $set: { element } })
 }
 
+const moveCharacter = (_id, { x, y }) => {
+  return model.findOneAndUpdate(
+    { _id },
+    {
+      $inc: { 'coordinates.x': x, 'coordinates.y': y, 'attributes.stamina': -1 }
+    }
+  )
+}
+
 module.exports = {
   getAll,
   getRanking,
@@ -204,5 +213,6 @@ module.exports = {
   getByCode,
   learnElement,
   setEquipment,
+  moveCharacter,
   setLastSesseionTime
 }

@@ -16,3 +16,9 @@ deploy:
   app: narutoquest
   on:
     branch: master
+  - provider: heroku
+  api_key:
+    secure: '5ce5511a-538d-49f9-9f9a-5302b99d36af'
+  app: narutoquest-v2
+  on:
+    branch: v2

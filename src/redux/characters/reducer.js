@@ -174,6 +174,20 @@ export const setEquipmentFail = error => ({
   payload: error
 })
 
+export const moveCharacter = () => ({
+  type: actionTypes.MOVE_CHARACTER.BASE
+})
+
+export const moveCharacterSuccess = data => ({
+  type: actionTypes.MOVE_CHARACTER.SUCCESS,
+  payload: data
+})
+
+export const moveCharacterFail = error => ({
+  type: actionTypes.MOVE_CHARACTER.FAIL,
+  payload: error
+})
+
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case actionTypes.CREATE.BASE:
@@ -241,6 +255,12 @@ export default (state = INITIAL_STATE, action) => {
     case actionTypes.USE_EQUIPMENT.SUCCESS:
       return { ...state, loadingCharacter: false }
     case actionTypes.USE_EQUIPMENT.FAIL:
+      return { ...state, error: action.payload, loadingCharacter: false }
+    case actionTypes.MOVE_CHARACTER.BASE:
+      return { ...state, loadingCharacter: true }
+    case actionTypes.MOVE_CHARACTER.SUCCESS:
+      return { ...state, loadingCharacter: false }
+    case actionTypes.MOVE_CHARACTER.FAIL:
       return { ...state, error: action.payload, loadingCharacter: false }
     case actionTypes.CLEAR_STATE.BASE:
       return INITIAL_STATE

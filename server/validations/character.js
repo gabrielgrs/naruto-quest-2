@@ -51,8 +51,23 @@ async function learnSkill(currentSkills, level) {
   return
 }
 
+async function moveCharacter(x, y, { attributes }) {
+  if (attributes.stamina < 1) {
+    return 'Estamina insuficiente'
+  }
+
+  const enableMoviments = [-1, 0, 1]
+
+  if (!enableMoviments.includes(x) || !enableMoviments.includes(y)) {
+    return 'Ação inválida, atualize a página'
+  }
+
+  return
+}
+
 module.exports = {
   insert,
   setAttributes,
-  learnSkill
+  learnSkill,
+  moveCharacter
 }

@@ -73,6 +73,12 @@ module.exports = [
     path: `/${component}/setEquipment`,
     action: 'setEquipment'
   },
+  {
+    component,
+    method: 'put',
+    path: `/${component}/moveCharacter`,
+    action: 'moveCharacter'
+  },
   // {
   //   component,
   //   method: 'get',

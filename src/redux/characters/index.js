@@ -35,7 +35,10 @@ import {
   learnElementFail,
   setEquipment as setEquipmentReducer,
   setEquipmentSuccess,
-  setEquipmentFail
+  setEquipmentFail,
+  moveCharacter as moveCharacterReducer,
+  moveCharacterSuccess,
+  moveCharacterFail
 } from './reducer'
 import { getUserByToken } from '../users'
 import * as charactersCollection from '../../api/character'
@@ -219,6 +222,20 @@ export const setEquipment = equipment => {
     } catch (error) {
       notifyNormalizedMessageError(error)
       dispatch(setEquipmentFail(error))
+    }
+  }
+}
+
+export const moveCharacter = (x, y) => {
+  return async dispatch => {
+    dispatch(moveCharacterReducer())
+    try {
+      const { data } = await charactersCollection.moveCharacter(x, y)
+      dispatch(getUserByToken())
+      dispatch(moveCharacterSuccess(data))
+    } catch (error) {
+      notifyNormalizedMessageError(error)
+      dispatch(moveCharacterFail(error))
     }
   }
 }
