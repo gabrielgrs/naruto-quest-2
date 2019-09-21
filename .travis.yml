@@ -5,20 +5,22 @@ node_js:
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
   - export PATH="$HOME/.yarn/bin:$PATH"
+
 install:
   - rm -rf node_modules/ build/
   - yarn install
   - yarn build
+
 deploy:
   - provider: heroku
-  api_key:
-    secure: '5ce5511a-538d-49f9-9f9a-5302b99d36af'
-  app: narutoquest-v2
-  on:
-    branch: demo
+    api_key:
+      secure: '5ce5511a-538d-49f9-9f9a-5302b99d36af'
+    app: narutoquest-v2
+    on:
+      branch: demo
   - provider: heroku
-  api_key:
-    secure: '5ce5511a-538d-49f9-9f9a-5302b99d36af'
-  app: narutoquest
-  on:
-    branch: master
+    api_key:
+      secure: '5ce5511a-538d-49f9-9f9a-5302b99d36af'
+    app: narutoquest
+    on:
+      branch: master
