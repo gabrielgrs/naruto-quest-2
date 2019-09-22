@@ -226,11 +226,12 @@ export const setEquipment = equipment => {
   }
 }
 
-export const moveCharacter = (x, y) => {
+export const moveCharacter = (x, y, callback) => {
   return async dispatch => {
     dispatch(moveCharacterReducer())
     try {
       const { data } = await charactersCollection.moveCharacter(x, y)
+      if (callback) callback(data.nextCoordinate.x, data.nextCoordinate.y)
       dispatch(getUserByToken())
       dispatch(moveCharacterSuccess(data))
     } catch (error) {

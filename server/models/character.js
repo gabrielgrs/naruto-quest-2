@@ -5,7 +5,7 @@ const schema = new Schema({
     type: String,
     unique: true
   },
-  coordinates: {
+  coordinate: {
     x: {
       type: Number,
       default: 0

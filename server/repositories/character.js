@@ -178,7 +178,7 @@ const moveCharacter = (_id, { x, y }) => {
   return model.findOneAndUpdate(
     { _id },
     {
-      $inc: { 'coordinates.x': x, 'coordinates.y': y, 'attributes.stamina': -1 }
+      $inc: { 'coordinate.x': x, 'coordinate.y': y, 'attributes.stamina': -1 }
     }
   )
 }

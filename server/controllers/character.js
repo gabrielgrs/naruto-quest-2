@@ -324,7 +324,13 @@ async function moveCharacter(req, res) {
 
     const data = await repository.moveCharacter(selectedCharacter._id, { x, y })
 
-    res.status(200).send(data)
+    res.status(200).send({
+      nextCoordinate: {
+        x: selectedCharacter.coordinate.x + x,
+        y: selectedCharacter.coordinate.y + y
+      },
+      ...data
+    })
   } catch (error) {
     res.handleError(500, error)
   }

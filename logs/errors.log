@@ -4,3 +4,70 @@
 {"message":"TypeError: Cannot destructure property `attributes` of 'undefined' or 'null'.","status":500,"level":"error","date":"2019-09-21T23:19:52.852Z"}
 {"message":"TypeError: Cannot destructure property `attributes` of 'undefined' or 'null'.","status":500,"level":"error","date":"2019-09-21T23:20:12.307Z"}
 {"message":"TypeError: Cannot destructure property `attributes` of 'undefined' or 'null'.","status":500,"level":"error","date":"2019-09-21T23:20:36.256Z"}
+{"message":"Error: Invalid map size","status":500,"level":"error","date":"2019-09-22T03:23:49.270Z"}
+{"message":"Error: Invalid map size","status":500,"level":"error","date":"2019-09-22T03:23:49.270Z"}
+{"message":"TypeError: Promise.resolve is not a constructor","status":500,"level":"error","date":"2019-09-22T03:27:37.606Z"}
+{"message":"MongoError: E11000 duplicate key error index: narutogame_validations.maps.$parts.code_1 dup key: { : null }","status":500,"level":"error","date":"2019-09-22T03:46:30.392Z"}
+{"message":"MongoError: E11000 duplicate key error index: narutogame_validations.maps.$parts.code_1 dup key: { : null }","status":500,"level":"error","date":"2019-09-22T03:47:13.288Z"}
+{"message":"MongoError: E11000 duplicate key error index: narutogame_validations.maps.$parts.code_1 dup key: { : null }","status":500,"level":"error","date":"2019-09-22T03:48:29.138Z"}
+{"message":"MongoError: E11000 duplicate key error index: narutogame_validations.maps.$parts.code_1 dup key: { : null }","status":500,"level":"error","date":"2019-09-22T03:48:51.041Z"}
+{"message":"ReferenceError: teste is not defined","status":500,"level":"error","date":"2019-09-22T03:52:42.940Z"}
+{"message":"TypeError: getDefaultMap is not a function or its return value is not iterable","status":500,"level":"error","date":"2019-09-22T04:01:57.281Z"}
+{"message":"TypeError: object is not iterable (cannot read property Symbol(Symbol.iterator))","status":500,"level":"error","date":"2019-09-22T04:02:35.043Z"}
+{"message":"ValidationError: parts: Cast to Array failed for value \"[AsyncFunction: generateMap]\" at path \"parts\"","status":500,"level":"error","date":"2019-09-22T04:03:41.711Z"}
+{"message":"TypeError: generateMapHelper is not a function","status":500,"level":"error","date":"2019-09-22T04:17:36.624Z"}
+{"message":"ValidationError: parts.0.type: `null` is not a valid enum value for path `type`.","status":500,"level":"error","date":"2019-09-22T04:19:11.029Z"}
+{"message":"ValidationError: parts.0.type: `null` is not a valid enum value for path `type`.","status":500,"level":"error","date":"2019-09-22T04:19:11.029Z"}
+{"message":"MongooseError: document must have an _id before saving","status":500,"level":"error","date":"2019-09-22T04:28:17.364Z"}
+{"message":"TypeError: undefined is not iterable (cannot read property Symbol(Symbol.iterator))","status":500,"level":"error","date":"2019-09-22T04:30:31.741Z"}
+{"message":"ReferenceError: index is not defined","status":500,"level":"error","date":"2019-09-22T04:49:44.821Z"}
+{"message":"TypeError: userRepository.getById is not a function","status":500,"level":"error","date":"2019-09-22T05:24:26.970Z"}
+{"message":"ReferenceError: o is not defined","status":500,"level":"error","date":"2019-09-22T05:28:40.517Z"}
+{"message":"JsonWebTokenError: jwt must be provided","status":500,"level":"error","date":"2019-09-22T05:32:19.801Z"}
+{"message":"JsonWebTokenError: jwt must be provided","status":500,"level":"error","date":"2019-09-22T05:32:19.801Z"}
+{"message":"ReferenceError: parsedArray is not defined","status":500,"level":"error","date":"2019-09-22T05:38:54.648Z"}
+{"message":"TypeError: (((1 + coordinates.x) === currX) && (currY === coordinates.y)) is not a function","status":500,"level":"error","date":"2019-09-22T06:00:44.433Z"}
+{"message":"TypeError: (((1 + coordinates.x) === currX) && (currY === coordinates.y)) is not a function","status":500,"level":"error","date":"2019-09-22T06:00:44.433Z"}
+{"message":"ReferenceError: curry is not defined","status":500,"level":"error","date":"2019-09-22T06:01:01.214Z"}
+{"message":"ReferenceError: curry is not defined","status":500,"level":"error","date":"2019-09-22T06:01:01.214Z"}
+{"message":"TypeError: (((1 + coordinates.x) === currX) && (currY === coordinates.y)) is not a function","status":500,"level":"error","date":"2019-09-22T06:02:36.456Z"}
+{"message":"TypeError: (((1 + coordinates.x) === currX) && (currY === coordinates.y)) is not a function","status":500,"level":"error","date":"2019-09-22T06:02:36.456Z"}
+{"message":"ReferenceError: curryX is not defined","status":500,"level":"error","date":"2019-09-22T06:11:40.343Z"}
+{"message":"ReferenceError: curryX is not defined","status":500,"level":"error","date":"2019-09-22T06:11:40.343Z"}
+{"message":"ReferenceError: currYX is not defined","status":500,"level":"error","date":"2019-09-22T06:23:00.856Z"}
+{"message":"ReferenceError: currYX is not defined","status":500,"level":"error","date":"2019-09-22T06:23:00.856Z"}
+{"message":"ReferenceError: curry is not defined","status":500,"level":"error","date":"2019-09-22T06:24:15.867Z"}
+{"message":"ReferenceError: curry is not defined","status":500,"level":"error","date":"2019-09-22T06:24:15.867Z"}
+{"message":"JsonWebTokenError: jwt must be provided","status":500,"level":"error","date":"2019-09-22T06:42:26.575Z"}
+{"message":"JsonWebTokenError: jwt must be provided","status":500,"level":"error","date":"2019-09-22T20:16:13.609Z"}
+{"message":"JsonWebTokenError: jwt must be provided","status":500,"level":"error","date":"2019-09-22T20:16:13.609Z"}
+{"message":"ReferenceError: coordinate is not defined","status":500,"level":"error","date":"2019-09-22T20:16:57.379Z"}
+{"message":"TypeError: map.find is not a function","status":500,"level":"error","date":"2019-09-22T20:17:15.183Z"}
+{"message":"TypeError: map.find is not a function","status":500,"level":"error","date":"2019-09-22T20:17:29.643Z"}
+{"message":"JsonWebTokenError: jwt must be provided","status":500,"level":"error","date":"2019-09-22T20:26:02.437Z"}
+{"message":"ReferenceError: response is not defined","status":500,"level":"error","date":"2019-09-22T21:10:01.993Z"}
+{"message":"TokenExpiredError: jwt expired","status":500,"level":"error","date":"2019-09-22T21:19:04.263Z"}
+{"message":"TokenExpiredError: jwt expired","status":500,"level":"error","date":"2019-09-22T21:19:04.263Z"}
+{"message":"ReferenceError: index is not defined","status":500,"level":"error","date":"2019-09-22T21:37:54.740Z"}
+{"message":"ValidationError: parts: Cast to Array failed for value \"1\" at path \"parts\"","status":500,"level":"error","date":"2019-09-22T21:38:10.902Z"}
+{"message":"TypeError: Cannot read property 'parts' of null","status":500,"level":"error","date":"2019-09-22T21:38:39.483Z"}
+{"message":"TypeError: Cannot read property 'parts' of null","status":500,"level":"error","date":"2019-09-22T21:38:39.483Z"}
+{"message":"TypeError: Cannot read property 'parts' of null","status":500,"level":"error","date":"2019-09-22T21:39:11.495Z"}
+{"message":"TypeError: Cannot read property 'parts' of null","status":500,"level":"error","date":"2019-09-22T21:39:11.495Z"}
+{"message":"TypeError: Cannot read property 'parts' of null","status":500,"level":"error","date":"2019-09-22T21:41:27.815Z"}
+{"message":"ValidationError: parts: Cast to Array failed for value \"[AsyncFunction: populateMap]\" at path \"parts\"","status":500,"level":"error","date":"2019-09-22T21:45:34.193Z"}
+{"message":"ValidationError: parts: Cast to Array failed for value \"[AsyncFunction: populateMap]\" at path \"parts\"","status":500,"level":"error","date":"2019-09-22T21:46:00.356Z"}
+{"message":"TypeError: map.map is not a function","status":500,"level":"error","date":"2019-09-22T21:47:36.437Z"}
+{"message":"JsonWebTokenError: jwt must be provided","status":500,"level":"error","date":"2019-09-22T21:47:52.809Z"}
+{"message":"TypeError: map.map is not a function","status":500,"level":"error","date":"2019-09-22T21:58:25.625Z"}
+{"message":"ReferenceError: coordinate is not defined","status":500,"level":"error","date":"2019-09-22T23:08:44.682Z"}
+{"message":"ReferenceError: v is not defined","status":500,"level":"error","date":"2019-09-22T23:09:34.341Z"}
+{"message":"TypeError: villages.for is not a function","status":500,"level":"error","date":"2019-09-22T23:10:08.247Z"}
+{"message":"ReferenceError: probability is not defined","status":500,"level":"error","date":"2019-09-22T23:13:54.993Z"}
+{"message":"TypeError: Cannot read property 'x' of undefined","status":500,"level":"error","date":"2019-09-22T23:25:22.486Z"}
+{"message":"TypeError: Cannot destructure property `attributes` of 'undefined' or 'null'.","status":500,"level":"error","date":"2019-09-22T23:40:58.404Z"}
+{"message":"TypeError: Cannot destructure property `attributes` of 'undefined' or 'null'.","status":500,"level":"error","date":"2019-09-22T23:41:29.415Z"}
+{"message":"TypeError: Cannot destructure property `attributes` of 'undefined' or 'null'.","status":500,"level":"error","date":"2019-09-22T23:42:18.579Z"}
+{"message":"TypeError: Cannot destructure property `attributes` of 'undefined' or 'null'.","status":500,"level":"error","date":"2019-09-22T23:42:48.776Z"}
+{"message":"TypeError: Cannot read property 'vitality' of undefined","status":500,"level":"error","date":"2019-09-22T23:44:15.206Z"}
+{"message":"TypeError: Cannot read property 'vitality' of undefined","status":500,"level":"error","date":"2019-09-22T23:44:53.587Z"}

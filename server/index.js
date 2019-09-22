@@ -34,7 +34,7 @@ app.use(morgan('dev'))
 app.use('/api', router)
 
 // Server static files
-migrations.executeMigrations()
+// migrations.executeMigrations()
 
 //Static file declaration
 app.use(express.static(path.join(__dirname, '../build')))

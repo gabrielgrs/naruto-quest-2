@@ -23,13 +23,15 @@ async function enterInBattle(req, res) {
       return res.status(400).send({ message: errorMessage })
     }
 
-    const { enemyId } = req.body
-
-    const { attributes } = await enemyRepository.getById(req.body.enemyId)
+    const { enemyId, code } = req.body
+    const { _id: currentEnemyId, attributes } =
+      code === undefined
+        ? await enemyRepository.getById(req.body.enemyId)
+        : await enemyRepository.getByCode(code)
 
     const data = await repository.insert({
       character: selectedCharacter._id,
-      enemy: enemyId,
+      enemy: enemyId || currentEnemyId,
       currentEnemyLife: attributes.vitality * 10
     })
 

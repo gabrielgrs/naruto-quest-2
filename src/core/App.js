@@ -158,7 +158,7 @@ export default () => {
               )}
             </Col>
             <Col sm={3}>
-              {selectedCharacter && selectedCharacter.coordinates && <Map />}
+              {selectedCharacter && selectedCharacter.coordinate && <Map />}
             </Col>
             <Col sm={9}>
               <Router />

@@ -25,7 +25,8 @@ export const enterInBattle = (character, enemy) => {
     try {
       const data = await battleCollection.enterInbattle({
         characterId: character._id,
-        enemyId: enemy._id
+        enemyId: enemy._id,
+        code: enemy.code
       })
 
       dispatch(getUserByToken())

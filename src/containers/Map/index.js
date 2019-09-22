@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { moveCharacter } from '../../redux/characters'
 import { enterInBattle } from '../../redux/battle'
 // import { texts } from '../../helpers/texts'
-import { generateMap } from '../../helpers/map'
+
+import { getMap } from '../../api/map'
 
 const StyledWrapper = styled.div`
   text-align: center;
@@ -28,6 +29,7 @@ const StyledMapPart = styled.div`
   height: 100px;
   width: ${({ itemsPerRow }) => getWidth(itemsPerRow)};
   box-sizing: border-box;
+  opacity: ${({ isBlocked }) => (isBlocked ? 0.5 : 1)};
   background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvHTKXFkoS6Ye0h0916XwIDh6ppfq1bfcpLaG7faU3i_0jt7n1');
 `
 
@@ -85,36 +87,20 @@ const Character = () => {
 const MapPart = ({ isCharacterHere, coordX, coordY, content, itemsPerRow }) => {
   const renderContent = content => {
     if (content.type === 'village') {
-      return (
-        <div>
-          <img
-            width="100%"
-            height="100%"
-            alt={content.name}
-            src={content.image}
-          />
-        </div>
-      )
+      return <div>{content.data.name} Village</div>
     }
 
     if (content.type === 'enemy') {
-      return (
-        <div>
-          <img
-            width="100%"
-            height="100%"
-            alt={content.name}
-            src={content.image}
-          />
-        </div>
-      )
+      return <div>inimigo</div>
     }
   }
 
+  const isBlocked = coordX === undefined || coordY === undefined
+
   return (
-    <StyledMapPart itemsPerRow={itemsPerRow}>
-      <span>x: {coordX}</span>
-      <span>y: {coordY}</span>
+    <StyledMapPart isBlocked={isBlocked} itemsPerRow={itemsPerRow}>
+      {!isBlocked && <span>x: {coordX}</span>}
+      {!isBlocked && <span>y: {coordY}</span>}
       {content && renderContent(content)}
       {isCharacterHere && <Character />}
     </StyledMapPart>
@@ -125,37 +111,39 @@ const Map = ({ isLoading, ...props }) => {
   const dispatch = useDispatch()
   const [accessAction, setAccessAction] = useState(undefined)
   const { selectedCharacter } = useSelector(({ user }) => ({ ...user }))
-  // const language = 'pt'
+  const [map, setMap] = useState([])
 
   const mapSize = 9
   const itemsPerRow = Math.sqrt(mapSize)
-  const generatedMap = generateMap(mapSize, itemsPerRow)
 
   useEffect(() => {
-    if (selectedCharacter.coordinates) {
-      const { x, y } = selectedCharacter.coordinates
-      onAccessArea(x, y)
+    if (!map.length) {
+      fetchMap()
     }
-    // eslint-disable-next-line
-  }, [selectedCharacter.coordinates])
+  }, [map.length])
+
+  const fetchMap = async () => {
+    const { data } = await getMap()
+    setMap(data)
+  }
 
   // document.addEventListener('keydown', ({ key }) => {
   //   const actions = {
   //     ArrowUp: {
   //       action: () => setPosition(0, -1),
-  //       isDisabled: selectedCharacter.coordinates.y === 0 || !canExecuteAction
+  //       isDisabled: selectedCharacter.coordinate.y === 0 || !canExecuteAction
   //     },
   //     ArrowRight: {
   //       action: () => setPosition(1, 0),
-  //       isDisabled: selectedCharacter.coordinates.x === itemsPerRow - 1 || !canExecuteAction
+  //       isDisabled: selectedCharacter.coordinate.x === itemsPerRow - 1 || !canExecuteAction
   //     },
   //     ArrowDown: {
   //       action: () => setPosition(0, 1),
-  //       isDisabled: selectedCharacter.coordinates.y === itemsPerRow - 1 || !canExecuteAction
+  //       isDisabled: selectedCharacter.coordinate.y === itemsPerRow - 1 || !canExecuteAction
   //     },
   //     ArrowLeft: {
   //       action: () => setPosition(-1, 0),
-  //       isDisabled: selectedCharacter.coordinates.x === 0 || !canExecuteAction
+  //       isDisabled: selectedCharacter.coordinate.x === 0 || !canExecuteAction
   //     }
   //   }
 
@@ -168,7 +156,12 @@ const Map = ({ isLoading, ...props }) => {
 
   const setPosition = (x, y) => {
     if (!isLoading) {
-      dispatch(moveCharacter(x, y))
+      dispatch(
+        moveCharacter(x, y, (nextX, nextY) => {
+          onAccessArea(nextX, nextY)
+          fetchMap()
+        })
+      )
     }
   }
 
@@ -178,30 +171,15 @@ const Map = ({ isLoading, ...props }) => {
       enemy: '/campo'
     }
 
-    const currentArea = generatedMap.find(m => m.coordX === x && m.coordY === y)
+    const currentArea = map.find(m => {
+      return m.coordinate.x === x && m.coordinate.y === y
+    })
 
     if (currentArea && currentArea.content) {
-      const mockEnemy = {
-        attributes: { attack: 0, intelligence: 0, vitality: 0 },
-        inStory: false,
-        _id: '5d81473dc4632e26a8f7f720',
-        code: 0,
-        name: 'Denka de Treinamento',
-        image:
-          'https://res.cloudinary.com/dbmnsavja/image/upload/v1566237351/Naruto%20Game/Characters/denka.png',
-        level: 1,
-        element: 'neutral',
-        exp: 20,
-        gold: 0,
-        __v: 0
-      }
-      if (
-        !selectedCharacter.currentBattle &&
-        currentArea.content.type === 'enemy'
-      ) {
-        dispatch(enterInBattle(selectedCharacter, mockEnemy))
-        // TODO
-        setPosition(0, 1)
+      if (currentArea.content.type === 'enemy') {
+        dispatch(
+          enterInBattle(selectedCharacter, { ...currentArea.content.data })
+        )
       }
 
       const current = actions[currentArea.content.type]
@@ -237,29 +215,31 @@ const Map = ({ isLoading, ...props }) => {
       <div>{texts.mapDescription[language]}</div> */}
       <>
         <StyledMap>
-          {generatedMap.map(m => (
-            <MapPart
-              itemsPerRow={itemsPerRow}
-              isCharacterHere={
-                m.coordX === selectedCharacter.coordinates.x &&
-                m.coordY === selectedCharacter.coordinates.y
-              }
-              coordX={m.coordX}
-              coordY={m.coordY}
-              content={m.content}
-            />
-          ))}
+          {map.map(({ coordinate, content, type }) => {
+            return (
+              <MapPart
+                itemsPerRow={itemsPerRow}
+                isCharacterHere={
+                  coordinate.x === selectedCharacter.coordinate.x &&
+                  coordinate.y === selectedCharacter.coordinate.y
+                }
+                coordX={coordinate.x}
+                coordY={coordinate.y}
+                content={content}
+              />
+            )
+          })}
           {/* <div>
             Coordenadas atuais
-            <div>X: {selectedCharacter.coordinates.x}</div>
-            <div>Y: {selectedCharacter.coordinates.y}</div>
+            <div>X: {selectedCharacter.coordinate.x}</div>
+            <div>Y: {selectedCharacter.coordinate.y}</div>
           </div> */}
           <StyledControls>
             <div>
               <StyledControlButton isInvisible />
               <StyledControlButton
                 onClick={() => setPosition(0, -1)}
-                isDisabled={selectedCharacter.coordinates.y === 0 || isLoading}
+                isDisabled={selectedCharacter.coordinate.y === 0 || isLoading}
               >
                 Norte
               </StyledControlButton>
@@ -267,7 +247,7 @@ const Map = ({ isLoading, ...props }) => {
             </div>
             <div>
               <StyledControlButton
-                isDisabled={selectedCharacter.coordinates.x === 0 || isLoading}
+                isDisabled={selectedCharacter.coordinate.x === 0 || isLoading}
                 onClick={() => setPosition(-1, 0)}
               >
                 Oeste
@@ -275,7 +255,7 @@ const Map = ({ isLoading, ...props }) => {
               {renderAccessButton()}
               <StyledControlButton
                 isDisabled={
-                  selectedCharacter.coordinates.x === itemsPerRow - 1 ||
+                  // selectedCharacter.coordinate.x === itemsPerRow - 1 ||
                   isLoading
                 }
                 onClick={() => setPosition(1, 0)}
@@ -287,7 +267,7 @@ const Map = ({ isLoading, ...props }) => {
               <StyledControlButton isInvisible />
               <StyledControlButton
                 isDisabled={
-                  selectedCharacter.coordinates.y === itemsPerRow - 1 ||
+                  // selectedCharacter.coordinate.y === itemsPerRow - 1 ||
                   isLoading
                 }
                 onClick={() => setPosition(0, 1)}

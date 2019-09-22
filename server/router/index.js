@@ -14,7 +14,8 @@ const routes = [
   ...require('./routes/base'),
   // ...require('./routes/billing'),
   ...require('./routes/vip'),
-  ...require('./routes/message')
+  ...require('./routes/message'),
+  ...require('./routes/map')
 ]
 
 function createRoute({ component, method, path, action }) {
