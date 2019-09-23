@@ -133,14 +133,11 @@ export const removeCharacter = id => {
   }
 }
 
-export const recoveryCharacter = (characterId, recoveryType) => {
+export const recoveryCharacter = () => {
   return async dispatch => {
     dispatch(recoveryCharacterReducer())
     try {
-      const { data } = await charactersCollection.recoveryCharacter(
-        characterId,
-        recoveryType
-      )
+      const { data } = await charactersCollection.recoveryCharacter()
       dispatch(getUserByToken())
       dispatch(recoveryCharacterSuccess(data))
     } catch (error) {

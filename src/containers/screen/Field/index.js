@@ -171,7 +171,7 @@ export default () => {
     <Page
       title="Campo"
       description="Batalhe contra monstros"
-      returnPath="/vila"
+      returnPath="/village"
       hiddenLoader={selectedCharacter.inBattle}
       representantImage="https://res.cloudinary.com/dbmnsavja/image/upload/v1567454394/Naruto%20Game/Chibis/Kisame.png"
       helperText="Escolha algum inimigo para treinar, clique duas vezes nele ou selecione e clique para entrar na batalha"

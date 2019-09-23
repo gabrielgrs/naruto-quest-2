@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Navbar, NavItem } from '../'
+import texts from '../../helpers/texts'
 
 export const StyledNavLinks = styled.div`
   display: flex;
@@ -40,7 +41,8 @@ export default ({
   isAuthenticated,
   dontHaveCharacters,
   onLogout,
-  selectedCharacter
+  selectedCharacter,
+  language
 }) => {
   const [navbarIsOpen, setNavbarIsOpen] = useState(false)
   const { inBattle, currentQuest } = selectedCharacter
@@ -52,35 +54,23 @@ export default ({
           hidden={
             !isAuthenticated || dontHaveCharacters || inBattle || currentQuest
           }
-          path="/vila"
+          path="/village"
         >
-          Vila
+          {texts.navbar.village[language]}
         </NavItem>
         <NavItem
           onClick={() => setNavbarIsOpen(false)}
           hidden={!isAuthenticated || dontHaveCharacters || inBattle}
-          path="/missoes"
+          path="/missions"
         >
-          Missões
+          {texts.navbar.missions[language]}
         </NavItem>
-        {inBattle && (
-          <NavItem
-            onClick={() => setNavbarIsOpen(false)}
-            hidden={
-              ((!isAuthenticated || dontHaveCharacters) && !inBattle) ||
-              currentQuest
-            }
-            path="/campo"
-          >
-            Campo
-          </NavItem>
-        )}
         <NavItem
           onClick={() => setNavbarIsOpen(false)}
           hidden={!isAuthenticated || dontHaveCharacters || inBattle}
-          path="/treinamento"
+          path="/training"
         >
-          Treino
+          {texts.navbar.training[language]}
         </NavItem>
         {/* <NavItem
           onClick={() => setNavbarIsOpen(false)}
@@ -108,9 +98,9 @@ export default ({
           hidden={
             !isAuthenticated || dontHaveCharacters || inBattle || currentQuest
           }
-          path="/time"
+          path="/team"
         >
-          Times
+          {texts.navbar.teams[language]}
         </NavItem>
         {/* <NavItem
           onClick={() => setNavbarIsOpen(false)}
@@ -128,24 +118,24 @@ export default ({
         </NavItem> */}
         <NavItem
           onClick={() => setNavbarIsOpen(false)}
-          hidden={!isAuthenticated || inBattle || selectedCharacter.selectedJob}
-          path="/personagens"
+          hidden={!isAuthenticated || !selectedCharacter.name}
+          path="/characters"
         >
-          Personagens
+          {texts.navbar.characters[language]}
         </NavItem>
         <NavItem
           onClick={() => setNavbarIsOpen(false)}
           hidden={!isAuthenticated || inBattle || dontHaveCharacters}
           path="/ranking"
         >
-          Ranking
+          {texts.navbar.ranking[language]}
         </NavItem>
         <NavItem
           onClick={() => setNavbarIsOpen(false)}
           hidden={!isAuthenticated || dontHaveCharacters}
           path="/chat"
         >
-          Chat
+          {texts.navbar.chat[language]}
         </NavItem>
         <NavItem
           hidden={!isAuthenticated}
@@ -155,21 +145,21 @@ export default ({
           }}
           path="/"
         >
-          Sair
+          {texts.navbar.logout[language]}
         </NavItem>
         <NavItem
           onClick={() => setNavbarIsOpen(false)}
           hidden={isAuthenticated}
-          path="/registro"
+          path="/register"
         >
-          Cadastro
+          {texts.navbar.register[language]}
         </NavItem>
         <NavItem
           onClick={() => setNavbarIsOpen(false)}
           hidden={isAuthenticated}
-          path="/acesso"
+          path="/login"
         >
-          Acesso
+          {texts.navbar.login[language]}
         </NavItem>
       </StyledNavLinks>
     </Navbar>

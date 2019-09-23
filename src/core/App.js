@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import 'react-toastify/dist/ReactToastify.css'
 import Router from './router'
 import { ThemeProvider } from 'styled-components'
-import { theme } from './configurations'
+import { getTheme } from './configurations'
 import {
   NavbarComponent,
   Row,
@@ -18,6 +18,7 @@ import {
 // import Sidebar from '../containers/templates/Sidebar'
 import { getUserByToken, clearSession } from '../redux/users'
 import * as storageHelper from '../helpers/storage'
+import texts from '../helpers/texts'
 
 export const StyledActionButton = styled.div`
   cursor: pointer;
@@ -60,6 +61,8 @@ export default () => {
     isAuthenticated,
     selectedCharacter,
     token,
+    theme,
+    language,
     loadingUser,
     loadingEnemy,
     loadingBattle,
@@ -72,6 +75,7 @@ export default () => {
     ({ user, enemies, battle, character, quest, team, vip, common }) => {
       return {
         ...user,
+        ...common,
         loadingEnemy: enemies.loadingEnemy,
         loadingBattle: battle.loadingBattle,
         loadingCharacter: character.loadingCharacter,
@@ -115,19 +119,21 @@ export default () => {
   const renderActionButton = () => {
     if (!!selectedCharacter.inBattle)
       return (
-        <StyledActionButton to="/campo">Voltar para Batalha</StyledActionButton>
+        <StyledActionButton to="/field">
+          {texts.app.actionButton.backToBattle[language]}
+        </StyledActionButton>
       )
 
     if (!!selectedCharacter.currentQuest)
       return (
-        <StyledActionButton to="/missoes">
-          Voltar para Missão
+        <StyledActionButton to="/missions">
+          {texts.app.actionButton.backToMission[language]}
         </StyledActionButton>
       )
 
     return (
       <StyledActionButton onClick={() => setShowonboarding(true)}>
-        Tutorial
+        {texts.app.actionButton.tutorial[language]}
       </StyledActionButton>
     )
   }
@@ -143,10 +149,10 @@ export default () => {
   )
 
   return (
-    <ThemeProvider theme={theme(selectedCharacter.village)}>
+    <ThemeProvider theme={getTheme(theme)}>
       <OverlayLoader loading={loadingScreen}>
         {process.env.NODE_ENV !== 'production' && (
-          <StyledTag>Servidor de Testes</StyledTag>
+          <StyledTag>{texts.app.testServerFlag[language]}</StyledTag>
         )}
         <Row>
           {!selectedCharacter.inBattle && (
@@ -155,6 +161,7 @@ export default () => {
               dontHaveCharacters={dontHaveCharacters}
               onLogout={onLogout}
               selectedCharacter={selectedCharacter}
+              language={language}
             />
           )}
           {/* {isAuthenticated && !selectedCharacter.inBattle && (

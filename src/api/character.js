@@ -18,8 +18,7 @@ export const changeJob = (characterId, data) =>
 
 export const buyItem = (id, data) => axios.put(`${BASE}/buyItem/${id}`, data)
 
-export const recoveryCharacter = (id, recoveryType) =>
-  axios.put(`${BASE}/recoveryCharacter/${id}`, { recoveryType })
+export const recoveryCharacter = () => axios.put(`${BASE}/recoveryCharacter`)
 
 export const getRanking = () => axios.get(`${BASE}/getRanking`)
 

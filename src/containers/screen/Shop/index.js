@@ -95,7 +95,7 @@ export default () => {
     <Page
       title="Loja"
       description="Compre itens para seu personagem"
-      returnPath="/vila"
+      returnPath="/village"
       representantImage="https://res.cloudinary.com/dbmnsavja/image/upload/v1567454394/Naruto%20Game/Chibis/Madara.png"
     >
       <Row>

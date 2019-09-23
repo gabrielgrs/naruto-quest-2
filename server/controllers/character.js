@@ -233,61 +233,26 @@ async function buyItem(req, res) {
 }
 
 async function recoveryCharacter(req, res) {
-  // TODO
-  const recoveryTypes = {
-    soft: {
-      amount: 100,
-      cost: 30
-    },
-    medium: {
-      amount: 300,
-      cost: 50
-    },
-    total: {
-      amount: 1000000,
-      cost: 200
-    }
-  }
-
-  const getValuesToRecovery = (status, recoveryType, attributes, level) => {
-    // TODO
-    const valueToRecovery = recoveryTypes[recoveryType].amount
-    const maxLife = getMaxLife(attributes.vitality, level)
-    const maxMana = getMaxMana(attributes.intelligence, level)
-
-    if (status === 'life') {
-      const recoveredStatus = attributes.life + valueToRecovery
-      return recoveredStatus <= maxLife ? recoveredStatus : maxLife
-    } else if (status === 'mana') {
-      const recoveredStatus = attributes.mana + valueToRecovery
-      return recoveredStatus <= maxMana ? recoveredStatus : maxMana
-    }
-
-    return 0
-  }
-
   try {
-    const { characterId } = req.params
-    const { attributes, level } = await repository.getById(characterId)
+    const { _id } = await res.getCurrentUser()
+    const { selectedCharacter } = await userRepository.getById(_id)
+
     const recoveryValues = {
-      life: getValuesToRecovery(
-        'life',
-        req.body.recoveryType,
-        attributes,
-        level
+      life: getMaxLife(
+        selectedCharacter.attributes.vitality,
+        selectedCharacter.level
       ),
-      mana: getValuesToRecovery(
-        'mana',
-        req.body.recoveryType,
-        attributes,
-        level
+      mana: getMaxMana(
+        selectedCharacter.attributes.intelligence,
+        selectedCharacter.level
       )
     }
+    const cost = selectedCharacter.level * 10
 
     const data = await repository.recoveryCharacter(
-      characterId,
+      selectedCharacter._id,
       recoveryValues,
-      recoveryTypes[req.body.recoveryType].cost
+      cost
     )
     res.status(200).send(data)
   } catch (error) {

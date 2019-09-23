@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 const LazyHome = lazy(() => import('../containers/screen/Home'))
+const LazySupport = lazy(() => import('../containers/screen/Support'))
 const LazyLogin = lazy(() => import('../containers/screen/Login'))
 const LazyRegister = lazy(() => import('../containers/screen/Register'))
 
@@ -24,14 +25,15 @@ const LazyVIP = lazy(() => import('../containers/screen/Vip'))
 
 const routesWhenQuest = [
   '/',
-  '/missoes',
-  '/personagens',
+  '/help',
+  '/missions',
+  '/characters',
   '/ranking',
   '/chat',
-  '/equipamentos',
-  '/mochila',
+  '/equipments',
+  '/bag',
   '/vip',
-  '/treino'
+  '/training'
 ]
 
 const PrivateRoute = ({ path, exact, component }) => {
@@ -40,13 +42,13 @@ const PrivateRoute = ({ path, exact, component }) => {
     selectedCharacter: user.selectedCharacter
   }))
 
-  if (!isAuthenticated) return <Redirect to="/acesso" component={LazyLogin} />
+  if (!isAuthenticated) return <Redirect to="/login" component={LazyLogin} />
 
-  if (selectedCharacter.inBattle && path !== '/campo')
-    return <Redirect to="/campo" />
+  if (selectedCharacter.inBattle && path !== '/field')
+    return <Redirect to="/field" />
 
   if (selectedCharacter.currentQuest && !routesWhenQuest.includes(path))
-    return <Redirect to="/missoes" />
+    return <Redirect to="/missions" />
 
   return <Route path={path} exact={exact} component={component} />
 }
@@ -60,11 +62,11 @@ const OpenRoute = ({ path, exact, component }) => {
   if (isAuthenticated && path !== '/')
     return <Redirect to="/" component={LazyLogin} />
 
-  if (selectedCharacter.inBattle && path !== '/campo')
-    return <Redirect to="/campo" />
+  if (selectedCharacter.inBattle && path !== '/field')
+    return <Redirect to="/field" />
 
   if (selectedCharacter.currentQuest && !routesWhenQuest.includes(path))
-    return <Redirect to="/missoes" />
+    return <Redirect to="/missions" />
 
   return <Route path={path} exact={exact} component={component} />
 }
@@ -74,23 +76,25 @@ export default () => {
     <Suspense fallback={'loading'}>
       <Switch>
         <Route path="/" exact={true} component={LazyHome} />
+        <Route path="/home" exact={true} component={LazyHome} />
+        <Route path="/help" exact={true} component={LazySupport} />
         <Route path="/tutorial" exact={true} component={LazyTutorial} />
         <PrivateRoute path="/arena" component={LazyArena} />
-        <PrivateRoute path="/vila" component={LazyVillage} />
-        <PrivateRoute path="/equipamentos" component={LazyEquipment} />
-        <PrivateRoute path="/missoes" component={LazyQuest} />
-        <PrivateRoute path="/time" component={LazyTeam} />
-        <PrivateRoute path="/campo" component={LazyField} />
-        <PrivateRoute path="/mochila" component={LazyBag} />
-        <PrivateRoute path="/loja" component={LazyShop} />
+        <PrivateRoute path="/village" component={LazyVillage} />
+        <PrivateRoute path="/equipments" component={LazyEquipment} />
+        <PrivateRoute path="/missions" component={LazyQuest} />
+        <PrivateRoute path="/team" component={LazyTeam} />
+        <PrivateRoute path="/field" component={LazyField} />
+        <PrivateRoute path="/bag" component={LazyBag} />
+        <PrivateRoute path="/shop" component={LazyShop} />
         <PrivateRoute path="/hospital" component={LazyHospital} />
-        <PrivateRoute path="/treinamento" component={LazyTraining} />
-        <PrivateRoute path="/personagens" component={LazyCharacter} />
+        <PrivateRoute path="/training" component={LazyTraining} />
+        <PrivateRoute path="/characters" component={LazyCharacter} />
         <PrivateRoute path="/chat" component={LazyChat} />
         <PrivateRoute path="/ranking" component={LazyRanking} />
         <PrivateRoute path="/vip" component={LazyVIP} />
-        <OpenRoute path="/acesso" component={LazyLogin} />
-        <OpenRoute path="/registro" component={LazyRegister} />
+        <OpenRoute path="/login" component={LazyLogin} />
+        <OpenRoute path="/register" component={LazyRegister} />
       </Switch>
     </Suspense>
   )

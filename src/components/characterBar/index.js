@@ -86,11 +86,11 @@ export default ({ selectedCharacter }) => {
               <Col sm={3}>
                 <StyledActionButtons>
                   {/* <StyledLink to="/treinamento">Treinamento</StyledLink> */}
-                  <StyledLink to="/equipamentos">Equipamentos</StyledLink>
+                  <StyledLink to="/equipments">Equipamentos</StyledLink>
 
-                  <StyledLink to="/mochila">Mochila</StyledLink>
+                  <StyledLink to="/bag">Mochila</StyledLink>
 
-                  <StyledLink to="/personagens">personagens</StyledLink>
+                  <StyledLink to="/characters">personagens</StyledLink>
 
                   <StyledLink to="/vip">Sala VIP</StyledLink>
                 </StyledActionButtons>

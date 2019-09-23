@@ -1,7 +1,9 @@
 import { actionTypes } from './helpers'
 
 const INITIAL_STATE = {
-  loadingImage: false
+  loadingImage: false,
+  language: localStorage.getItem('language') || 'pt',
+  theme: 'dark'
 }
 
 export const onLoadImage = () => ({

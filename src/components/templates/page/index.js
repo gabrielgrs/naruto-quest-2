@@ -12,6 +12,7 @@ import {
   StyledCharacter
 } from './styles'
 import { Row, Col, Tooltip } from '../../index'
+import texts from '../../../helpers/texts'
 
 export default ({
   children,
@@ -29,17 +30,21 @@ export default ({
     loadingBattle,
     loadingCharacter,
     loadingQuest,
-    loadingTeam
-  } = useSelector(({ user, enemies, battle, character, quest, team }) => {
-    return {
-      ...user,
-      loadingEnemy: enemies.loadingEnemy,
-      loadingBattle: battle.loadingBattle,
-      loadingCharacter: character.loadingCharacter,
-      loadingQuest: quest.loadingQuest,
-      loadingTeam: team.loadingTeam
+    loadingTeam,
+    language
+  } = useSelector(
+    ({ user, enemies, battle, character, quest, team, common }) => {
+      return {
+        ...user,
+        language: common.language,
+        loadingEnemy: enemies.loadingEnemy,
+        loadingBattle: battle.loadingBattle,
+        loadingCharacter: character.loadingCharacter,
+        loadingQuest: quest.loadingQuest,
+        loadingTeam: team.loadingTeam
+      }
     }
-  })
+  )
 
   const loadingScreen =
     loadingUser ||
@@ -79,7 +84,7 @@ export default ({
         </Col>
         <Col sm={6}>
           <h1 style={{ opacity: 0.1, cursor: 'default' }}>
-            Jogo em fase Alpha
+            {texts.page.versionDescription[language]}
           </h1>
         </Col>
         <Col sm={2}>

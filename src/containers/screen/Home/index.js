@@ -1,80 +1,18 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
-import axios from '../../../api'
-import styled from 'styled-components'
-import {
-  Page,
-  Container,
-  TextField,
-  Row,
-  Col,
-  Button
-} from '../../../components'
-import * as notify from '../../../helpers/notify'
-
-const StyledMessage = styled.div`
-  display: flex;
-  text-align: center;
-  font-size: 2em;
-  font-weight: 600;
-  letter-spacing: 2px;
-`
+import { Page, Container } from '../../../components'
+import texts from '../../../helpers/texts'
 
 export default () => {
-  const { email } = useSelector(({ user }) => {
-    return {
-      isAuthenticated: user.isAuthenticated,
-      email: user.email
-    }
-  })
-
-  const [values, setValues] = useState({
-    message: ''
-  })
-
-  const onSendMessage = async () => {
-    try {
-      await axios.post('/base/sendMessage', {
-        subject: `Contato - ${email}`,
-        from: 'app',
-        ...values
-      })
-      notify.success('Mensagem enviada com sucesso! Obrigado!')
-      setValues({ message: '' })
-    } catch (error) {
-      console.log(error)
-      notify.error('Falha ao enviar a mensagem')
-    }
-  }
+  const { language } = useSelector(({ common }) => ({ ...common }))
 
   return (
-    <Page title="Suporte" description="Ajuda e contato">
+    <Page
+      title={texts.home.title[language]}
+      description={texts.home.description[language]}
+    >
       <Container>
-        <StyledMessage>Jogo em fase Alpha</StyledMessage>
-      </Container>
-      <Container>
-        <h3>
-          Ficou com alguma dúvida? Tem alguma sugestão? Sentiu falto de algo?
-          Mande sua mensagem que entraremos em contato pelo e-mail da sua conta!
-        </h3>
-        <Row>
-          <Col sm={8}>
-            <TextField
-              fullWidth
-              placeholder="Mensagem"
-              name="message"
-              value={values.message}
-              onChange={({ target }) =>
-                setValues({ ...values, [target.name]: target.value })
-              }
-            />
-          </Col>
-          <Col sm={4}>
-            <Button fullWidth onClick={() => onSendMessage()}>
-              Enviar
-            </Button>
-          </Col>
-        </Row>
+        <h1>{texts.home.welcome[language]}</h1>
       </Container>
     </Page>
   )

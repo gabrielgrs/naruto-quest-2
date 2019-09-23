@@ -1,17 +1,10 @@
 import * as colorsThemes from './themes/colors'
 
-const getThemeByVilage = village => {
-  // if (village === 'Leaf') return colorsThemes.leaf
-  // if (village === 'Cloud') return colorsThemes.cloud
-  // if (village === 'Mist') return colorsThemes.mist
-  // if (village === 'Rock') return colorsThemes.rock
-  // if (village === 'Sand') return colorsThemes.sand
-  // if (village === 'Sound') return colorsThemes.sound
-
-  return colorsThemes.main
+export const getTheme = selectedTheme => {
+  return theme(selectedTheme)
 }
 
-export const theme = characterVillage => ({
+export const theme = theme => ({
   spaces: {
     xs: '8px',
     sm: '16px',
@@ -29,8 +22,7 @@ export const theme = characterVillage => ({
     semiBold: 600,
     bold: 700
   },
-  // colors: getColors(theme),
-  colors: getThemeByVilage(characterVillage),
+  colors: colorsThemes[theme],
   icons: {}
 })
 

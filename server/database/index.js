@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
 
 const getDatabaseConnectionString = () => {
+  if (process.env.DATABASE) {
+    return process.env.DATABASE
+  }
+
   // if (process.env.NODE_ENV === 'development') {
   return 'mongodb://admin:admin123@ds311968.mlab.com:11968/narutopocket'
   // }

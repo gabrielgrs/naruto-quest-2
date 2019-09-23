@@ -38,7 +38,7 @@ module.exports = [
   {
     component,
     method: 'put',
-    path: `/${component}/recoveryCharacter/:characterId`,
+    path: `/${component}/recoveryCharacter`,
     action: 'recoveryCharacter',
     needAuthentication: true
   },

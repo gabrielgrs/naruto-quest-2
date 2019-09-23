@@ -16,6 +16,7 @@ import { getAll, clearState as clearJobsState } from '../../../redux/jobs'
 import { getAll as getAllSkills } from '../../../redux/skills'
 import { labels, rules } from '../../../config/'
 import { elements, getRankingLabel } from './helpers'
+import texts from '../../../helpers/texts'
 
 export const StyledActionButton = styled.button`
   cursor: pointer;
@@ -41,13 +42,16 @@ export default () => {
   const [selectedElement, setSelectedElement] = useState(undefined)
   const dispatch = useDispatch()
 
-  const { list, selectedCharacter } = useSelector(({ skills, user, jobs }) => {
-    return {
-      ...skills,
-      ...user,
-      ...jobs
+  const { list, selectedCharacter, language } = useSelector(
+    ({ skills, user, jobs, common }) => {
+      return {
+        language: common.language,
+        ...skills,
+        ...user,
+        ...jobs
+      }
     }
-  })
+  )
 
   useEffect(() => {
     return () => {
@@ -129,9 +133,9 @@ export default () => {
 
   const getSkillType = type => {
     const types = [
-      { name: 'damager', text: 'Dano' },
-      { name: 'healer', text: 'Cura' },
-      { name: 'evasion', text: 'Aumento de Defesa' }
+      { name: 'damager', text: texts.training.jutsuTypes.damage[language] },
+      { name: 'healer', text: texts.training.jutsuTypes.heal[language] },
+      { name: 'evasion', text: texts.training.jutsuTypes.deffense[language] }
     ]
     return types.find(t => t.name === type) || { text: `${type} N/A` }
   }
@@ -159,12 +163,14 @@ export default () => {
     return (
       <div>
         <div>{name}</div>
-        <div>Estilo: {getSkillStyle(style).text}</div>
+        <div>
+          {texts.training.style[language]}: {getSkillStyle(style).text}
+        </div>
         <div>
           {getSkillType(type).text}: {value}
         </div>
         <div>
-          <b>Level necessário:</b> {requiredLevel}
+          <b>{texts.training.requiredLevel[language]}: </b> {requiredLevel}
         </div>
         <div>
           <b>Rank</b> {getRankingLabel(requiredNinjaRank)}
@@ -181,7 +187,7 @@ export default () => {
     if (!currentElement) return null
     return (
       <Col sm={6}>
-        Elemento Atual
+        {texts.training.currentElement[language]}
         <Tooltip text={currentElement.name}>
           <Image alt={currentElement.name} src={currentElement.image} />
         </Tooltip>
@@ -191,15 +197,17 @@ export default () => {
 
   return (
     <Page
-      title="Treinamento"
-      description="Treine seu personagem"
+      title={texts.training.title[language]}
+      description={texts.training.description[language]}
       representantImage="https://res.cloudinary.com/dbmnsavja/image/upload/v1567454394/Naruto%20Game/Chibis/Minato.png"
     >
       <Row>
-        <b>Pontos de Atributos: </b> {currentAttributePoints || 0}
+        <b>{texts.training.points.attribute[language]}:</b>{' '}
+        {currentAttributePoints || 0}
       </Row>
       <Row>
-        <b>Pontos de Habilidades: </b> {currentSkillPoints || 0}
+        <b>{texts.training.points.skills[language]}:</b>{' '}
+        {currentSkillPoints || 0}
       </Row>
       <Row>
         <Row>
@@ -214,7 +222,9 @@ export default () => {
                   />
                   <Row>
                     <Col sm={12}>
-                      <Button onClick={() => onSaveAttributes()}>Salvar</Button>
+                      <Button onClick={() => onSaveAttributes()}>
+                        {texts.training.save[language]}
+                      </Button>
                     </Col>
                   </Row>
                 </>
@@ -225,7 +235,7 @@ export default () => {
             {list && !!list.length && (
               <>
                 <Row>
-                  <h3>Jutsus para Aprender</h3>
+                  <h3>{texts.training.title[language]}</h3>
                   <Row inline>
                     <StyledActionButton
                       isDisabled={currentJutsuFilter !== 'taijutsu'}
@@ -285,7 +295,7 @@ export default () => {
                         }
                         onClick={() => onClickLearnButton()}
                       >
-                        Aprender {labels.skill}
+                        {texts.training.learnJutsu[language]}
                       </Button>
                     </Row>
                   )}
@@ -322,7 +332,7 @@ export default () => {
                         isDisabled={!selectedElement}
                         onClick={() => onClickLearnElement()}
                       >
-                        Aprender Elemento
+                        {texts.training.learnElement[language]}
                       </Button>
                     </Col>
                   </Row>

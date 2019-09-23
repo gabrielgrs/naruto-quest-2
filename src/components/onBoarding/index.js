@@ -8,7 +8,7 @@ const StyledOnBoardingModal = styled(OnBoardingModal)``
 const OnBoardingCard = styled.div`
   width: 800px;
   height: 400px;
-  background-color: var(--primary-color);
+  background-color: ${({ theme }) => theme.colors.black};
   position: absolute; /*it can be fixed too*/
   left: 0;
   right: 0;
@@ -19,7 +19,7 @@ const OnBoardingCard = styled.div`
   max-height: 100%;
   overflow: auto;
   border-radius: 7px;
-  color: var(--white);
+  color: ${({ theme }) => theme.colors.white};
   /* margin-top: 100px; */
 `
 
@@ -46,6 +46,7 @@ const StyledContent = styled.div`
   font-size: 1.5em;
   border: solid black 2px;
   height: 120px;
+  color: ${({ theme }) => theme.colors.black};
 `
 
 const StyledFooter = styled.div`
