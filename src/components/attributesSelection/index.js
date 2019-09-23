@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Row, Col, Button, Tooltip } from '../../components'
 import labels from '../../config/labels'
+import texts from '../../helpers/texts'
 
 const StyledAttributeLabel = styled.div`
   margin: 10px 0 10px 0;
@@ -18,7 +19,12 @@ const StyledAttributeValue = styled.span`
   margin: 0 10px 0 10px;
 `
 
-export default ({ attributes, onDecreaseAttribute, onIncreaseAttribute }) => {
+export default ({
+  attributes,
+  onDecreaseAttribute,
+  onIncreaseAttribute,
+  language
+}) => {
   const fields = [
     {
       type: 'success',
@@ -36,7 +42,7 @@ export default ({ attributes, onDecreaseAttribute, onIncreaseAttribute }) => {
 
   return (
     <>
-      <h3>Atributos</h3>
+      <h3>{texts.training.attribute[language]}</h3>
       {fields.map((field, index) => {
         return (
           <Row inline key={index}>

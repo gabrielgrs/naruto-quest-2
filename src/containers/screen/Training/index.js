@@ -216,6 +216,7 @@ export default () => {
               {attributes && (attributes.attack || attributes.stamina) && (
                 <>
                   <AttributesSelection
+                    language={language}
                     onDecreaseAttribute={onDecreaseAttribute}
                     onIncreaseAttribute={onIncreaseAttribute}
                     attributes={attributes}
@@ -235,7 +236,7 @@ export default () => {
             {list && !!list.length && (
               <>
                 <Row>
-                  <h3>{texts.training.title[language]}</h3>
+                  <h3>{texts.training.learnJutsu[language]}</h3>
                   <Row inline>
                     <StyledActionButton
                       isDisabled={currentJutsuFilter !== 'taijutsu'}

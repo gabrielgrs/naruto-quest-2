@@ -31,14 +31,19 @@ export default () => {
 
   const dispatch = useDispatch()
 
-  const { id, characters, jobsList, additionalCharacters } = useSelector(
-    ({ user, jobs }) => {
-      return {
-        ...user,
-        ...jobs
-      }
+  const {
+    id,
+    characters,
+    jobsList,
+    additionalCharacters,
+    language
+  } = useSelector(({ user, jobs, common }) => {
+    return {
+      language: common.language,
+      ...user,
+      ...jobs
     }
-  )
+  })
 
   useEffect(() => {
     return () => {
@@ -140,6 +145,7 @@ export default () => {
           </Row>
         ) : (
           <CharacterCreation
+            language={language}
             jobsList={jobsList || []}
             villages={villages || []}
             name={name}

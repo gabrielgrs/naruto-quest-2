@@ -1,19 +1,26 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Button, TextField, Row, Col } from '../../../components'
 import { StyledContainer, StyledConductCode, StyledTitle } from './styles'
 import { register } from '../../../redux/users'
 import * as notify from '../../../helpers/notify'
 import { paragraphs } from './helpers'
+import texts from '../../../helpers/texts'
 
 export default () => {
   const [readRules, setReadRules] = useState(false)
+
   const [fields, setFields] = useState({
     email: '',
     password: '',
     passwordConfirmation: ''
   })
+
   const dispatch = useDispatch()
+
+  const { language } = useSelector(({ common }) => ({
+    language: common.language
+  }))
 
   const onSubmit = async () => {
     const { email, password, passwordConfirmation } = fields
@@ -49,10 +56,11 @@ export default () => {
 
   return (
     <StyledContainer>
-      <StyledTitle> Registro </StyledTitle>
+      <StyledTitle> {texts.register.title[language]} </StyledTitle>
       <Row>
         <TextField
-          label="E-mail"
+          label={texts.register.username.label[language]}
+          placeholder={texts.register.username.placeholder[language]}
           name="email"
           value={fields.email}
           onKeyDown={e => onKeyDown(e)}
@@ -62,7 +70,8 @@ export default () => {
       </Row>
       <Row>
         <TextField
-          label="Senha"
+          label={texts.register.password.label[language]}
+          placeholder={texts.register.password.placeholder[language]}
           type="password"
           name="password"
           value={fields.password}
@@ -73,7 +82,8 @@ export default () => {
       </Row>
       <Row>
         <TextField
-          label="Confirmação de Senha"
+          label={texts.register.passwordRepeat.label[language]}
+          placeholder={texts.register.passwordRepeat.placeholder[language]}
           type="password"
           name="passwordConfirmation"
           value={fields.passwordConfirmation}
@@ -82,10 +92,10 @@ export default () => {
         />
       </Row>
       <Row>
-        <h2> Código de Conduta </h2>
+        <h2> {texts.register.conductCode.title[language]} </h2>
         <StyledConductCode>
           {paragraphs.map(p => (
-            <p>{p}</p>
+            <p>{p[language]}</p>
           ))}
         </StyledConductCode>
       </Row>
@@ -99,7 +109,7 @@ export default () => {
         </Col>
         <Col sm={11}>
           <div style={{ marginTop: 9 }}>
-            Li e aceito os termos de conduta préviamente descritos!
+            {texts.register.conductCode.rulesAndAcceptment[language]}
           </div>
         </Col>
       </Row>
@@ -109,7 +119,7 @@ export default () => {
         fullWidth
         onClick={() => onSubmit()}
       >
-        Cadastrar
+        {texts.register.submit[language]}
       </Button>
     </StyledContainer>
   )

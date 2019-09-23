@@ -1,13 +1,19 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Button, TextField, Row } from '../../../components'
 import { StyledContainer, StyledTitle } from './styles'
 import * as userActions from '../../../redux/users'
 import * as notify from '../../../helpers/notify'
+import texts from '../../../helpers/texts'
 
 export default () => {
   const [fields, setFields] = useState({ email: '', password: '' })
+
   const dispatch = useDispatch()
+
+  const { language } = useSelector(({ common }) => ({
+    language: common.language
+  }))
 
   const onSubmit = () => {
     const { email, password } = fields
@@ -35,10 +41,11 @@ export default () => {
 
   return (
     <StyledContainer>
-      <StyledTitle> Acesso </StyledTitle>
+      <StyledTitle> {texts.login.title[language]} </StyledTitle>
       <Row>
         <TextField
-          label="E-mail"
+          label={texts.login.username.label[language]}
+          placeholder={texts.login.username.placeholder[language]}
           name="email"
           value={fields.email}
           onKeyDown={e => onKeyDown(e)}
@@ -48,7 +55,8 @@ export default () => {
       </Row>
       <Row>
         <TextField
-          label="Senha"
+          label={texts.login.password.label[language]}
+          placeholder={texts.login.password.placeholder[language]}
           name="password"
           value={fields.password}
           type="password"
@@ -58,7 +66,7 @@ export default () => {
         />
       </Row>
       <Button simpleBorder fullWidth onClick={() => onSubmit()}>
-        Acessar
+        {texts.login.submit[language]}
       </Button>
     </StyledContainer>
   )

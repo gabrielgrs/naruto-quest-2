@@ -34,7 +34,8 @@ export default ({
   attributes,
   onIncreaseAttribute,
   onDecreaseAttribute,
-  onCreateCharacter
+  onCreateCharacter,
+  language
 }) => {
   const itemsPerPage = 12
   const [totalPages, setTotalPages] = useState(0)
@@ -142,6 +143,7 @@ export default ({
       </Col>
       <Col sm={12}>
         <AttributesSelection
+          language={language}
           onDecreaseAttribute={onDecreaseAttribute}
           onIncreaseAttribute={onIncreaseAttribute}
           attributes={attributes}

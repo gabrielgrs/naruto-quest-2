@@ -41,6 +41,10 @@ export default {
     pt: 'Estilo',
     us: 'Style'
   },
+  attribute: {
+    pt: 'Atributos',
+    us: 'Attributes'
+  },
   jutsuTypes: {
     damage: {
       pt: 'Dano',
@@ -58,5 +62,23 @@ export default {
   requiredLevel: {
     pt: 'Level Necessário',
     us: 'Required Level'
+  },
+  ninjutsu: {
+    tooltip: {
+      pt: 'Aumenta Ninjutsu e Chakra máximo',
+      us: 'Increase Ninjutsu and Max Chakra'
+    }
+  },
+  taijutsu: {
+    tooltip: {
+      pt: 'Aumenta Taijutsu',
+      us: 'Increase Taijutsu'
+    }
+  },
+  genjutsu: {
+    tooltip: {
+      pt: 'Aumenta Genjutsu e Vida Máxima',
+      us: 'Increase Genjutsu and Max Life'
+    }
   }
 }
