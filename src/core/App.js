@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Map from '../containers/Map'
 import { Link } from 'react-router-dom'
@@ -54,6 +54,7 @@ export const StyledTag = styled.div`
 `
 
 export default () => {
+  const [isOnboardingOpen, setIsOnboardingOpen] = useState(false)
   const {
     isAuthenticated,
     selectedCharacter,
@@ -80,6 +81,7 @@ export default () => {
       }
     }
   )
+
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -123,7 +125,11 @@ export default () => {
         </StyledActionButton>
       )
 
-    return <StyledActionButton to="/tutorial"> Tutorial </StyledActionButton>
+    return (
+      <StyledActionButton onClick={() => setIsOnboardingOpen(true)}>
+        Tutorial
+      </StyledActionButton>
+    )
   }
 
   document.addEventListener(
@@ -135,6 +141,11 @@ export default () => {
     },
     false
   )
+
+  const canShowMap =
+    selectedCharacter &&
+    selectedCharacter.coordinate &&
+    !selectedCharacter.currentBattle
 
   return (
     <ThemeProvider theme={theme(selectedCharacter.village)}>
@@ -152,24 +163,31 @@ export default () => {
             />
           )}
           <StyledWrapper>
-            <Col sm={12}>
+            <Col sm={2}>
               {isAuthenticated && !selectedCharacter.inBattle && (
                 <CharacterBar selectedCharacter={selectedCharacter} />
               )}
             </Col>
-            <Col sm={3}>
-              {selectedCharacter && selectedCharacter.coordinate && <Map />}
-            </Col>
-            <Col sm={9}>
+
+            <Col
+              style={{ marginTop: 50 }}
+              sm={selectedCharacter.currentBattle ? 12 : 8}
+            >
               <Router />
             </Col>
           </StyledWrapper>
+          <Col sm={2}>{canShowMap && <Map />}</Col>
           {/* <Footer fixed title="Todos os direitos reservados">
         <h3>Naruto Quest</h3>
         <div>Developed 4Fun</div>
       </Footer> */}
           {renderActionButton()}
-          {isAuthenticated && !!selectedCharacter.name && <Onboarding />}
+          {
+            <Onboarding
+              isOpen={isOnboardingOpen}
+              onClose={() => setIsOnboardingOpen(false)}
+            />
+          }
           <Toast />
         </Row>
       </OverlayLoader>

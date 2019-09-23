@@ -17,7 +17,10 @@ export default () => {
 
   return (
     <Page
-      title={`Vila da ${getVillage(selectedCharacter.village).label}`}
+      title={
+        selectedCharacter.village &&
+        `Vila da ${getVillage(selectedCharacter.village).label}`
+      }
       description="Se aventure pela Vila"
       representantImage="https://res.cloudinary.com/dbmnsavja/image/upload/v1567454394/Naruto%20Game/Chibis/Sai.png"
       helperText="Escolha entre as missões, loja ou hospital!"

@@ -51,9 +51,13 @@ async function learnSkill(currentSkills, level) {
   return
 }
 
-async function moveCharacter(x, y, { attributes }) {
+async function moveCharacter(x, y, { attributes, currentBattle }) {
   if (attributes.stamina < 1) {
     return 'Estamina insuficiente'
+  }
+
+  if (!!currentBattle) {
+    return 'Você não pode se mexer enquanto estiver em batalha'
   }
 
   const enableMoviments = [-1, 0, 1]

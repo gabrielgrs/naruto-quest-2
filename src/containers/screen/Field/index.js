@@ -6,13 +6,11 @@ import {
   Col,
   Container,
   Image,
-  Button,
   ProgressBar,
   Tooltip
 } from '../../../components'
 import { getAll, clearState as clearEnemysState } from '../../../redux/enemies'
 import {
-  enterInBattle,
   battleAction,
   clearState as clearBattleState,
   leaveBattle
@@ -33,7 +31,6 @@ export default () => {
   const [selectedItemToUse, setSelectedItemToUse] = useState(undefined)
   const [characterLevel, setCharacterLevel] = useState(0)
   const [lastActionIsAttack, setLastActionIsAttack] = useState(undefined)
-  const [selectedEnemyId, setSelectedEnemyId] = useState(undefined)
   const [userInBattle, setUserInBattle] = useState(false)
   const dispatch = useDispatch()
 
@@ -80,12 +77,6 @@ export default () => {
       setUserInBattle(selectedCharacter.inBattle)
     }
   }, [selectedCharacter.inBattle, userInBattle, dispatch])
-
-  const onEnterInBattle = () => {
-    setUserInBattle(true)
-    const selectedEnemy = enemiesList.find(x => +x.code === +selectedEnemyId)
-    dispatch(enterInBattle(selectedCharacter, selectedEnemy))
-  }
 
   const onUseSkill = skill => {
     setLastActionIsAttack(true)
@@ -171,68 +162,12 @@ export default () => {
     <Page
       title="Campo"
       description="Batalhe contra monstros"
-      returnPath="/vila"
       hiddenLoader={selectedCharacter.inBattle}
       representantImage="https://res.cloudinary.com/dbmnsavja/image/upload/v1567454394/Naruto%20Game/Chibis/Kisame.png"
       helperText="Escolha algum inimigo para treinar, clique duas vezes nele ou selecione e clique para entrar na batalha"
     >
-      {!userInBattle && (
-        <>
-          <Row>
-            {!!enemiesList.length &&
-              enemiesList.map(item => {
-                const isDisabled = +item.code !== +selectedEnemyId
-                return (
-                  <Col key={item._id} sm={2}>
-                    <Tooltip text={`${item.name} level ${item.level}`}>
-                      <Image
-                        key={item._id}
-                        onClick={() =>
-                          !isDisabled
-                            ? onEnterInBattle()
-                            : setSelectedEnemyId(+item.code)
-                        }
-                        isDisabled={isDisabled}
-                        src={item.image}
-                      />
-                    </Tooltip>
-                  </Col>
-                )
-              })}
-          </Row>
-          <Row>
-            <Col sm={12}>
-              <Tooltip
-                text={
-                  selectedCharacter.skills && !selectedCharacter.skills.length
-                    ? 'Necessário aprender habilidade'
-                    : ''
-                }
-              >
-                <Button
-                  isDisabled={selectedEnemyId === undefined}
-                  onClick={() => onEnterInBattle()}
-                >
-                  Entrar na batalha
-                </Button>
-              </Tooltip>
-            </Col>
-          </Row>
-        </>
-      )}
-
       {canShowBattle() && (
         <Container>
-          {/* <Row>
-            <Col sm={12}>
-              <Button onClick={() => setShowLogs(!showLogs)}>
-                {showLogs ? 'Esconder' : 'Mostrar'} logs de batalha
-              </Button>
-            </Col>
-          </Row>
-          <Col hidden={!showLogs} sm={4}>
-            {renderLog(selectedCharacter.currentBattle.log)}
-          </Col> */}
           <Row>
             <Col sm={10} />
             <Col sm={2}>

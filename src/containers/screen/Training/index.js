@@ -251,7 +251,7 @@ export default () => {
                       !characterHaveThisSkills(skill) &&
                       (!currentJutsuFilter ||
                         currentJutsuFilter === skill.style) && (
-                        <Col key={skill._id} sm={2}>
+                        <Col key={skill._id} sm={3}>
                           <Tooltip html={renderSkillTooltip(skill)}>
                             <Image
                               hasGreyscale={

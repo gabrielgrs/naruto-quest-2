@@ -10,9 +10,28 @@ import { enterInBattle } from '../../redux/battle'
 import { getMap } from '../../api/map'
 
 const StyledWrapper = styled.div`
-  text-align: center;
-  background: ${({ theme }) => theme.colors.lightPrimary};
-  padding: 10px;
+  transition: 1s;
+  font-size: 1.2em;
+  background-color: ${({ theme }) => 'rgba(50, 50, 50, 0.5)'};
+  margin-top: ${({ theme }) => theme.spaces.md};
+  border-radius: 5px;
+
+  border-left: 4px solid ${({ theme }) => theme.colors.primary};
+
+  @media screen and (max-width: 720px) {
+    margin-top: ${({ theme }) => theme.spaces.lg};
+  }
+
+  &:hover {
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 0.5);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 0.5);
+    box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 0.5);
+  }
+
+  & > img {
+    float: left;
+    width: 100%;
+  }
 `
 
 const StyledMap = styled.div`

@@ -47,10 +47,6 @@ export const StyledActionButtons = styled.div`
   @media screen and (max-width: 720px) {
     flex-direction: row;
     display: flex;
-
-    & > a {
-      width: 33%;
-    }
   }
 `
 
