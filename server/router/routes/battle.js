@@ -5,18 +5,21 @@ module.exports = [
     component,
     method: 'post',
     path: `/${component}/enterInBattle`,
-    action: 'enterInBattle'
+    action: 'enterInBattle',
+    needAuthentication: true
   },
   {
     component,
     method: 'put',
     path: `/${component}/battleAction/:battleId`,
-    action: 'battleAction'
+    action: 'battleAction',
+    needAuthentication: true
   },
   {
     component,
     method: 'put',
     path: `/${component}/leaveBattle`,
-    action: 'leaveBattle'
+    action: 'leaveBattle',
+    needAuthentication: true
   }
 ]

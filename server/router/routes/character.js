@@ -11,67 +11,78 @@ module.exports = [
     component,
     method: 'put',
     path: `/${component}/learnSkill/:characterId`,
-    action: 'learnSkill'
+    action: 'learnSkill',
+    needAuthentication: true
   },
   {
     component,
     method: 'put',
     path: `/${component}/setAttributes/:characterId`,
-    action: 'setAttributes'
+    action: 'setAttributes',
+    needAuthentication: true
   },
   {
     component,
     method: 'put',
     path: `/${component}/changeJob/:characterId`,
-    action: 'changeJob'
+    action: 'changeJob',
+    needAuthentication: true
   },
   {
     component,
     method: 'put',
     path: `/${component}/buyItem/:characterId`,
-    action: 'buyItem'
+    action: 'buyItem',
+    needAuthentication: true
   },
   {
     component,
     method: 'put',
     path: `/${component}/recoveryCharacter/:characterId`,
-    action: 'recoveryCharacter'
+    action: 'recoveryCharacter',
+    needAuthentication: true
   },
   {
     component,
     method: 'get',
     path: `/${component}/getRanking`,
-    action: 'getRanking'
+    action: 'getRanking',
+    needAuthentication: true
   },
   {
     component,
     method: 'put',
     path: `/${component}/enterInQuest`,
-    action: 'enterInQuest'
+    action: 'enterInQuest',
+    needAuthentication: true
   },
   {
     component,
     method: 'put',
     path: `/${component}/finishQuest`,
-    action: 'finishQuest'
+    action: 'finishQuest',
+    needAuthentication: true
   },
   {
     component,
     method: 'put',
     path: `/${component}/leaveQuest`,
-    action: 'leaveQuest'
+    action: 'leaveQuest',
+    needAuthentication: true
   },
   {
     component,
     method: 'put',
     path: `/${component}/learnElement`,
-    action: 'learnElement'
+    action: 'learnElement',
+    needAuthentication: true
   },
   {
     component,
     method: 'put',
     path: `/${component}/setEquipment`,
-    action: 'setEquipment'
+    action: 'setEquipment',
+    needAuthentication: true
   },
   // {
   //   component,

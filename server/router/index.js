@@ -1,4 +1,5 @@
 const app = require('express')()
+const authService = require('../services/auth')
 
 const routes = [
   ...require('./routes/user'),
@@ -17,8 +18,19 @@ const routes = [
   ...require('./routes/message')
 ]
 
-function createRoute({ component, method, path, action }) {
-  console.log(`${String(method).toUpperCase()}: ${action} ${path}`)
+function createRoute({ component, method, path, action, needAuthentication }) {
+  console.log(
+    `${String(method).toUpperCase()}: ${
+      needAuthentication ? 'private' : 'public'
+    } ${action} ${path}`
+  )
+  if (needAuthentication) {
+    return app[method](
+      path,
+      authService.authorize,
+      require(`../controllers/${component}`)[action]
+    )
+  }
   return app[method](path, require(`../controllers/${component}`)[action])
 }
 

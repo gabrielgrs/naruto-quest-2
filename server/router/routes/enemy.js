@@ -5,13 +5,15 @@ module.exports = [
     component,
     method: 'get',
     path: `/${component}/getAll`,
-    action: 'getAll'
+    action: 'getAll',
+    needAuthentication: true
   },
   {
     component,
     method: 'get',
     path: `/${component}/getById/:id`,
-    action: 'getById'
+    action: 'getById',
+    needAuthentication: true
   },
   {
     component,

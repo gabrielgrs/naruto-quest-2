@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
 
 const getDatabaseConnectionString = () => {
-  if (process.env.NODE_ENV === 'development') {
-    return 'mongodb://admin:admin123@ds311968.mlab.com:11968/narutopocket'
-  }
+  // if (process.env.NODE_ENV === 'development') {
+  return 'mongodb://admin:admin123@ds311968.mlab.com:11968/narutopocket'
+  // }
 
   // Development url
-  return 'mongodb://admin:admin123@ds217438.mlab.com:17438/narutogame_validations'
+  // return 'mongodb://admin:admin123@ds217438.mlab.com:17438/narutogame_validations'
 }
 
 const url = getDatabaseConnectionString()
