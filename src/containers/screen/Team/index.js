@@ -7,18 +7,22 @@ import {
   requestJoinTheTeam,
   clearState
 } from '../../../redux/team'
+import texts from '../../../helpers/texts'
 
 export default () => {
   const dispatch = useDispatch()
   const [values, setValues] = useState({})
   const [creatingTeam, setCreatingTeam] = useState(false)
 
-  const { selectedCharacter, teamsList } = useSelector(({ user, team }) => {
-    return {
-      ...user,
-      ...team
+  const { selectedCharacter, teamsList, language } = useSelector(
+    ({ user, team, common }) => {
+      return {
+        language: common.language,
+        ...user,
+        ...team
+      }
     }
-  })
+  )
 
   useEffect(() => () => dispatch(clearState()), [dispatch])
 
@@ -32,7 +36,7 @@ export default () => {
 
   const fields = [
     {
-      label: 'Nome do Grupo',
+      label: texts.team.name,
       name: 'teamName',
       value: values.teamName
     }
@@ -60,12 +64,12 @@ export default () => {
       return (
         <Row key={t._id}>
           <Col sm={9}>
-            {t.name} - {t.members.length + 1} membros
+            {t.name} - {t.members.length + 1} {texts.team.members[language]}
           </Col>
           <Col sm={3}>
             {t.members.length + 1 < 3 && (
               <Button onClick={() => onRequestJoinTheTeam(t._id)}>
-                Participar
+                {texts.team.participate}
               </Button>
             )}
           </Col>
@@ -85,19 +89,20 @@ export default () => {
               : 'Time atual'}
           </h3>
           <Col sm={6}>
-            <b>Nome do Time:</b> {currentTeam.name}
+            <b>{texts.team.name[language]}</b> {currentTeam.name}
           </Col>
           <Col sm={6}>
-            <b>Total de Membros:</b> {currentTeam.members.length + 1}
+            <b>{texts.team.members[language]}</b>{' '}
+            {currentTeam.members.length + 1}
           </Col>
           <hr />
           <Col sm={12}>
-            <b>Lider:</b> {currentTeam.owner.name}
+            <b>{texts.team.leader[language]}: </b> {currentTeam.owner.name}
           </Col>
           <Col sm={12}>
             {currentTeam.members.map(m => (
               <div key={m._id}>
-                <b>Membro: </b>
+                <b>{texts.team.member[language]}: </b>
                 {m.name}
               </div>
             ))}
@@ -109,10 +114,10 @@ export default () => {
 
   return (
     <Page
-      title="Times"
-      description="Aqui você poderá fazer parte de um time"
+      title={texts.team.title[language]}
+      description={texts.team.description[language]}
       representantImage="https://res.cloudinary.com/dbmnsavja/image/upload/v1567454394/Naruto%20Game/Chibis/Gaara.png"
-      helperText="Os times são divididos por vilas e os seus companheiros de time também ganharão experiência quando você ganhar!"
+      helperText={texts.team.helperText[language]}
     >
       <Row>
         {selectedCharacter.currentTeam && renderCurrentTeam()}
@@ -124,12 +129,12 @@ export default () => {
                 <Col sm={7} />
                 <Col sm={3}>
                   <Button noBorder onClick={() => setCreatingTeam(false)}>
-                    Cancelar Criação
+                    {texts.team.cancelCreation[language]}
                   </Button>
                 </Col>
                 <Col sm={2}>
                   <Button fullWidth onClick={() => onCreateTeam()}>
-                    Salvar
+                    {texts.team.createTeam[language]}
                   </Button>
                 </Col>
               </Row>
@@ -137,7 +142,7 @@ export default () => {
               <Row>
                 <Col sm={12}>
                   <Button onClick={() => setCreatingTeam(true)}>
-                    Criar Time
+                    {texts.team.createTeam[language]}
                   </Button>
                 </Col>
                 <Col sm={12}>{renderTeams()}</Col>

@@ -13,8 +13,9 @@ import labels from '../../config/labels'
 import { getVillage } from '../../helpers/villages'
 import { getNinjaRank } from '../../helpers/ninjaRankings'
 import { getExpToNextLevel } from '../../helpers/rules'
+import texts from '../../helpers/texts'
 
-export default ({ selectedCharacter }) => {
+export default ({ language, selectedCharacter }) => {
   const {
     name,
     attributes,
@@ -37,18 +38,22 @@ export default ({ selectedCharacter }) => {
                 <StyledName>
                   {name}
                   <div>
-                    {getNinjaRank(ninjaRank).label} da Vila da{' '}
-                    {getVillage(village).label}
+                    {language === 'pt'
+                      ? `${getNinjaRank(ninjaRank).label} - 'Vila da'
+                    ${getVillage(village).label}`
+                      : `${getNinjaRank(ninjaRank).label} - ${
+                          getVillage(village).label
+                        } Village`}
                   </div>
                 </StyledName>
                 <ProgressBar
-                  label={labels.life}
+                  label={texts.characterBar.life[language]}
                   color="green"
                   current={attributes.life}
                   max={stats.maxLife}
                 />
                 <ProgressBar
-                  label={labels.mana}
+                  label={texts.characterBar.chakra[language]}
                   color="blue"
                   current={attributes.mana}
                   max={stats.maxMana}
@@ -61,13 +66,13 @@ export default ({ selectedCharacter }) => {
                   </Col>
                   <Col sm={8}>
                     <ProgressBar
-                      label={labels.exp}
+                      label={texts.characterBar.exp[language]}
                       color="black"
                       current={exp}
                       max={getExpToNextLevel(level)}
                     />
                     <ProgressBar
-                      label={labels.stamina}
+                      label={texts.characterBar.stamina[language]}
                       color="red"
                       current={attributes.stamina}
                       max={stats.maxStamina}
@@ -86,13 +91,21 @@ export default ({ selectedCharacter }) => {
               <Col sm={3}>
                 <StyledActionButtons>
                   {/* <StyledLink to="/treinamento">Treinamento</StyledLink> */}
-                  <StyledLink to="/equipments">Equipamentos</StyledLink>
+                  <StyledLink to="/equipments">
+                    {texts.characterBar.equipments[language]}
+                  </StyledLink>
 
-                  <StyledLink to="/bag">Mochila</StyledLink>
+                  <StyledLink to="/bag">
+                    {texts.characterBar.bag[language]}
+                  </StyledLink>
 
-                  <StyledLink to="/characters">personagens</StyledLink>
+                  <StyledLink to="/characters">
+                    {texts.characterBar.characters[language]}
+                  </StyledLink>
 
-                  <StyledLink to="/vip">Sala VIP</StyledLink>
+                  <StyledLink to="/vip">
+                    {texts.characterBar.vipRoom[language]}
+                  </StyledLink>
                 </StyledActionButtons>
               </Col>
             </Col>

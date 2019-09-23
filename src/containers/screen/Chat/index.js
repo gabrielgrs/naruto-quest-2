@@ -3,15 +3,17 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Page, Row, Col, Button, TextField } from '../../../components'
 import { StyledChatPanel, StyledWrapper, StyledMessage } from './styles'
 import { getAll, sendMessage } from '../../../redux/message'
+import texts from '../../../helpers/texts'
 
 export default () => {
   const [isSendingMessage, setIsSendingMessage] = useState(false)
   const dispatch = useDispatch()
 
   const [message, setMessage] = useState()
-  const { messageList, selectedCharacter } = useSelector(
-    ({ message, user }) => {
+  const { messageList, selectedCharacter, language } = useSelector(
+    ({ message, user, common }) => {
       return {
+        language: common.language,
         ...user,
         messageList: message.messageList
       }
@@ -48,7 +50,8 @@ export default () => {
   }
 
   const renderMessages = () => {
-    if (!messageList.length) return <h2>Nenhuma mensagem encontrada</h2>
+    if (!messageList.length)
+      return <h2>{texts.chat.notFoundMessages[language]}</h2>
 
     return messageList.map((m, index) => (
       <Row key={index}>
@@ -63,7 +66,10 @@ export default () => {
   }
 
   return (
-    <Page title="Chat" description="Converse com o pessoal aqui!">
+    <Page
+      title={texts.chat.title[language]}
+      description={texts.chat.description[language]}
+    >
       <StyledWrapper>
         <Row>
           <Col sm={12}>
@@ -85,11 +91,13 @@ export default () => {
           </Col>
           <Col sm={2}>
             <Button
-              isDisabled={isSendingMessage}
+              isDisabled={isSendingMessage || !message}
               fullWidth
               onClick={() => onSendMessage()}
             >
-              {isSendingMessage ? 'Enviando...' : 'Enviar Mensagem'}
+              {isSendingMessage
+                ? texts.chat.sendingMessage[language]
+                : texts.chat.sendMessage[language]}
             </Button>
           </Col>
         </Row>

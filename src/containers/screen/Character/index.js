@@ -20,6 +20,7 @@ import { villages } from '../../../helpers/villages'
 import { initialValues } from './helpers'
 import * as notify from '../../../helpers/notify'
 import CharacterCreation from '../../../components/character/creation'
+import texts from '../../../helpers/texts'
 
 export default () => {
   const [selectedJob, setSelectedJob] = useState(undefined)
@@ -108,9 +109,16 @@ export default () => {
 
   return (
     <Page
-      title="Personagens"
-      description={`Você poderá criar até ${features.MAX_CHARACTERS +
-        additionalCharacters} personagens`}
+      title={texts.characters.title[language]}
+      description={
+        selectCharacter.level
+          ? `${
+              texts.characters.description(
+                features.MAX_CHARACTERS + additionalCharacters
+              )[language]
+            }`
+          : ''
+      }
     >
       <>
         {characters &&
@@ -121,7 +129,9 @@ export default () => {
                 <Button
                   onClick={() => setCreatingCharacter(!creatingCharacter)}
                 >
-                  {creatingCharacter ? 'Cancelar' : 'Criar personagem'}
+                  {creatingCharacter
+                    ? texts.characters.cancelCreation[language]
+                    : texts.characters.createCharacter[language]}
                 </Button>
               </Col>
             </Row>
@@ -133,10 +143,14 @@ export default () => {
                 return (
                   <Col key={character._id} sm={3}>
                     <Image src={character.selectedJob.image} />
-                    <CharacterInfo name={name} character={character} />
+                    <CharacterInfo
+                      language={language}
+                      name={name}
+                      character={character}
+                    />
                     <Row>
                       <Button onClick={() => onSelectCharacter(character)}>
-                        Selecionar
+                        {texts.characters.selectedCharacter[language]}
                       </Button>
                     </Row>
                   </Col>

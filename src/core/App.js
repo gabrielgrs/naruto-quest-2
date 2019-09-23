@@ -172,7 +172,10 @@ export default () => {
           <StyledWrapper>
             <Col sm={12}>
               {isAuthenticated && !selectedCharacter.inBattle && (
-                <CharacterBar selectedCharacter={selectedCharacter} />
+                <CharacterBar
+                  language={language}
+                  selectedCharacter={selectedCharacter}
+                />
               )}
             </Col>
             <Col sm={12}>

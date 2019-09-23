@@ -10,6 +10,7 @@ import {
   Tooltip,
   Image
 } from '../'
+import texts from '../../helpers/texts'
 
 const StyledTotalPoints = styled.span`
   font-weight: 600;
@@ -109,7 +110,7 @@ export default ({
             isDisabled={currentPage === 0}
             onClick={() => setCurrentPage(currentPage - 1)}
           >
-            Anterior
+            {texts.characters.previousPage[language]}
           </Button>
         </Col>
         <Col sm={1}>
@@ -122,15 +123,15 @@ export default ({
             isDisabled={currentPage === totalPages - 1}
             onClick={() => setCurrentPage(currentPage + 1)}
           >
-            Próximo
+            {texts.characters.nextPage[language]}
           </Button>
         </Col>
       </Row>
       <Col sm={12}>
         <TextField
-          label="Nome"
+          label={texts.characters.name.label[language]}
           name="name"
-          placeholder="Digite o nome do personagem aqui"
+          placeholder={texts.characters.name.placeholder[language]}
           value={name}
           onChange={({ target }) =>
             setName(target.value.replace(/[^A-Z0-9]/gi, ''))
@@ -139,7 +140,9 @@ export default ({
       </Col>
       {renderVillages()}
       <Col sm={12}>
-        <StyledTotalPoints>Total: {totalPoints}</StyledTotalPoints>
+        <StyledTotalPoints>
+          {texts.characters.totalPoints[language]} {totalPoints}
+        </StyledTotalPoints>
       </Col>
       <Col sm={12}>
         <AttributesSelection
@@ -148,7 +151,9 @@ export default ({
           onIncreaseAttribute={onIncreaseAttribute}
           attributes={attributes}
         />
-        <Button onClick={() => onCreateCharacter()}>Criar Personagem</Button>
+        <Button onClick={() => onCreateCharacter()}>
+          {texts.characters.createCharacter[language]}
+        </Button>
       </Col>
     </Row>
   )

@@ -1,8 +1,9 @@
 import React from 'react'
 import { Row } from '../../components'
 import labels from '../../config/labels'
+import texts from '../../helpers/texts'
 
-export default ({ character }) => {
+export default ({ character, language }) => {
   return (
     <Row>
       <Row>
@@ -18,13 +19,16 @@ export default ({ character }) => {
         <b>{labels.mana}:</b> {character.stats.maxMana}
       </Row>
       <Row>
-        <b>{labels.attack.name}:</b> {character.attributes.attack}
+        <b>{labels.attack.name}: </b>
+        {texts.training.taijutsu.tooltip[language]}
       </Row>
       <Row>
-        <b>{labels.intelligence.name}:</b> {character.attributes.intelligence}
+        <b>{labels.intelligence.name}: </b>
+        {texts.training.ninjutsu.tooltip[language]}
       </Row>
       <Row>
-        <b>{labels.vitality.name}:</b> {character.attributes.vitality}
+        <b>{labels.vitality.name}: </b>
+        {texts.training.genjutsu.tooltip[language]}
       </Row>
     </Row>
   )

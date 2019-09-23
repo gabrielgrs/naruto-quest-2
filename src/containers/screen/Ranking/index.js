@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { getVillage } from '../../../helpers/villages'
 import { getNinjaRank } from '../../../helpers/ninjaRankings'
 import { differenceInMinutes } from 'date-fns'
+import texts from '../../../helpers/texts'
 
 export const StyledRankingCard = styled.div`
   font-size: 1.5em;
@@ -61,12 +62,15 @@ export const StyledCard = styled.div`
 export default () => {
   const dispatch = useDispatch()
 
-  const { ranking, selectedCharacter } = useSelector(({ character, user }) => {
-    return {
-      ...character,
-      selectedCharacter: user.selectedCharacter
+  const { ranking, selectedCharacter, language } = useSelector(
+    ({ character, user, common }) => {
+      return {
+        language: common.language,
+        ...character,
+        selectedCharacter: user.selectedCharacter
+      }
     }
-  })
+  )
 
   useEffect(() => {
     return () => {
@@ -88,8 +92,8 @@ export default () => {
 
   return (
     <Page
-      title="Ranking"
-      description="Tela de Ranking de Personagens"
+      title={texts.ranking.title[language]}
+      description={texts.ranking.description[language]}
       representantImage="https://res.cloudinary.com/dbmnsavja/image/upload/v1567454394/Naruto%20Game/Chibis/Itachi.png"
     >
       <Row>
@@ -111,7 +115,7 @@ export default () => {
                     ${getVillage(char.village).label}`}
                   </div>
                   <div>
-                    <b>Level</b> {char.level}
+                    <b>{texts.ranking.level[language]}: </b> {char.level}
                   </div>
                 </Row>
                 <Row>
