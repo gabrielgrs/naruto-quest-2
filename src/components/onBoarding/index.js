@@ -45,6 +45,7 @@ const StyledContent = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   font-size: 1.5em;
   border: solid black 2px;
+  height: 120px;
 `
 
 const StyledFooter = styled.div`
@@ -65,11 +66,7 @@ const StyledButton = styled.button`
     isLastStep ? `${theme.colors.white}` : `${theme.colors.black}`};
 `
 
-const OnBoarding = props => {
-  const [showOnboarding, setShowOnboarding] = useState(
-    !localStorage.getItem('onboarding')
-  )
-
+const OnBoarding = ({ isOpen, onLastStep }) => {
   const [currentStep, setCurrentStep] = useState(0)
   const lastStep = steps.length - 1
 
@@ -83,8 +80,8 @@ const OnBoarding = props => {
     if (currentStep !== lastStep) {
       return setCurrentStep(currentStep + 1)
     } else if (currentStep === lastStep) {
-      localStorage.setItem('onboarding', 0)
-      setShowOnboarding(false)
+      setCurrentStep(0)
+      onLastStep()
     }
   }
 
@@ -96,7 +93,7 @@ const OnBoarding = props => {
   )
 
   return (
-    <StyledOnBoardingModal isOpen={showOnboarding}>
+    <StyledOnBoardingModal isOpen={isOpen}>
       <OnBoardingCard>
         <StyledIllustration>{illustration}</StyledIllustration>
         <StyledContent>

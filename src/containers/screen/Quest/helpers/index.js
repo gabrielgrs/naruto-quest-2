@@ -40,12 +40,12 @@ export const canShowQuest = (character, quest, questFilter) => {
 
 export const getRemainingTime = selectedCharacter => {
   const additectedMinutes = addMinutes(
-    selectedCharacter.startedLastQuestAt,
+    new Date(selectedCharacter.startedLastQuestAt),
     selectedCharacter.currentQuest.duration
   )
 
   const differenceBetweenDatesInSeconds = differenceInSeconds(
-    additectedMinutes,
+    new Date(additectedMinutes),
     Date.now()
   )
 

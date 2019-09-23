@@ -30,7 +30,7 @@ export const steps = [
   },
   {
     title: 'Status',
-    description: `Monte sua build como quiser. A cada nível você ganha 3 pontos de atributos, e você pode aumentar seu Taijutsu (que aumenta ataques do tipo Taijutsu), aumentar seu NinjutsU (que aumenta seu Chakra e ataques do tipo Ninjutsu) e o Genjutsu (que aumenta sua Vida e seus ataques do tipo Genjustu)`
+    description: `A cada nível você ganha 3 pontos de atributos, e você pode aumentar seu Taijutsu, Ninjutsu ou Genjutsu!`
   },
   {
     title: 'Jutsus',
