@@ -66,7 +66,8 @@ const levels = {
   47: createExpRequesite(725800),
   48: createExpRequesite(767800),
   49: createExpRequesite(812300),
-  50: createExpRequesite(859300)
+  50: createExpRequesite(859300),
+  51: createExpRequesite(0)
 }
 export const getExpToNextLevel = level => {
   return levels[level + 1].exp.base

@@ -231,8 +231,8 @@ export const moveCharacter = (x, y, callback) => {
     dispatch(moveCharacterReducer())
     try {
       const { data } = await charactersCollection.moveCharacter(x, y)
-      if (callback) callback(data.nextCoordinate.x, data.nextCoordinate.y)
       dispatch(getUserByToken())
+      if (callback) callback(data.nextCoordinate.x, data.nextCoordinate.y)
       dispatch(moveCharacterSuccess(data))
     } catch (error) {
       notifyNormalizedMessageError(error)

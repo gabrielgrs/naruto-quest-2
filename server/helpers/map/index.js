@@ -1,3 +1,5 @@
+const enemyRepository = require('../../repositories/enemy')
+
 const villages = [
   {
     name: 'Leaf',
@@ -112,9 +114,7 @@ const getDistance = (a, b) => {
 }
 
 const canGenerateMonster = probability => {
-  const canGenerate = Math.floor(Math.random() * 100) + 1 < probability
-  console.log(canGenerate)
-  return canGenerate
+  return Math.floor(Math.random() * 100) + 1 < probability
 }
 
 const populateMap = async asyncMap => {
@@ -129,34 +129,45 @@ const populateMap = async asyncMap => {
   }
   const currentMap = await Promise.resolve(asyncMap)
 
-  const arrayWithContent = currentMap.map(({ coordinate }, index) => {
-    const village = villages.find(v => {
-      return v.coordinate.x === coordinate.x && v.coordinate.y === coordinate.y
+  const arrayWithContent = Promise.all(
+    currentMap.map(async ({ coordinate }, index) => {
+      const village = villages.find(v => {
+        return (
+          v.coordinate.x === coordinate.x && v.coordinate.y === coordinate.y
+        )
+      })
+
+      if (village) {
+        return {
+          coordinate,
+          content: {
+            type: 'village',
+            data: { name: village.name }
+          }
+        }
+      }
+
+      // If 2 points in x and y, have 100 of change generate Monster
+      const pointsOfDistance = Math.ceil(index / Math.sqrt(currentMap.length))
+      if (
+        hasVillageNearby(coordinate, pointsOfDistance) &&
+        canGenerateMonster(80 - pointsOfDistance)
+      ) {
+        const currentEnemy = await enemyRepository.getByCode(
+          pointsOfDistance - 1
+        )
+        return {
+          coordinate,
+          content: {
+            type: 'enemy',
+            data: currentEnemy
+          }
+        }
+      }
+
+      return { coordinate }
     })
-
-    if (village) {
-      return {
-        coordinate,
-        content: {
-          type: 'village',
-          data: { name: village.name }
-        }
-      }
-    }
-
-    // If 2 points in x and y, have 100 of change generate Monster
-    if (hasVillageNearby(coordinate, 2) && canGenerateMonster(100)) {
-      return {
-        coordinate,
-        content: {
-          type: 'enemy',
-          data: { code: 0 }
-        }
-      }
-    }
-
-    return { coordinate }
-  })
+  )
 
   return arrayWithContent
 }

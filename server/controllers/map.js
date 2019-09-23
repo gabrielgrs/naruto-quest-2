@@ -42,7 +42,7 @@ async function generateMap(req, res) {
     await mapModel.findOneAndRemove({ code: 0 })
     const generatedMap = await generateMapHelper(100)
 
-    const response = await populateMap(generatedMap)
+    const response = await Promise.resolve(populateMap(generatedMap))
 
     await mapModel.create({
       code: 0,

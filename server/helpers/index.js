@@ -78,7 +78,8 @@ const levels = {
   47: createExpRequesite(725800),
   48: createExpRequesite(767800),
   49: createExpRequesite(812300),
-  50: createExpRequesite(859300)
+  50: createExpRequesite(859300),
+  51: createExpRequesite(999999999999)
 }
 
 module.exports = {

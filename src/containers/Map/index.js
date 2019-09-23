@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { Image, Tooltip } from '../../components'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { moveCharacter } from '../../redux/characters'
@@ -45,7 +45,6 @@ const StyledMapPart = styled.div`
   position: relative;
   border: solid black 1px;
   padding: 10px;
-  height: 100px;
   width: ${({ itemsPerRow }) => getWidth(itemsPerRow)};
   box-sizing: border-box;
   opacity: ${({ isBlocked }) => (isBlocked ? 0.5 : 1)};
@@ -54,11 +53,6 @@ const StyledMapPart = styled.div`
 
 const StyledControls = styled.div`
   margin: 0 auto;
-
-  & > div {
-    display: flex;
-    flex-wrap: wrap;
-  }
 `
 
 const getOpacity = (isDisabled, isInvisible) => {
@@ -79,8 +73,13 @@ const StyledControlButton = styled.div`
   width: 70px;
   text-align: center;
   background: ${({ theme }) => theme.colors.primary};
-  margin: 3px;
   padding: 5px 0 5px 0;
+  margin: 0 auto;
+  opacity: 0.5
+
+  &:hover {
+    opacity: 1;
+  }
 `
 
 const StyledCharacter = styled.div`
@@ -104,13 +103,54 @@ const Character = () => {
 }
 
 const MapPart = ({ isCharacterHere, coordX, coordY, content, itemsPerRow }) => {
+  const villages = {
+    Leaf: {
+      name: 'Folha',
+      image:
+        'https://res.cloudinary.com/dbmnsavja/image/upload/v1567526549/Naruto%20Game/villages/Leaf.png'
+    },
+    Sand: {
+      name: 'Areia',
+      image:
+        'https://res.cloudinary.com/dbmnsavja/image/upload/v1567526549/Naruto%20Game/villages/Sand.png'
+    },
+    Rock: {
+      name: 'Pedra',
+      image:
+        'https://res.cloudinary.com/dbmnsavja/image/upload/v1567526549/Naruto%20Game/villages/Rock.png'
+    },
+    Mist: {
+      name: 'Névoa',
+      image:
+        'https://res.cloudinary.com/dbmnsavja/image/upload/v1567526549/Naruto%20Game/villages/Mist.png'
+    },
+    Cloud: {
+      name: 'Núvem',
+      image:
+        'https://res.cloudinary.com/dbmnsavja/image/upload/v1567526549/Naruto%20Game/villages/Cloud.png'
+    },
+    Sound: {
+      name: 'Som',
+      image:
+        'https://res.cloudinary.com/dbmnsavja/image/upload/v1567526549/Naruto%20Game/villages/Sound.png'
+    }
+  }
   const renderContent = content => {
     if (content.type === 'village') {
-      return <div>{content.data.name} Village</div>
+      const village = villages[content.data.name]
+      return (
+        <Tooltip text={`Vila da ${village.name}`}>
+          <Image src={village.image} alt={village.name} />
+        </Tooltip>
+      )
     }
 
     if (content.type === 'enemy') {
-      return <div>inimigo</div>
+      return (
+        <Tooltip text={content.data.level}>
+          <Image src={content.data.image} alt={content.data.name} />
+        </Tooltip>
+      )
     }
   }
 
@@ -118,8 +158,8 @@ const MapPart = ({ isCharacterHere, coordX, coordY, content, itemsPerRow }) => {
 
   return (
     <StyledMapPart isBlocked={isBlocked} itemsPerRow={itemsPerRow}>
-      {!isBlocked && <span>x: {coordX}</span>}
-      {!isBlocked && <span>y: {coordY}</span>}
+      {!isBlocked && <span style={{ fontSize: '0.8em' }}>x: {coordX}</span>}
+      {!isBlocked && <span style={{ fontSize: '0.8em' }}>y: {coordY}</span>}
       {content && renderContent(content)}
       {isCharacterHere && <Character />}
     </StyledMapPart>
@@ -128,7 +168,6 @@ const MapPart = ({ isCharacterHere, coordX, coordY, content, itemsPerRow }) => {
 
 const Map = ({ isLoading, ...props }) => {
   const dispatch = useDispatch()
-  const [accessAction, setAccessAction] = useState(undefined)
   const { selectedCharacter } = useSelector(({ user }) => ({ ...user }))
   const [map, setMap] = useState([])
 
@@ -202,30 +241,8 @@ const Map = ({ isLoading, ...props }) => {
       }
 
       const current = actions[currentArea.content.type]
-      setAccessAction(current)
       props.history.push(current)
-    } else {
-      setAccessAction(undefined)
-
-      // TODO
-      if (
-        currentArea &&
-        currentArea.content &&
-        currentArea.content.type !== 'enemy'
-      ) {
-        props.history.push('/')
-      }
     }
-  }
-
-  const renderAccessButton = () => {
-    return accessAction ? (
-      <Link to={accessAction}>
-        <StyledControlButton>Acessar</StyledControlButton>
-      </Link>
-    ) : (
-      <StyledControlButton>Acessar</StyledControlButton>
-    )
   }
 
   return (
@@ -254,24 +271,19 @@ const Map = ({ isLoading, ...props }) => {
             <div>Y: {selectedCharacter.coordinate.y}</div>
           </div> */}
           <StyledControls>
-            <div>
-              <StyledControlButton isInvisible />
-              <StyledControlButton
-                onClick={() => setPosition(0, -1)}
-                isDisabled={selectedCharacter.coordinate.y === 0 || isLoading}
-              >
-                Norte
-              </StyledControlButton>
-              <StyledControlButton isInvisible />
-            </div>
-            <div>
+            <StyledControlButton
+              onClick={() => setPosition(0, -1)}
+              isDisabled={selectedCharacter.coordinate.y === 0 || isLoading}
+            >
+              Norte
+            </StyledControlButton>
+            <div style={{ display: 'flex' }}>
               <StyledControlButton
                 isDisabled={selectedCharacter.coordinate.x === 0 || isLoading}
                 onClick={() => setPosition(-1, 0)}
               >
                 Oeste
               </StyledControlButton>
-              {renderAccessButton()}
               <StyledControlButton
                 isDisabled={
                   // selectedCharacter.coordinate.x === itemsPerRow - 1 ||
@@ -282,19 +294,15 @@ const Map = ({ isLoading, ...props }) => {
                 Leste
               </StyledControlButton>
             </div>
-            <div>
-              <StyledControlButton isInvisible />
-              <StyledControlButton
-                isDisabled={
-                  // selectedCharacter.coordinate.y === itemsPerRow - 1 ||
-                  isLoading
-                }
-                onClick={() => setPosition(0, 1)}
-              >
-                Sul
-              </StyledControlButton>
-              <StyledControlButton isInvisible />
-            </div>
+            <StyledControlButton
+              isDisabled={
+                // selectedCharacter.coordinate.y === itemsPerRow - 1 ||
+                isLoading
+              }
+              onClick={() => setPosition(0, 1)}
+            >
+              Sul
+            </StyledControlButton>
           </StyledControls>
         </StyledMap>
       </>
