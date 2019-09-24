@@ -4,11 +4,13 @@ const schema = new Schema(
   {
     character: {
       type: Schema.Types.ObjectId,
-      ref: 'Character'
+      ref: 'Character',
+      autopopulate: true
     },
     enemy: {
       type: Schema.Types.ObjectId,
-      ref: 'Enemy'
+      ref: 'Enemy',
+      autopopulate: true
     },
     delayedSkills: [
       {
@@ -23,7 +25,8 @@ const schema = new Schema(
         description: String,
         who: {
           type: Schema.Types.ObjectId,
-          ref: 'Character'
+          ref: 'Character',
+          autopopulate: true
         }
       }
     ],
@@ -35,4 +38,5 @@ const schema = new Schema(
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 )
 
+schema.plugin(require('mongoose-autopopulate'))
 module.exports = model('Battle', schema)

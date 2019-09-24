@@ -19,4 +19,5 @@ const schema = new Schema({
   image: String
 })
 
+schema.plugin(require('mongoose-autopopulate'))
 module.exports = model('Enemy', schema)

@@ -11,12 +11,20 @@ const schema = new Schema({
   attributePoints: { Type: Number, default: 0 },
   skillPoints: { type: Number, default: 0 },
   bodyEquipments: {
-    weapon: { type: Schema.Types.ObjectId, ref: 'Equipment' },
-    head: { type: Schema.Types.ObjectId, ref: 'Equipment' },
-    trunk: { type: Schema.Types.ObjectId, ref: 'Equipment' },
-    arms: { type: Schema.Types.ObjectId, ref: 'Equipment' },
-    legs: { type: Schema.Types.ObjectId, ref: 'Equipment' },
-    feets: { type: Schema.Types.ObjectId, ref: 'Equipment' }
+    weapon: {
+      type: Schema.Types.ObjectId,
+      ref: 'Equipment',
+      autopopulate: true
+    },
+    head: { type: Schema.Types.ObjectId, ref: 'Equipment', autopopulate: true },
+    trunk: {
+      type: Schema.Types.ObjectId,
+      ref: 'Equipment',
+      autopopulate: true
+    },
+    arms: { type: Schema.Types.ObjectId, ref: 'Equipment', autopopulate: true },
+    legs: { type: Schema.Types.ObjectId, ref: 'Equipment', autopopulate: true },
+    feets: { type: Schema.Types.ObjectId, ref: 'Equipment', autopopulate: true }
   },
   element: {
     type: String,
@@ -26,12 +34,14 @@ const schema = new Schema({
   skills: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Skill'
+      ref: 'Skill',
+      autopopulate: true
     }
   ],
   selectedJob: {
     type: Schema.Types.ObjectId,
-    ref: 'Job'
+    ref: 'Job',
+    autopopulate: true
   },
   ninjaRank: {
     type: String,
@@ -45,15 +55,18 @@ const schema = new Schema({
   inBattle: { type: Boolean, default: false },
   currentBattle: {
     type: Schema.Types.ObjectId,
-    ref: 'Battle'
+    ref: 'Battle',
+    autopopulate: true
   },
   currentTeam: {
     type: Schema.Types.ObjectId,
-    ref: 'Team'
+    ref: 'Team',
+    autopopulate: true
   },
   currentQuest: {
     type: Schema.Types.ObjectId,
-    ref: 'Quest'
+    ref: 'Quest',
+    autopopulate: true
   },
   startedLastQuestAt: {
     type: Date
@@ -62,7 +75,7 @@ const schema = new Schema({
   // completedQuests: [
   //   {
   //     type: Schema.Types.ObjectId,
-  //     ref: 'Quest'
+  //     ref: 'Quest',autopopulate: true
   //   }
   // ],
   attributes: {
@@ -78,8 +91,10 @@ const schema = new Schema({
     maxMana: { type: Number, default: 0 },
     maxStamina: { type: Number, default: 0 }
   },
-  items: [{ type: Schema.Types.ObjectId, ref: 'Item' }],
-  equipments: [{ type: Schema.Types.ObjectId, ref: 'Equipment' }],
+  items: [{ type: Schema.Types.ObjectId, ref: 'Item', autopopulate: true }],
+  equipments: [
+    { type: Schema.Types.ObjectId, ref: 'Equipment', autopopulate: true }
+  ],
   currentStoryPoint: {
     type: Number,
     default: 0
@@ -110,4 +125,5 @@ const schema = new Schema({
   // createdAt: Date.now()
 })
 
+schema.plugin(require('mongoose-autopopulate'))
 module.exports = model('Character', schema)

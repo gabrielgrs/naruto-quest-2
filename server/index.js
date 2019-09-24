@@ -55,9 +55,11 @@ const startServer = () =>
   })
 
 // Clustering
-process.env.NODE_ENV === 'production'
-  ? enableCluster(() => startServer())
-  : startServer()
+// process.env.NODE_ENV === 'production'
+//   ? enableCluster(() => startServer())
+//   : startServer()
+
+startServer()
 
 cronService.executeCron()
 

@@ -12,7 +12,8 @@ const insertCharacter = (userId, characterId) =>
 const getAll = () => model.find({})
 
 const getById = async id => {
-  const response = await dynamicPopulate(model.findById(id))
+  // const response = await dynamicPopulate(model.findById(id))
+  const response = await model.findById(id)
 
   if (response.selectedCharacter) {
     const { level, attributes } = response.selectedCharacter

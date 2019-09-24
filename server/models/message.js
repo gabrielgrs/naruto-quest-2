@@ -4,11 +4,13 @@ const schema = new Schema({
   sender: {
     type: Schema.Types.ObjectId,
     ref: 'Character',
-    required: true
+    required: true,
+    autopopulate: true
   },
   receiver: {
     type: Schema.Types.ObjectId,
-    ref: 'Character'
+    ref: 'Character',
+    autopopulate: true
   },
   text: String,
   // village: {
@@ -21,4 +23,5 @@ const schema = new Schema({
   }
 })
 
+schema.plugin(require('mongoose-autopopulate'))
 module.exports = model('Message', schema)

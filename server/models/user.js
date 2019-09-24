@@ -8,12 +8,14 @@ const schema = new Schema({
   password: String,
   selectedCharacter: {
     type: Schema.Types.ObjectId,
-    ref: 'Character'
+    ref: 'Character',
+    autopopulate: true
   },
   characters: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Character'
+      ref: 'Character',
+      autopopulate: true
     }
   ],
   vipCredits: {
@@ -32,4 +34,5 @@ const schema = new Schema({
   }
 })
 
+schema.plugin(require('mongoose-autopopulate'))
 module.exports = model('User', schema)

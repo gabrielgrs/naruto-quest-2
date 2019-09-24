@@ -4,12 +4,14 @@ const schema = new Schema({
   name: { type: String, required: true, unique: true },
   owner: {
     type: Schema.Types.ObjectId,
-    ref: 'Character'
+    ref: 'Character',
+    autopopulate: true
   },
   members: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Character'
+      ref: 'Character',
+      autopopulate: true
     }
   ],
   village: {
@@ -18,4 +20,5 @@ const schema = new Schema({
   }
 })
 
+schema.plugin(require('mongoose-autopopulate'))
 module.exports = model('Team', schema)
