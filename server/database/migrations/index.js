@@ -14,7 +14,9 @@ const {
 // }
 
 const verifyAndCreate = async (list, collection) => {
-  console.log(`Creating collection ${collection.name}`)
+  if (process.env.NODE_ENV !== 'production') {
+    console.log(`Creating collection ${collection.name}`)
+  }
   const repository = require(`../../repositories/${collection.controller}`)
   return list.map(async item => {
     try {

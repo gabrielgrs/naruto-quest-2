@@ -19,11 +19,14 @@ const routes = [
 ]
 
 function createRoute({ component, method, path, action, needAuthentication }) {
-  console.log(
-    `${String(method).toUpperCase()}: ${
-      needAuthentication ? 'private' : 'public'
-    } ${action} ${path}`
-  )
+  if (process.env.NODE_ENV !== 'production') {
+    console.log(
+      `${String(method).toUpperCase()}: ${
+        needAuthentication ? 'private' : 'public'
+      } ${action} ${path}`
+    )
+  }
+
   if (needAuthentication) {
     return app[method](
       path,

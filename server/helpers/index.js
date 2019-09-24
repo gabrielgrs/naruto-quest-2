@@ -1,7 +1,8 @@
 const rules = require('../config/rules')
 
 // Specific Rules
-const getExpBonus = exp => exp * rules.expMultiplier
+const getExpBonus = exp =>
+  exp * process.env.EXP_MULTIPLIER || rules.expMultiplier
 
 const getGoldWithBonus = gold => gold * rules.goldMultiplier
 

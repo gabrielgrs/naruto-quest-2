@@ -1,9 +1,10 @@
 const mongoose = require('mongoose')
 
 const getDatabaseConnectionString = () => {
-  console.log('Database', process.env.DATABASE)
   if (process.env.DATABASE) {
     return process.env.DATABASE
+  } else {
+    console.log('No DATABASE env defined')
   }
 
   // if (process.env.NODE_ENV === 'development') {

@@ -89,7 +89,12 @@ export default () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (isAuthenticated && token) dispatch(getUserByToken(token))
+    if (isAuthenticated && token) {
+      if (process.env.EXP_MULTIPLIER) {
+        console.log(`EXP multiplied by ${process.env.EXP_MULTIPLIER}`)
+      }
+      dispatch(getUserByToken(token))
+    }
   }, [isAuthenticated, token, dispatch])
 
   const dontHaveCharacters = !Object.keys(selectedCharacter).length
