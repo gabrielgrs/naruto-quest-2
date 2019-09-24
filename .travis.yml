@@ -16,9 +16,11 @@ deploy:
     api_key:
       secure: 5ce5511a-538d-49f9-9f9a-5302b99d36af
     app: narutoquest-dev
-    on: develop
+    on:
+      branch: develop
   - provider: heroku
     api_key:
       secure: 5ce5511a-538d-49f9-9f9a-5302b99d36af
     app: narutoquest
-    on: master
+    on:
+      branch: master
