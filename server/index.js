@@ -62,8 +62,4 @@ startServer()
 
 cronService.executeCron()
 
-if (process.env.NODE_ENV === 'production') {
-  console.log(process.env)
-}
-
 module.exports = app
