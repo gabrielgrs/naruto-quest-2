@@ -171,10 +171,11 @@ async function finishQuest(req, res) {
       await repository.levelUp(selectedCharacter._id, selectedCharacter.level)
     }
 
-    if (
-      selectedCharacter.ninjaRankg ===
+    const canAdvanceRank =
+      selectedCharacter.ninjaRank ===
       selectedCharacter.currentQuest.advanceToRank - 1
-    ) {
+
+    if (canAdvanceRank) {
       await repository.rankUp(selectedCharacter._id)
     }
 

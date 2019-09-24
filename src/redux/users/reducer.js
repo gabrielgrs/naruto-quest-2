@@ -154,7 +154,10 @@ export default (state = INITIAL_STATE, action) => {
     case actionTypes.SELECT_CHARACTER.FAIL:
       return { ...state, loadingUser: false, error: action.payload }
     case actionTypes.CLEAR_STATE.BASE:
-      return INITIAL_STATE
+      return {
+        isAuthenticated: false,
+        ...INITIAL_STATE
+      }
     default:
       return state
   }

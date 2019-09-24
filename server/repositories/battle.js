@@ -2,12 +2,15 @@ const model = require('../models/battle')
 
 const insert = data => model.create(data)
 
-const update = (_id, { log, enemy, currentEnemyLife, delayedSkills }) => {
+const update = (
+  _id,
+  { log, enemy, currentEnemyLife, delayedSkills, lastCharacterAction }
+) => {
   return model.findOneAndUpdate(
     { _id },
     {
       enemy: enemy._id,
-      $set: { currentEnemyLife, delayedSkills },
+      $set: { currentEnemyLife, delayedSkills, lastCharacterAction },
       $push: { log: log }
     }
   )

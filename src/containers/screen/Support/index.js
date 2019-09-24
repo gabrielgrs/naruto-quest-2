@@ -48,7 +48,7 @@ export default () => {
   }
 
   return (
-    <Page title="Home" description="Ajuda e contato">
+    <Page title="Suporte" description="Ajuda e contato">
       <Container>
         <StyledMessage>Jogo em fase Alpha</StyledMessage>
       </Container>

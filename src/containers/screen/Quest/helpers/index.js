@@ -32,7 +32,11 @@ export const canShowQuest = (character, quest, questFilter) => {
 
   // Graduação
   if (questFilter === filters[2].name) {
-    return !quest.needTeam && quest.advanceToRank
+    return (
+      !quest.needTeam &&
+      quest.advanceToRank &&
+      character.ninjaRank < quest.advanceToRank
+    )
   }
 
   return characterHasQuestLevel

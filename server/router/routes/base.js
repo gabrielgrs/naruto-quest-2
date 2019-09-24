@@ -9,7 +9,7 @@ module.exports = [
   },
   {
     component,
-    method: 'post',
+    method: 'get',
     path: `/${component}/getNews`,
     action: 'getNews'
   },

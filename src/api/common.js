@@ -1,5 +1,5 @@
 import axios from './index'
 
-const BASE = '/common'
+const BASE = '/base'
 
 export const getNews = () => axios.get(`${BASE}/getNews`)

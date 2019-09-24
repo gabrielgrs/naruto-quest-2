@@ -75,6 +75,8 @@ async function battleAction(req, res) {
 
     await repository.update(battleId, {
       enemy: selectedBattle.enemy,
+      lastCharacterAction: Date.now(),
+      // lastOponentAction: Date.now(),
       currentEnemyLife: battleResolver.enemyLife,
       log: battleResolver.log,
       delayedSkills

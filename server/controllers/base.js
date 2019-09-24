@@ -1,6 +1,6 @@
 const mailerService = require('../services/mailer')
 const serverConfigs = require('../config/general')
-const news = require('../config/notices')
+const { notices } = require('../config/notices')
 
 async function sendMessage(req, res) {
   try {
@@ -15,7 +15,7 @@ async function sendMessage(req, res) {
 
 async function getNews(req, res) {
   try {
-    const data = new Promise(resolve => setTimeout(() => resolve([]), 2000))
+    const data = notices
 
     res.status(200).send(data)
   } catch (error) {
