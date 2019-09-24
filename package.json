@@ -9,6 +9,7 @@
   "license": "ISC",
   "scripts": {
     "start": "pm2-runtime start ecosystem.config.js -i 0 --env production",
+    "preinstall": "npm i -g pm2",
     "test": "echo \"\n[ Skip tests ]\n\"",
     "client": "NODE_ENV=development react-scripts start",
     "build": "react-scripts build",
