@@ -1,26 +1,16 @@
 const repository = require('../repositories/skill')
 const userRepository = require('../repositories/user')
 
-const getJutsusByRank = (list, characterRank) => {
-  const rankings = ['Student', 'Genin', 'Chuunin', 'Jounin', 'ANBU', 'Sannin']
-
-  const splicedArray = rankings.splice(0, rankings.indexOf(characterRank) + 1)
-
-  return list.filter(x => splicedArray.includes(x.requiredNinjaRank))
-}
-
 async function getAll(req, res) {
   try {
     const { _id } = await res.getCurrentUser()
     const { selectedCharacter } = await userRepository.getById(_id)
     // const rank = getRanking(selectedCharacter.ninjaRank)
-    const filtredJutsus = await repository.getAll(
+    const data = await repository.getAll(
       selectedCharacter.level,
+      selectedCharacter.ninjaRank,
       selectedCharacter.element
     )
-
-    // TODO: improve
-    const data = getJutsusByRank(filtredJutsus, selectedCharacter.ninjaRank)
 
     res.status(200).send(data)
   } catch (error) {

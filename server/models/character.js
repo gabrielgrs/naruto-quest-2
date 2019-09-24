@@ -34,9 +34,9 @@ const schema = new Schema({
     ref: 'Job'
   },
   ninjaRank: {
-    type: String,
-    enum: ['Student', 'Genin', 'Chuunin', 'Jounin', 'ANBU', 'Sannin'],
-    default: 'Student'
+    type: Number,
+    // enum: ['Student', 'Genin', 'Chuunin', 'Jounin', 'ANBU', 'Sannin'],
+    default: 0
   },
   village: {
     type: 'String',

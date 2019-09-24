@@ -171,31 +171,11 @@ async function finishQuest(req, res) {
       await repository.levelUp(selectedCharacter._id, selectedCharacter.level)
     }
 
-    if (selectedCharacter.currentQuest.advanceRank) {
-      const getNextRank = (rank, characterLevel) => {
-        const { genin, chuunin, jounin } = ninjaRankRequiredLevel
-        if (rank === 'Student' && characterLevel >= genin) {
-          return 'Genin'
-        }
-        if (rank === 'Genin' && characterLevel >= chuunin) {
-          return 'Chuunin'
-        }
-
-        if (rank === 'Chuunin' && characterLevel >= jounin) {
-          return 'Jounin'
-        }
-
-        return null
-      }
-
-      const nextRank = getNextRank(
-        selectedCharacter.ninjaRank,
-        selectedCharacter.level
-      )
-
-      if (nextRank) {
-        await repository.rankUp(selectedCharacter._id, nextRank)
-      }
+    if (
+      selectedCharacter.ninjaRankg ===
+      selectedCharacter.currentQuest.advanceToRank - 1
+    ) {
+      await repository.rankUp(selectedCharacter._id)
     }
 
     const data = await repository.finishQuest(

@@ -12,9 +12,9 @@ const schema = new Schema({
   image: String,
   requiredLevel: Number,
   requiredNinjaRank: {
-    type: String,
-    enum: ['Student', 'Genin', 'Chuunin', 'Jounin', 'ANBU', 'Sannin'],
-    default: 'Student'
+    type: Number,
+    // enum: ['Student', 'Genin', 'Chuunin', 'Jounin', 'ANBU', 'Sannin'],
+    default: 0
   },
   ranking: {
     type: String,

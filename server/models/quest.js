@@ -17,7 +17,7 @@ const schema = new Schema({
     enum: ['D', 'C', 'B', 'A', 'S'],
     required: true
   },
-  advanceRank: { type: Boolean, default: false },
+  advanceToRank: Number,
   // requiredRank: String,
   image: String
 })

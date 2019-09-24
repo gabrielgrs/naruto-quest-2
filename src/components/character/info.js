@@ -1,7 +1,6 @@
 import React from 'react'
 import { Row } from '../../components'
 import labels from '../../config/labels'
-import texts from '../../helpers/texts'
 
 export default ({ character, language }) => {
   return (
@@ -20,15 +19,15 @@ export default ({ character, language }) => {
       </Row>
       <Row>
         <b>{labels.attack.name}: </b>
-        {texts.training.taijutsu.tooltip[language]}
+        {character.attributes.attack}
       </Row>
       <Row>
         <b>{labels.intelligence.name}: </b>
-        {texts.training.ninjutsu.tooltip[language]}
+        {character.attributes.intelligence}
       </Row>
       <Row>
         <b>{labels.vitality.name}: </b>
-        {texts.training.genjutsu.tooltip[language]}
+        {character.attributes.vitality}
       </Row>
     </Row>
   )

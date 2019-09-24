@@ -150,7 +150,7 @@ export default () => {
                     />
                     <Row>
                       <Button onClick={() => onSelectCharacter(character)}>
-                        {texts.characters.selectedCharacter[language]}
+                        {texts.characters.selectCharacter[language]}
                       </Button>
                     </Row>
                   </Col>

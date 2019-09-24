@@ -16,7 +16,7 @@ const generateQuests = () =>
     ranking: q.ranking,
     image: q.image || baseImage,
     needTeam: q.needTeam || false,
-    advanceRank: !!q.name
+    advanceToRank: q.advanceToRank
   }))
 
 const quests = generateQuests()

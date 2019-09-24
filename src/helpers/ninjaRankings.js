@@ -31,6 +31,9 @@ export const ninjaRankings = [
   }
 ]
 
-export const getNinjaRank = name => {
-  return ninjaRankings.find(x => x.name === name) || { label: 'N/A' }
+export const getNinjaRank = param => {
+  if (!Number.isNaN(param)) {
+    return ninjaRankings.find(x => x.id === param) || { label: 'N/A' }
+  }
+  return ninjaRankings.find(x => x.name === param) || { label: 'N/A' }
 }

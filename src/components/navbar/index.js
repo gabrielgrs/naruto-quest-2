@@ -118,7 +118,7 @@ export default ({
         </NavItem> */}
         <NavItem
           onClick={() => setNavbarIsOpen(false)}
-          hidden={!isAuthenticated || !selectedCharacter.name}
+          hidden={!isAuthenticated && !selectedCharacter.name}
           path="/characters"
         >
           {texts.navbar.characters[language]}

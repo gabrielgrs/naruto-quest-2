@@ -152,8 +152,8 @@ const updateLifeAndMana = (_id, life, mana) => {
   )
 }
 
-const rankUp = (_id, rank) => {
-  return model.findOneAndUpdate({ _id }, { $set: { ninjaRank: rank } })
+const rankUp = _id => {
+  return model.findOneAndUpdate({ _id }, { $inc: { ninjaRank: 1 } })
 }
 
 const leaveFromBattle = _id => {

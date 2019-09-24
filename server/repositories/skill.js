@@ -1,8 +1,9 @@
 const model = require('../models/skill')
 
-const getAll = (characterLevel, element) => {
+const getAll = (characterLevel, ninjaRank, element) => {
   return model.find({
     requiredLevel: { $lt: characterLevel + 1 },
+    requiredNinjaRank: { $lt: requiredNinjaRank + 1 },
     $or: [{ element }, { element: 'neutral' }]
   })
 }

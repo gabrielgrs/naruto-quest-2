@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Row, Col, Button, Tooltip } from '../../components'
-import labels from '../../config/labels'
 import texts from '../../helpers/texts'
 
 const StyledAttributeLabel = styled.div`
@@ -28,15 +27,18 @@ export default ({
   const fields = [
     {
       type: 'success',
-      property: 'attack'
+      property: 'attack',
+      value: 'taijutsu'
     },
     {
       type: 'info',
-      property: 'intelligence'
+      property: 'intelligence',
+      value: 'ninjutsu'
     },
     {
       type: 'warning',
-      property: 'vitality'
+      property: 'vitality',
+      value: 'genjutsu'
     }
   ]
 
@@ -47,9 +49,9 @@ export default ({
         return (
           <Row inline key={index}>
             <Col sm={4}>
-              <Tooltip text={labels[field.property].description}>
+              <Tooltip text={texts.training[field.value].tooltip[language]}>
                 <StyledAttributeLabel type={field.type}>
-                  {labels[field.property].name}
+                  {field.value}
                 </StyledAttributeLabel>
               </Tooltip>
             </Col>

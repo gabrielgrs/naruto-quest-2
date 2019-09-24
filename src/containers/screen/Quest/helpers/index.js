@@ -22,17 +22,17 @@ export const canShowQuest = (character, quest, questFilter) => {
 
   // Solo
   if (questFilter === filters[0].name) {
-    return !quest.advanceRank && !quest.needTeam
+    return !quest.advanceToRank && !quest.needTeam
   }
 
   // Time
   if (questFilter === filters[1].name) {
-    return !quest.advanceRank && quest.needTeam
+    return !quest.advanceToRank && quest.needTeam
   }
 
   // Graduação
   if (questFilter === filters[2].name) {
-    return !quest.needTeam && quest.advanceRank
+    return !quest.needTeam && quest.advanceToRank
   }
 
   return characterHasQuestLevel

@@ -27,7 +27,7 @@ export default {
     pt: 'Próximo',
     us: 'Next'
   },
-  selectedCharacter: {
+  selectCharacter: {
     pt: 'Selecionar',
     us: 'Select'
   },

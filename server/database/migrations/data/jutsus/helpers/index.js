@@ -20,12 +20,12 @@ const elements = {
 }
 
 const ninjaRanks = {
-  STUDENT: 'Student',
-  GENIN: 'Genin',
-  CHUUNIN: 'Chuunin',
-  JOUNIN: 'Jounin',
-  ANBU: 'ANBU',
-  SANNING: 'Sanning'
+  STUDENT: 0,
+  GENIN: 1,
+  CHUUNIN: 1,
+  JOUNIN: 2,
+  ANBU: 3,
+  SANNIN: 4
 }
 
 module.exports = {

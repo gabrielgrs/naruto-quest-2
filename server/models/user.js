@@ -23,8 +23,8 @@ const schema = new Schema({
   role: {
     type: String,
     required: true,
-    default: 'User',
-    enum: ['user', 'Admin']
+    default: 'user',
+    enum: ['user', 'admin']
   },
   additionalCharacters: {
     type: Number,

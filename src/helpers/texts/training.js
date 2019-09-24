@@ -59,6 +59,32 @@ export default {
       us: 'Deffense'
     }
   },
+  rank: {
+    pt: 'Rank',
+    us: 'Rank'
+  },
+  ninjaRankings: {
+    0: {
+      pt: 'Estudante',
+      us: 'Student'
+    },
+    1: {
+      pt: 'Genin',
+      us: 'Genin'
+    },
+    2: {
+      pt: 'Chuunin',
+      us: 'Chuunin'
+    },
+    3: {
+      pt: 'Jounin',
+      us: 'Jounin'
+    },
+    4: {
+      pt: 'Sanin',
+      us: 'Sanin'
+    }
+  },
   requiredLevel: {
     pt: 'Level Necessário',
     us: 'Required Level'

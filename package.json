@@ -13,7 +13,7 @@
     "test": "echo \"\n[ Skip tests ]\n\"",
     "client": "NODE_ENV=development react-scripts start",
     "build": "react-scripts build",
-    "server": "NODE_ENV=development nodemon server/index",
+    "server": "NODE_ENV=development DATABASE=mongodb://admin:admin123@ds217438.mlab.com:17438/narutogame_validations nodemon server/index",
     "loadtest": "loadtest -c 10 --rps 100"
   },
   "dependencies": {
