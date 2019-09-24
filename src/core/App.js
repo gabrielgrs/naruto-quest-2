@@ -182,17 +182,11 @@ export default () => {
               <Router />
             </Col>
           </StyledWrapper>
-          {/* <Footer fixed title="Todos os direitos reservados">
-        <h3>Naruto Quest</h3>
-        <div>Developed 4Fun</div>
-      </Footer> */}
           {renderActionButton()}
-          {
-            <Onboarding
-              isOpen={showOnboarding}
-              onLastStep={() => setShowonboarding(false)}
-            />
-          }
+          <Onboarding
+            isOpen={showOnboarding}
+            onLastStep={() => setShowonboarding(false)}
+          />
           <Toast />
         </Row>
       </OverlayLoader>

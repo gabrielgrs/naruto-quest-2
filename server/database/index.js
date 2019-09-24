@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
 const getDatabaseConnectionString = () => {
+  console.log('Database', process.env.DATABASE)
   if (process.env.DATABASE) {
-    console.log(process.env.DATABASE)
     return process.env.DATABASE
   }
 
