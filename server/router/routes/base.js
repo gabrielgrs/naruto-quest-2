@@ -9,6 +9,12 @@ module.exports = [
   },
   {
     component,
+    method: 'post',
+    path: `/${component}/getNews`,
+    action: 'getNews'
+  },
+  {
+    component,
     method: 'get',
     path: `/${component}/getServerStatus`,
     action: 'getServerStatus'

@@ -1,10 +1,15 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-import { Page, Container } from '../../../components'
+import { useSelector, useDispatch } from 'react-redux'
+import { Page, Container, Button } from '../../../components'
+import { changeLanguage } from '../../../redux/common'
 import texts from '../../../helpers/texts'
 
-export default () => {
-  const { language } = useSelector(({ common }) => ({ ...common }))
+export default props => {
+  const dispatch = useDispatch()
+
+  const { language } = useSelector(({ common }) => ({
+    ...common
+  }))
 
   return (
     <Page
@@ -14,6 +19,15 @@ export default () => {
       <Container>
         <h1>{texts.home.welcome[language]}</h1>
       </Container>
+      {language === 'pt' ? (
+        <Button onClick={() => dispatch(changeLanguage('us'))}>
+          Change language to English
+        </Button>
+      ) : (
+        <Button onClick={() => dispatch(changeLanguage('pt'))}>
+          Alterar idioma para Português
+        </Button>
+      )}
     </Page>
   )
 }

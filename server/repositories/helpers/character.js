@@ -72,6 +72,12 @@ const dynamicPopulate = model => {
     .populate({
       path: 'selectedCharacter',
       populate: {
+        path: 'bodyEquipments.feets'
+      }
+    })
+    .populate({
+      path: 'selectedCharacter',
+      populate: {
         path: 'currentQuest'
       }
     })

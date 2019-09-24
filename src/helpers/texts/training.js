@@ -54,7 +54,7 @@ export default {
       pt: 'Cura',
       us: 'Heal'
     },
-    deffense: {
+    defense: {
       pt: 'Defesa',
       us: 'Deffense'
     }

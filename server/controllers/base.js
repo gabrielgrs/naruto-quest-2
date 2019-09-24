@@ -1,5 +1,6 @@
 const mailerService = require('../services/mailer')
 const serverConfigs = require('../config/general')
+const news = require('../config/notices')
 
 async function sendMessage(req, res) {
   try {
@@ -9,6 +10,16 @@ async function sendMessage(req, res) {
     res.status(200).send({ data, message: 'Feedkback enviado com sucesso!' })
   } catch (error) {
     res.handleError(500, error)
+  }
+}
+
+async function getNews(req, res) {
+  try {
+    const data = new Promise(resolve => setTimeout(() => resolve([]), 2000))
+
+    res.status(200).send(data)
+  } catch (error) {
+    res.handlError(500, error)
   }
 }
 
@@ -52,5 +63,6 @@ async function testServer(req, res) {
 module.exports = {
   sendMessage,
   getServerStatus,
-  testServer
+  testServer,
+  getNews
 }

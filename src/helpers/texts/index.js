@@ -11,6 +11,7 @@ import ranking from './ranking'
 import chat from './chat'
 import characterBar from './characterBar'
 import characters from './characters'
+import equipments from './equipments'
 
 const texts = {
   app,
@@ -25,7 +26,8 @@ const texts = {
   ranking,
   chat,
   characters,
-  characterBar
+  characterBar,
+  equipments
 }
 
 export default texts

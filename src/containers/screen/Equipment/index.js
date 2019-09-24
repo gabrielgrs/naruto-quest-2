@@ -2,45 +2,71 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Page, Row, Col, Image, Tooltip } from '../../../components'
 import { setEquipment } from '../../../redux/characters'
-import { renderEquipmentTooltip } from './helpers/render'
-import styled from 'styled-components'
+import texts from '../../../helpers/texts'
+import {
+  StyledSlot,
+  StyledCharacter,
+  StyledHead,
+  StyledTrunk,
+  StyledLegs,
+  StyledFeets,
+  StyledArm,
+  StyledWeapon
+} from './styles'
 
-const StyledSlot = styled.div`
-  cursor: default;
-  border: ${({ hasEquipment }) => (hasEquipment ? null : 'dashed 2px black')};
-  opacity: ${({ hasEquipment }) => (hasEquipment ? 1 : 0.5)};
-  height: 80px;
-  width: 80px;
-  text-align: center;
+const renderEquipmentTooltip = (equipment, language) => {
+  if (!equipment) return null
 
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  flex-direction: column;
+  const { name, value, usageType } = equipment
 
-  @media screen and (max-width: 720px) {
-    width: 50px;
-    height: 50px;
+  const { increaseType } = texts.equipments
+
+  const getUsageType = type => {
+    if (type === 'weapon')
+      return { name: 'Arma', increase: increaseType.attack[language] }
+    if (type === 'head')
+      return { name: 'Cabeça', increase: increaseType.defense[language] }
+    if (type === 'trunk')
+      return { name: 'Corpo', increase: increaseType.defense[language] }
+    if (type === 'arms')
+      return { name: 'Braços', increase: increaseType.defense[language] }
+    if (type === 'legs')
+      return { name: 'Pernas', increase: increaseType.defense[language] }
+    if (type === 'feets') {
+      return { name: 'Pés', increase: increaseType.defense[language] }
+    }
+
+    return { name: type, increase: 'n/a' }
   }
-`
 
-const types = {
-  weapon: 'Arma',
-  head: 'Cabeça',
-  trunk: 'Corpo',
-  arms: 'Braços',
-  legs: 'Pernas'
+  return (
+    <div style={{ letterSpacing: '1px' }}>
+      <b>{name}</b>
+      <div>
+        <b>{texts.equipments.type[language]}: </b>
+        {getUsageType(usageType).name}
+      </div>
+      <div>
+        <b>{texts.equipments.increase[language]}: </b>
+        {value}
+        {` ${language === 'pt' ? 'de' : 'of'} ${
+          getUsageType(usageType).increase
+        }`}
+      </div>
+    </div>
+  )
 }
 
-const Slot = ({ type, bodyEquipments }) => {
+const Slot = ({ type, bodyEquipments, language }) => {
   if (!type || !bodyEquipments || !bodyEquipments[type]) {
-    return <StyledSlot>{types[type]}</StyledSlot>
+    const equipment = texts.equipments.characterParts[type]
+    return <StyledSlot>{equipment[language]}</StyledSlot>
   }
 
   const currentEquipment = bodyEquipments[type]
   return (
     <StyledSlot hasEquipment>
-      <Tooltip html={renderEquipmentTooltip(currentEquipment)}>
+      <Tooltip html={renderEquipmentTooltip(currentEquipment, language)}>
         <Image src={currentEquipment.image} />
       </Tooltip>
     </StyledSlot>
@@ -50,65 +76,85 @@ const Slot = ({ type, bodyEquipments }) => {
 export default () => {
   const dispatch = useDispatch()
 
-  const { equipments, bodyEquipments } = useSelector(({ user }) => {
-    return {
-      equipments: user.selectedCharacter.equipments,
-      bodyEquipments: user.selectedCharacter.bodyEquipments
+  const { equipments, bodyEquipments, language } = useSelector(
+    ({ user, common }) => {
+      return {
+        language: common.language,
+        equipments: user.selectedCharacter.equipments,
+        bodyEquipments: user.selectedCharacter.bodyEquipments
+      }
     }
-  })
+  )
 
   const onClickEquipment = equipment => {
     dispatch(setEquipment(equipment))
   }
 
   return (
-    <Page title="Equipamentos" description="Suas armas e equipamentos">
+    <Page
+      title={texts.equipments.title[language]}
+      description={texts.equipments.description[language]}
+    >
       <Row>
         <Col sm={6}>
-          <h3>Equipamentos Utilizados</h3>
-          <>
-            <Row inline>
-              <Col sm={4} />
-              <Col sm={4}>
-                <Slot type="head" bodyEquipments={bodyEquipments} />
-              </Col>
-              <Col sm={4} />
-            </Row>
-            <Row inline>
-              <Col sm={4}>
-                <Slot type="arms" bodyEquipments={bodyEquipments} />
-              </Col>
-              <Col sm={4}>
-                <Slot type="trunk" bodyEquipments={bodyEquipments} />
-              </Col>
-              <Col sm={4}>
-                <Slot type="arms" bodyEquipments={bodyEquipments} />
-              </Col>
-            </Row>
-            <Row inline>
-              <Col sm={4}>
-                <Slot type="legs" bodyEquipments={bodyEquipments} />
-              </Col>
-              <Col sm={4} />
-              <Col sm={4}>
-                <Slot type="legs" bodyEquipments={bodyEquipments} />
-              </Col>
-            </Row>
-            <Row>
-              <Col sm={12}>
-                <Slot type="weapon" bodyEquipments={bodyEquipments} />
-              </Col>
-            </Row>
-          </>
+          <h3>{texts.equipments.utilizedEquipments[language]}</h3>
+          <StyledCharacter>
+            <img
+              src="https://res.cloudinary.com/dbmnsavja/image/upload/v1569284785/Naruto%20Game/assets/NarutoBody.png"
+              alt="char"
+            />
+            <StyledHead>
+              <Slot
+                language={language}
+                type="head"
+                bodyEquipments={bodyEquipments}
+              />
+            </StyledHead>
+            <StyledArm>
+              <Slot
+                language={language}
+                type="arms"
+                bodyEquipments={bodyEquipments}
+              />
+            </StyledArm>
+            <StyledTrunk>
+              <Slot
+                language={language}
+                type="trunk"
+                bodyEquipments={bodyEquipments}
+              />
+            </StyledTrunk>
+            <StyledLegs>
+              <Slot
+                language={language}
+                type="legs"
+                bodyEquipments={bodyEquipments}
+              />
+            </StyledLegs>
+            <StyledFeets>
+              <Slot
+                language={language}
+                type="feets"
+                bodyEquipments={bodyEquipments}
+              />
+            </StyledFeets>
+            <StyledWeapon>
+              <Slot
+                language={language}
+                type="weapon"
+                bodyEquipments={bodyEquipments}
+              />
+            </StyledWeapon>
+          </StyledCharacter>
         </Col>
         <Col sm={6}>
-          <h3>Meus Equipamentos</h3>
+          <h3>{texts.equipments.myEquipments[language]}</h3>
           <Row>
             {equipments &&
               equipments.map(e => {
                 return (
                   <Col key={e._id} sm={2}>
-                    <Tooltip html={renderEquipmentTooltip(e)}>
+                    <Tooltip html={renderEquipmentTooltip(e, language)}>
                       <Image
                         onClick={() => onClickEquipment(e)}
                         src={e.image}

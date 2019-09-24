@@ -15,7 +15,8 @@ const schema = new Schema({
     head: { type: Schema.Types.ObjectId, ref: 'Equipment' },
     trunk: { type: Schema.Types.ObjectId, ref: 'Equipment' },
     arms: { type: Schema.Types.ObjectId, ref: 'Equipment' },
-    legs: { type: Schema.Types.ObjectId, ref: 'Equipment' }
+    legs: { type: Schema.Types.ObjectId, ref: 'Equipment' },
+    feets: { type: Schema.Types.ObjectId, ref: 'Equipment' }
   },
   element: {
     type: String,

@@ -4,9 +4,9 @@ export const StyledContainer = styled.div`
   margin: 0 auto;
   background-color: ${({ theme }) => theme.colors.white};
   padding: 80px;
-  margin-top: 50px;
   padding: 30px;
-  width: 50%;
+  width: 400px;
+  margin-top: 2%;
   -webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.3);
@@ -21,6 +21,10 @@ export const StyledConductCode = styled.div`
   height: 300px;
   padding: 10px;
   overflow: auto;
+
+  @media only screen and (max-width: 720px) {
+    height: 150px;
+  }
 `
 
 export const StyledTitle = styled.h1`

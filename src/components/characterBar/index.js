@@ -39,11 +39,9 @@ export default ({ language, selectedCharacter }) => {
                   {name}
                   <div>
                     {language === 'pt'
-                      ? `${getNinjaRank(ninjaRank).label} - 'Vila da'
+                      ? `${getNinjaRank(ninjaRank).label} - Vila da
                     ${getVillage(village).label}`
-                      : `${getNinjaRank(ninjaRank).label} - ${
-                          getVillage(village).label
-                        } Village`}
+                      : `${getNinjaRank(ninjaRank).label} - ${village} Village`}
                   </div>
                 </StyledName>
                 <ProgressBar

@@ -14,10 +14,6 @@ const migrationCollections = {
     controller: 'item',
     name: 'items'
   },
-  equipmentS: {
-    controller: 'equipment',
-    name: 'equipment'
-  },
   WEAPONS: {
     controller: 'weapon',
     name: 'weapons'

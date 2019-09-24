@@ -135,7 +135,7 @@ export default () => {
     const types = [
       { name: 'damager', text: texts.training.jutsuTypes.damage[language] },
       { name: 'healer', text: texts.training.jutsuTypes.heal[language] },
-      { name: 'evasion', text: texts.training.jutsuTypes.deffense[language] }
+      { name: 'evasion', text: texts.training.jutsuTypes.defense[language] }
     ]
     return types.find(t => t.name === type) || { text: `${type} N/A` }
   }

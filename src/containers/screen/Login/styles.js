@@ -4,9 +4,9 @@ export const StyledContainer = styled.div`
   margin: 0 auto;
   background-color: ${({ theme }) => theme.colors.white};
   padding: 80px;
-  margin-top: 50px;
   padding: 30px;
-  width: 50%;
+  width: 400px;
+  margin-top: 10%;
   -webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.3);
