@@ -195,7 +195,10 @@ export default () => {
         {
           <div>
             {vipOptions.map(v => (
-              <StyledButton onClick={() => setSelectedPlan(v.name)}>
+              <StyledButton
+                key={v.name}
+                onClick={() => setSelectedPlan(v.name)}
+              >
                 <div>Plano {v.name}</div>
                 <div>R$ {v.cost}</div>
                 <div>Créditos {v.credits}</div>
@@ -217,8 +220,8 @@ export default () => {
   }
 
   const renderVipScreen = () =>
-    actionsList.map(a => (
-      <div>
+    actionsList.map((a, i) => (
+      <div key={i}>
         <Button
           isDisabled={dispatchIsActive}
           fullWidth
@@ -330,8 +333,8 @@ export default () => {
         <>
           <h3>Escolha a quantidade de Ryous</h3>
           <Row>
-            {ryousOptions.map(o => (
-              <Button onClick={() => setCurrentValue(o.quantity)}>
+            {ryousOptions.map((o, i) => (
+              <Button key={i} onClick={() => setCurrentValue(o.quantity)}>
                 {`${o.quantity} Ryous por ${
                   o.credits > 1 ? 'Créditos' : 'Crédito'
                 }`}

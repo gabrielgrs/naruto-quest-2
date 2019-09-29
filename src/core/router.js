@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import { useSelector } from 'react-redux'
 
 const LazyHome = lazy(() => import('../containers/screen/Home'))
@@ -74,28 +75,36 @@ const OpenRoute = ({ path, exact, component }) => {
 export default () => {
   return (
     <Suspense fallback={'loading'}>
-      <Switch>
-        <Route path="/" exact={true} component={LazyHome} />
-        <Route path="/home" exact={true} component={LazyHome} />
-        <Route path="/help" exact={true} component={LazySupport} />
-        <Route path="/tutorial" exact={true} component={LazyTutorial} />
-        <PrivateRoute path="/arena" component={LazyArena} />
-        <PrivateRoute path="/village" component={LazyVillage} />
-        <PrivateRoute path="/equipments" component={LazyEquipment} />
-        <PrivateRoute path="/missions" component={LazyQuest} />
-        <PrivateRoute path="/team" component={LazyTeam} />
-        <PrivateRoute path="/field" component={LazyField} />
-        <PrivateRoute path="/bag" component={LazyBag} />
-        <PrivateRoute path="/shop" component={LazyShop} />
-        <PrivateRoute path="/hospital" component={LazyHospital} />
-        <PrivateRoute path="/training" component={LazyTraining} />
-        <PrivateRoute path="/characters" component={LazyCharacter} />
-        <PrivateRoute path="/chat" component={LazyChat} />
-        <PrivateRoute path="/ranking" component={LazyRanking} />
-        <PrivateRoute path="/vip" component={LazyVIP} />
-        <OpenRoute path="/login" component={LazyLogin} />
-        <OpenRoute path="/register" component={LazyRegister} />
-      </Switch>
+      <Route
+        render={({ location }) => (
+          <TransitionGroup>
+            <CSSTransition key={location.key} timeout={450} classNames="fade">
+              <Switch>
+                <Route path="/" exact={true} component={LazyHome} />
+                <Route path="/home" exact={true} component={LazyHome} />
+                <Route path="/help" exact={true} component={LazySupport} />
+                <Route path="/tutorial" exact={true} component={LazyTutorial} />
+                <PrivateRoute path="/arena" component={LazyArena} />
+                <PrivateRoute path="/village" component={LazyVillage} />
+                <PrivateRoute path="/equipments" component={LazyEquipment} />
+                <PrivateRoute path="/missions" component={LazyQuest} />
+                <PrivateRoute path="/team" component={LazyTeam} />
+                <PrivateRoute path="/field" component={LazyField} />
+                <PrivateRoute path="/bag" component={LazyBag} />
+                <PrivateRoute path="/shop" component={LazyShop} />
+                <PrivateRoute path="/hospital" component={LazyHospital} />
+                <PrivateRoute path="/training" component={LazyTraining} />
+                <PrivateRoute path="/characters" component={LazyCharacter} />
+                <PrivateRoute path="/chat" component={LazyChat} />
+                <PrivateRoute path="/ranking" component={LazyRanking} />
+                <PrivateRoute path="/vip" component={LazyVIP} />
+                <OpenRoute path="/login" component={LazyLogin} />
+                <OpenRoute path="/register" component={LazyRegister} />
+              </Switch>
+            </CSSTransition>
+          </TransitionGroup>
+        )}
+      />
     </Suspense>
   )
 }

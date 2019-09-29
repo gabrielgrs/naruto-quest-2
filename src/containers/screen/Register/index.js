@@ -94,8 +94,8 @@ export default () => {
       <Row>
         <h2> {texts.register.conductCode.title[language]} </h2>
         <StyledConductCode>
-          {paragraphs.map(p => (
-            <p>{p[language]}</p>
+          {paragraphs.map((p, index) => (
+            <p key={index}>{p[language]}</p>
           ))}
         </StyledConductCode>
       </Row>

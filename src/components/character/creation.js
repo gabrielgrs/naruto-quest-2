@@ -87,7 +87,7 @@ export default ({
   const renderVillages = () => {
     return villages.map(({ name, label, image }) => {
       return (
-        <Col sm={2}>
+        <Col sm={2} key={name}>
           <Tooltip text={label}>
             <Image
               hasGreyscale={name !== selectedVillage}

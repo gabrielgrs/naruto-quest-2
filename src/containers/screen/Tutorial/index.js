@@ -24,10 +24,10 @@ export default () => {
     <Page title="Tutorial" description="Básicos sobre o jogo">
       <Container>
         <StyledMessage>Jogo em fase Alpha</StyledMessage>
-        {listOfHelpers({ isAuthenticated }).map(h => {
+        {listOfHelpers({ isAuthenticated }).map((h, i) => {
           if (h.canShow === undefined) {
             return (
-              <div>
+              <div key={i}>
                 - <b>{h.title}</b>: {h.description}
                 {h.childs &&
                   h.childs.map(c => (
@@ -44,8 +44,8 @@ export default () => {
               <div>
                 - <b>{h.title}</b>: {h.description}
                 {h.childs &&
-                  h.childs.map(c => (
-                    <div style={{ marginLeft: '20px' }}>
+                  h.childs.map((c, i) => (
+                    <div key={i} style={{ marginLeft: '20px' }}>
                       - <b>{c.title}</b>: {c.description}
                     </div>
                   ))}
