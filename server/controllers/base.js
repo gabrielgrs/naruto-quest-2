@@ -1,13 +1,20 @@
+const messageRepository = require('../repositories/message')
 const mailerService = require('../services/mailer')
 const serverConfigs = require('../config/general')
 const { notices } = require('../config/notices')
 
 async function sendMessage(req, res) {
   try {
-    const { from, subject, message } = req.body
+    const { from, subject, message, toSupport } = req.body
 
-    const data = mailerService.sendEmail({ from, subject, message })
-    res.status(200).send({ data, message: 'Feedkback enviado com sucesso!' })
+    // const data = mailerService.sendEmail({ from, subject, message })
+
+    if (toSupport) {
+      const createdMessage = `From ${from} / Subject ${subject}: ${message}`
+      await messageRepository.insert(null, null, createdMessage, true)
+    }
+
+    res.status(200).send({ message: 'Feedkback enviado com sucesso!' })
   } catch (error) {
     res.handleError(500, error)
   }

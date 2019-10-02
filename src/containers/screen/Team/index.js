@@ -48,9 +48,9 @@ export default () => {
   const renderField = ({ label, value, name }) => {
     return (
       <TextField
-        key={label}
+        key={label[language]}
         onChange={onChange}
-        label={label}
+        label={label[language]}
         value={value}
         name={name}
       />

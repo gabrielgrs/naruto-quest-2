@@ -30,7 +30,8 @@ async function enterInBattle(req, res) {
     const data = await repository.insert({
       character: selectedCharacter._id,
       enemy: enemyId,
-      currentEnemyLife: attributes.vitality * 10
+      currentEnemyLife: attributes.vitality * 10,
+      lastCharacterAction: Date.now()
     })
 
     await characterRepository.enterInBattle(selectedCharacter._id, data._id)

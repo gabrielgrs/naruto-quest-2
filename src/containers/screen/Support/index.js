@@ -37,6 +37,7 @@ export default () => {
       await axios.post('/base/sendMessage', {
         subject: `Contato - ${email}`,
         from: 'app',
+        toSupport: true,
         ...values
       })
       notify.success('Mensagem enviada com sucesso! Obrigado!')

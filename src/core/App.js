@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import 'react-toastify/dist/ReactToastify.css'
@@ -20,7 +21,7 @@ import { getUserByToken, clearSession } from '../redux/users'
 import * as storageHelper from '../helpers/storage'
 import texts from '../helpers/texts'
 
-export const StyledActionButton = styled.div`
+export const StyledActionButton = styled(Link)`
   cursor: pointer;
   text-decoration: none;
   position: fixed;

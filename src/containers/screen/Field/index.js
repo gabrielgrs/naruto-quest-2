@@ -22,12 +22,15 @@ import {
   StyledAttackEffectReverse,
   StyledDamage,
   StyledSkill,
-  StyledLeaveButton
+  StyledLeaveButton,
+  StyledTimer
 } from './styles'
 import { getSkillStyle, getSkillType } from './helpers'
 import labels from '../../../config/labels'
+import { differenceInSeconds } from 'date-fns'
 
 export default () => {
+  const [timeToEndTurn, setTimeToEndTurn] = useState(undefined)
   // const [showLogs, setShowLogs] = useState(false)
   const [selectedSkillToUse, setSelectedSkillToUse] = useState(undefined)
   const [selectedItemToUse, setSelectedItemToUse] = useState(undefined)
@@ -49,6 +52,17 @@ export default () => {
       ...user
     }
   })
+
+  useEffect(() => {
+    if (!!selectedCharacter.currentBattle) {
+      const difference = differenceInSeconds(
+        new Date(selectedCharacter.currentBattle.lastCharacterAction),
+        new Date()
+      )
+
+      return setTimeToEndTurn(difference)
+    }
+  }, [selectedCharacter, setTimeToEndTurn, timeToEndTurn])
 
   useEffect(() => {
     return () => {
@@ -233,6 +247,9 @@ export default () => {
           <Col hidden={!showLogs} sm={4}>
             {renderLog(selectedCharacter.currentBattle.log)}
           </Col> */}
+          {timeToEndTurn !== undefined && (
+            <StyledTimer>{timeToEndTurn}</StyledTimer>
+          )}
           <Row>
             <Col sm={10} />
             <Col sm={2}>
