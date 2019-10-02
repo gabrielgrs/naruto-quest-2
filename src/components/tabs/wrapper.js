@@ -30,6 +30,7 @@ export default ({ children }) => {
       <Row inline>
         {children.map((c, index) => (
           <StyledTab
+            key={index}
             isFirstTab={index === 0}
             isLastTab={index === children.length - 1}
             isDisabled={currentTab !== index}
