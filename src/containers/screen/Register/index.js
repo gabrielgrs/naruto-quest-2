@@ -22,11 +22,20 @@ export default () => {
     language: common.language
   }))
 
+  const emailIsValid = email => {
+    const emailRE = /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    return emailRE.test(String(email).toLowerCase())
+  }
+
   const onSubmit = async () => {
     const { email, password, passwordConfirmation } = fields
 
     if (!email) {
       return notify.error('Preencha o e-mail')
+    }
+
+    if (!emailIsValid(email)) {
+      return notify.error('Preencha um e-mail válido')
     }
 
     if (!password) {
