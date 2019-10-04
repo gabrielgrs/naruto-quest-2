@@ -14,7 +14,10 @@ export default () => {
     dispatch(recoveryCharacter())
   }
 
-  const recoveryCost = selectedCharacter.level * 10
+  const characterIsDead =
+    selectedCharacter.attributes && selectedCharacter.attributes.life < 1
+
+  const recoveryCost = characterIsDead ? 0 : selectedCharacter.level * 10
 
   return (
     <Page
@@ -30,7 +33,7 @@ export default () => {
             fullWidth
             onClick={() => onRecoveryCharacter()}
           >
-            {selectedCharacter.attributes.life < 1
+            {characterIsDead
               ? `Reviva seu personagem`
               : `Recupere seu personagem por ${recoveryCost} Ryous`}
           </Button>
