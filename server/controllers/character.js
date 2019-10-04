@@ -218,17 +218,23 @@ async function recoveryCharacter(req, res) {
     const { _id } = await res.getCurrentUser()
     const { selectedCharacter } = await userRepository.getById(_id)
 
+    const characterIsDied = selectedCharacter.attributes.life < 1
+
     const recoveryValues = {
-      life: getMaxLife(
-        selectedCharacter.attributes.vitality,
-        selectedCharacter.level
-      ),
-      mana: getMaxMana(
-        selectedCharacter.attributes.intelligence,
-        selectedCharacter.level
-      )
+      life: characterIsDied
+        ? 10
+        : getMaxLife(
+            selectedCharacter.attributes.vitality,
+            selectedCharacter.level
+          ),
+      mana: characterIsDied
+        ? selectedCharacter.attributes.mana
+        : getMaxMana(
+            selectedCharacter.attributes.intelligence,
+            selectedCharacter.level
+          )
     }
-    const cost = selectedCharacter.level * 10
+    const cost = characterIsDied ? 0 : selectedCharacter.level * 10
 
     const data = await repository.recoveryCharacter(
       selectedCharacter._id,

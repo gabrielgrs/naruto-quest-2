@@ -69,7 +69,7 @@ export default () => {
           <Col sm={3}>
             {t.members.length + 1 < 3 && (
               <Button onClick={() => onRequestJoinTheTeam(t._id)}>
-                {texts.team.participate}
+                {texts.team.participate[language]}
               </Button>
             )}
           </Col>

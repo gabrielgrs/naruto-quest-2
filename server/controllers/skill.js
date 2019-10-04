@@ -5,7 +5,7 @@ async function getAll(req, res) {
   try {
     const { _id } = await res.getCurrentUser()
     const { selectedCharacter } = await userRepository.getById(_id)
-    // const rank = getRanking(selectedCharacter.ninjaRank)
+
     const data = await repository.getAll(
       selectedCharacter.level,
       selectedCharacter.ninjaRank,

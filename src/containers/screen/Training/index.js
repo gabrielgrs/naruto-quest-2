@@ -61,8 +61,8 @@ export default () => {
   }, [dispatch])
 
   useEffect(() => {
-    if (!list.length) dispatch(getAllSkills())
-  }, [dispatch, list])
+    dispatch(getAllSkills())
+  }, [dispatch])
 
   useEffect(() => {
     setAttributes(selectedCharacter.attributes)

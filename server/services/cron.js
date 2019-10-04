@@ -7,9 +7,9 @@ async function recoveryStats() {
     if (attributes.stamina < stats.maxStamina) {
       await characterRepository.updateStamina(_id, 1)
     }
-    if (attributes.life === 0) {
-      await characterRepository.updateLifeAndMana(_id, 30, 0)
-    }
+    // if (attributes.life === 0) {
+    //   await characterRepository.updateLifeAndMana(_id, 30, 0)
+    // }
   })
 }
 

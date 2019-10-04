@@ -30,7 +30,9 @@ export default () => {
             fullWidth
             onClick={() => onRecoveryCharacter()}
           >
-            Recupere seu personagem po {recoveryCost} Ryous
+            {selectedCharacter.attributes.life < 1
+              ? `Reviva seu personagem`
+              : `Recupere seu personagem por ${recoveryCost} Ryous`}
           </Button>
         </Col>
       </Row>
