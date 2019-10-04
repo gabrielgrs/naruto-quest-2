@@ -22,8 +22,7 @@ import {
   StyledAttackEffectReverse,
   StyledDamage,
   StyledSkill,
-  StyledLeaveButton,
-  StyledTimer
+  StyledLeaveButton
 } from './styles'
 import { getSkillStyle, getSkillType } from './helpers'
 import labels from '../../../config/labels'
@@ -247,9 +246,9 @@ export default () => {
           <Col hidden={!showLogs} sm={4}>
             {renderLog(selectedCharacter.currentBattle.log)}
           </Col> */}
-          {timeToEndTurn !== undefined && (
+          {/* {timeToEndTurn !== undefined && (
             <StyledTimer>{timeToEndTurn}</StyledTimer>
-          )}
+          )} */}
           <Row>
             <Col sm={10} />
             <Col sm={2}>
