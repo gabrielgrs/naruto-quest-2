@@ -24,7 +24,7 @@ export default {
       pt: 'Cabeça',
       us: 'Head'
     },
-    trunK: {
+    trunk: {
       pt: 'Tronco',
       us: 'Trunk'
     },

@@ -1,0 +1,10 @@
+{"message":"JsonWebTokenError: jwt malformed","status":500,"level":"error","date":"2019-10-05T23:21:01.716Z"}
+{"message":"TypeError: Cannot read property 'selectedCharacter' of null","status":500,"level":"error","date":"2019-10-06T20:42:25.899Z"}
+{"message":"TypeError: Cannot read property 'selectedCharacter' of null","status":500,"level":"error","date":"2019-10-06T20:47:57.152Z"}
+{"message":"TypeError: Cannot read property 'selectedCharacter' of null","status":500,"level":"error","date":"2019-10-06T20:47:57.152Z"}
+{"message":"TypeError: Cannot read property 'selectedCharacter' of null","status":500,"level":"error","date":"2019-10-06T20:49:34.547Z"}
+{"message":"TypeError: Cannot read property 'selectedCharacter' of null","status":500,"level":"error","date":"2019-10-06T20:51:55.353Z"}
+{"message":"TypeError: Cannot read property 'selectedCharacter' of null","status":500,"level":"error","date":"2019-10-06T20:51:55.353Z"}
+{"message":"TypeError: Cannot read property 'selectedCharacter' of null","status":500,"level":"error","date":"2019-10-06T20:51:55.353Z"}
+{"message":"TypeError: Cannot read property 'selectedCharacter' of null","status":500,"level":"error","date":"2019-10-06T20:51:55.353Z"}
+{"message":"TypeError: Cannot read property 'selectedCharacter' of null","status":500,"level":"error","date":"2019-10-07T12:56:32.937Z"}

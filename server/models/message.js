@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose')
 
 const schema = new Schema({
+  code: Number,
   sender: {
     type: Schema.Types.ObjectId,
     ref: 'Character'
