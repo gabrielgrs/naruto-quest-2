@@ -79,7 +79,7 @@ export default () => {
                 </Row>
                 <Row>
                   <StyledDateMessage>
-                    {format(new Date(m.createdAt), 'DD/MM/YYYY HH:mm')}
+                    {format(m.createdAt, 'dd/MM/YYYY HH:mm')}
                   </StyledDateMessage>
                 </Row>
               </Col>

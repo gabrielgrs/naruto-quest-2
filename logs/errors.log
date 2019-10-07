@@ -8,3 +8,4 @@
 {"message":"TypeError: Cannot read property 'selectedCharacter' of null","status":500,"level":"error","date":"2019-10-06T20:51:55.353Z"}
 {"message":"TypeError: Cannot read property 'selectedCharacter' of null","status":500,"level":"error","date":"2019-10-06T20:51:55.353Z"}
 {"message":"TypeError: Cannot read property 'selectedCharacter' of null","status":500,"level":"error","date":"2019-10-07T12:56:32.937Z"}
+{"message":"TypeError: Cannot read property 'selectedCharacter' of null","status":500,"level":"error","date":"2019-10-07T17:07:54.229Z"}

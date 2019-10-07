@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
 const getDatabaseConnectionString = () => {
+  return 'mongodb://admin:admin123@ds157571.mlab.com:57571/naruto-quest'
   if (process.env.DATABASE) {
     return process.env.DATABASE
   } else {
