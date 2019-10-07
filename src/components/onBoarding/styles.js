@@ -3,7 +3,6 @@ import styled from 'styled-components'
 export const StyledWrapper = styled.div`
   width: 800px;
   height: 400px;
-  background-color: var(--primary-color);
   position: absolute; /*it can be fixed too*/
   left: 0;
   right: 0;

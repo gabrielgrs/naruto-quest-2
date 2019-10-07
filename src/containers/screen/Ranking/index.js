@@ -43,13 +43,14 @@ export const StyledStatus = styled.div`
 
 export const StyledCard = styled.div`
   background: ${({ theme }) =>
-    `linear-gradient(to bottom, ${theme.colors.darkPrimary}, ${theme.colors.primary})`};
+    `linear-gradient(to bottom, #2C3E50, ${theme.colors.primary})`};
   padding: 11px 7px 11px 7px;
   text-align: center;
   color: ${({ theme }) => theme.colors.white};
   font-size: 0.9em;
   letter-spacing: 1px;
   height: 220px;
+  border-radius: 10px 0 10px 0;
 
   & img {
     margin: 5px 0 5px 0;

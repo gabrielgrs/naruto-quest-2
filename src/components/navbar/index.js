@@ -72,27 +72,7 @@ export default ({
         >
           {texts.navbar.training[language]}
         </NavItem>
-        {/* <NavItem
-          onClick={() => setNavbarIsOpen(false)}
-          hidden={!isAuthenticated || dontHaveCharacters || inBattle}
-          path="/loja"
-        >
-          Loja
-        </NavItem> */}
-        {/* <NavItem
-          onClick={() => setNavbarIsOpen(false)}
-          hidden={!isAuthenticated || dontHaveCharacters || inBattle}
-          path="/hospital"
-        >
-          Hospital
-        </NavItem> */}
-        {/* <NavItem
-          onClick={() => setNavbarIsOpen(false)}
-          hidden={!isAuthenticated || dontHaveCharacters}
-          path="/treino"
-        >
-          Treino
-        </NavItem> */}
+
         <NavItem
           onClick={() => setNavbarIsOpen(false)}
           hidden={
@@ -102,23 +82,9 @@ export default ({
         >
           {texts.navbar.teams[language]}
         </NavItem>
-        {/* <NavItem
-          onClick={() => setNavbarIsOpen(false)}
-          hidden={!isAuthenticated || dontHaveCharacters}
-          path="/time"
-        >
-          Time
-        </NavItem> */}
-        {/* <NavItem
-          onClick={() => setNavbarIsOpen(false)}
-          hidden={!isAuthenticated || dontHaveCharacters}
-          path="/time"
-        >
-          Missões
-        </NavItem> */}
         <NavItem
           onClick={() => setNavbarIsOpen(false)}
-          hidden={!isAuthenticated && !selectedCharacter.name}
+          hidden={!isAuthenticated || !!selectedCharacter.name}
           path="/characters"
         >
           {texts.navbar.characters[language]}
@@ -129,13 +95,6 @@ export default ({
           path="/ranking"
         >
           {texts.navbar.ranking[language]}
-        </NavItem>
-        <NavItem
-          onClick={() => setNavbarIsOpen(false)}
-          hidden={!isAuthenticated || dontHaveCharacters}
-          path="/chat"
-        >
-          {texts.navbar.chat[language]}
         </NavItem>
         <NavItem
           hidden={!isAuthenticated}

@@ -1,9 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Page, Row, Col, Button, TextField } from '../../../components'
-import { StyledChatPanel, StyledWrapper, StyledMessage } from './styles'
+import {
+  StyledChatPanel,
+  StyledWrapper,
+  StyledMessage,
+  StyledMessageText,
+  StyledDateMessage,
+  StyledSenderName,
+  StyledSenderLevel
+} from './styles'
 import { getAll, sendMessage } from '../../../redux/message'
 import texts from '../../../helpers/texts'
+import { format } from 'date-fns'
 
 export default () => {
   const [isSendingMessage, setIsSendingMessage] = useState(false)
@@ -56,9 +65,28 @@ export default () => {
     return messageList.map((m, index) => (
       <Row key={index}>
         {!!m.sender && (
-          <StyledMessage fromUser={m.sender._id === selectedCharacter._id}>
-            <b>{m.sender.name} - </b>
-            {m.text}
+          <StyledMessage
+            fromGM={m.sender.name.includes('[GM]')}
+            fromUser={m.sender._id === selectedCharacter._id}
+          >
+            <Row>
+              <Col sm={2}>
+                <Row>
+                  <StyledSenderName>{m.sender.name}</StyledSenderName>
+                </Row>
+                <Row>
+                  <StyledSenderLevel>Level {m.sender.level}</StyledSenderLevel>
+                </Row>
+                <Row>
+                  <StyledDateMessage>
+                    {format(m.createdAt, 'DD/MM/YYYY HH:mm')}
+                  </StyledDateMessage>
+                </Row>
+              </Col>
+              <Col sm={10}>
+                <StyledMessageText>{m.text}</StyledMessageText>
+              </Col>
+            </Row>
           </StyledMessage>
         )}
       </Row>

@@ -18,6 +18,7 @@ import {
 } from '../components'
 // import Sidebar from '../containers/templates/Sidebar'
 import { getUserByToken, clearSession } from '../redux/users'
+import { changeLanguage } from '../redux/common'
 import * as storageHelper from '../helpers/storage'
 import texts from '../helpers/texts'
 
@@ -32,6 +33,38 @@ export const StyledActionButton = styled(Link)`
   font-size: 1.2em;
   background: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.white};
+
+  @media screen and (max-width: 820px) {
+    right: 30px;
+    font-size: 0.7em;
+  }
+`
+
+const StyledChangeLanguage = styled.div`
+  cursor: pointer;
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  z-index: 99;
+
+  & img {
+    width: 20px;
+    height: 15px;
+  }
+`
+
+export const StyledChatButton = styled(Link)`
+  cursor: pointer;
+  text-decoration: none;
+  position: fixed;
+  bottom: 0;
+  left: 50px;
+  padding: 10px 30px 10px 30px;
+  letter-spacing: 2px;
+  font-size: 1.2em;
+  border-radius: 20px 20px 0px 0px;
+  background: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.black};
 
   @media screen and (max-width: 820px) {
     right: 30px;
@@ -71,9 +104,20 @@ export default () => {
     loadingQuest,
     loadingTeam,
     loadingVip,
-    loadingImage
+    loadingImage,
+    loadingMessage
   } = useSelector(
-    ({ user, enemies, battle, character, quest, team, vip, common }) => {
+    ({
+      user,
+      enemies,
+      battle,
+      character,
+      quest,
+      team,
+      vip,
+      common,
+      message
+    }) => {
       return {
         ...user,
         ...common,
@@ -83,7 +127,8 @@ export default () => {
         loadingQuest: quest.loadingQuest,
         loadingTeam: team.loadingTeam,
         loadingVip: vip.loadingVip,
-        loadingImage: common.loadingImage
+        loadingImage: common.loadingImage,
+        loadingMessage: message.loadingMessage
       }
     }
   )
@@ -116,7 +161,8 @@ export default () => {
       loadingQuest ||
       loadingTeam ||
       loadingVip ||
-      loadingImage
+      loadingImage ||
+      loadingMessage
     )
   }
 
@@ -125,7 +171,7 @@ export default () => {
   const renderActionButton = () => {
     if (!!selectedCharacter.inBattle)
       return (
-        <StyledActionButton to="/field">
+        <StyledActionButton inRight to="/field">
           {texts.app.actionButton.backToBattle[language]}
         </StyledActionButton>
       )
@@ -138,7 +184,7 @@ export default () => {
       )
 
     return (
-      <StyledActionButton onClick={() => setShowonboarding(true)}>
+      <StyledActionButton to="/" onClick={() => setShowonboarding(true)}>
         {texts.app.actionButton.tutorial[language]}
       </StyledActionButton>
     )
@@ -188,6 +234,27 @@ export default () => {
               <Router />
             </Col>
           </StyledWrapper>
+          <StyledChangeLanguage
+            onClick={() =>
+              dispatch(changeLanguage(language === 'pt' ? 'us' : 'pt'))
+            }
+          >
+            {language === 'pt' ? (
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/2000px-Flag_of_the_United_States.svg.png"
+                alt="english"
+              />
+            ) : (
+              <img
+                src="https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/1280px-Flag_of_Brazil.svg.png"
+                alt="português"
+              />
+            )}
+          </StyledChangeLanguage>
+
+          {!selectedCharacter.inBattle && (
+            <StyledChatButton to="/chat">Chat</StyledChatButton>
+          )}
           {renderActionButton()}
           <Onboarding
             isOpen={showOnboarding}

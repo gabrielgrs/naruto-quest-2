@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { Page, Container, Button, Row, Col } from '../../../components'
-import { changeLanguage } from '../../../redux/common'
+import { Page, Container, Row, Col } from '../../../components'
 import { news } from './helpers'
 import texts from '../../../helpers/texts'
 
 const StyledNews = styled.div`
   cursor: pointer;
-  border: ${({ theme }) => `solid ${theme.colors.primary} 2px`};
-  border-radius: 10px 0 10px 0;
-  margin: 10px;
+  border-left: ${({ theme }) => `solid ${theme.colors.primary} 3px`};
+  background: ${({ theme }) => theme.colors.white};
+  border-radius: 0px 5px 5px 0px;
+  margin: 5px 10px;
+  padding: 5px 3px;
 
   & h4 {
     text-align: center;
@@ -24,7 +25,6 @@ const StyledNews = styled.div`
 
 export default props => {
   const [selectedNew, setSelectedNew] = useState(undefined)
-  const dispatch = useDispatch()
 
   const { language } = useSelector(({ common }) => ({
     ...common
@@ -48,19 +48,10 @@ export default props => {
       </Container>
       <Row>
         <Col sm={6}>
-          {language === 'pt' ? (
-            <Button onClick={() => dispatch(changeLanguage('us'))}>
-              Change language to English
-            </Button>
-          ) : (
-            <Button onClick={() => dispatch(changeLanguage('pt'))}>
-              Alterar idioma para Português
-            </Button>
-          )}
-        </Col>
-        <Col sm={6}>
+          <h3>Notícias</h3>
           {news.map((n, index) => (
             <StyledNews
+              key={index}
               onClick={() => onSelectNew(index)}
               isSelected={index === selectedNew}
             >
@@ -72,6 +63,7 @@ export default props => {
           ))}
         </Col>
       </Row>
+      <hr />
       <Row>
         <Col sm={4}>
           <h3>Curta nossa página</h3>
@@ -85,7 +77,7 @@ export default props => {
         </Col>
         <Col sm={4}>
           <h3>Entre em contato conosco</h3>
-          <b>help@narutoquest.com</b>
+          <b style={{ letterSpacing: 1 }}>help@narutoquest.com</b>
         </Col>
       </Row>
     </Page>
