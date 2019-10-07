@@ -6,13 +6,13 @@ import {
   StyledWrapper,
   StyledMessage,
   StyledMessageText,
-  StyledDateMessage,
+  // StyledDateMessage,
   StyledSenderName,
   StyledSenderLevel
 } from './styles'
 import { getAll, sendMessage } from '../../../redux/message'
 import texts from '../../../helpers/texts'
-import { format } from 'date-fns'
+// import { format } from 'date-fns'
 
 export default () => {
   const [isSendingMessage, setIsSendingMessage] = useState(false)
