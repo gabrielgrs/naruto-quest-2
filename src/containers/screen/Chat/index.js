@@ -64,6 +64,7 @@ export default () => {
 
     return messageList.map((m, index) => {
       const messageDate = new Date(m.createdAt).toISOString()
+      console.log(m.createdAt, messageDate)
       return (
         <Row key={index}>
           {!!m.sender && (
@@ -81,13 +82,13 @@ export default () => {
                       Level {m.sender.level}
                     </StyledSenderLevel>
                   </Row>
-                  <Row>
+                  {/* <Row>
                     <StyledDateMessage>
                       {Number.isNaN(messageDate)
                         ? 'Invalid Date'
                         : format(messageDate, 'dd/MM/YYYY HH:mm')}
                     </StyledDateMessage>
-                  </Row>
+                  </Row> */}
                 </Col>
                 <Col sm={10}>
                   <StyledMessageText>{m.text}</StyledMessageText>
