@@ -62,35 +62,42 @@ export default () => {
     if (!messageList.length)
       return <h2>{texts.chat.notFoundMessages[language]}</h2>
 
-    return messageList.map((m, index) => (
-      <Row key={index}>
-        {!!m.sender && (
-          <StyledMessage
-            fromGM={m.sender.name.includes('[GM]')}
-            fromUser={m.sender._id === selectedCharacter._id}
-          >
-            <Row>
-              <Col sm={2}>
-                <Row>
-                  <StyledSenderName>{m.sender.name}</StyledSenderName>
-                </Row>
-                <Row>
-                  <StyledSenderLevel>Level {m.sender.level}</StyledSenderLevel>
-                </Row>
-                <Row>
-                  <StyledDateMessage>
-                    {format(m.createdAt, 'dd/MM/YYYY HH:mm')}
-                  </StyledDateMessage>
-                </Row>
-              </Col>
-              <Col sm={10}>
-                <StyledMessageText>{m.text}</StyledMessageText>
-              </Col>
-            </Row>
-          </StyledMessage>
-        )}
-      </Row>
-    ))
+    return messageList.map((m, index) => {
+      const messageDate = new Date(m.createdAt).toISOString()
+      return (
+        <Row key={index}>
+          {!!m.sender && (
+            <StyledMessage
+              fromGM={m.sender.name.includes('[GM]')}
+              fromUser={m.sender._id === selectedCharacter._id}
+            >
+              <Row>
+                <Col sm={2}>
+                  <Row>
+                    <StyledSenderName>{m.sender.name}</StyledSenderName>
+                  </Row>
+                  <Row>
+                    <StyledSenderLevel>
+                      Level {m.sender.level}
+                    </StyledSenderLevel>
+                  </Row>
+                  <Row>
+                    <StyledDateMessage>
+                      {Number.isNaN(messageDate)
+                        ? 'Invalid Date'
+                        : format(messageDate, 'dd/MM/YYYY HH:mm')}
+                    </StyledDateMessage>
+                  </Row>
+                </Col>
+                <Col sm={10}>
+                  <StyledMessageText>{m.text}</StyledMessageText>
+                </Col>
+              </Row>
+            </StyledMessage>
+          )}
+        </Row>
+      )
+    })
   }
 
   return (
