@@ -40,7 +40,18 @@ export default () => {
     >
       <Container>
         <Row>
-          <Col sm={4}>
+          <Col sm={3}>
+            <h3>{texts.village.arena.title[language]}</h3>
+            <Link to="/arena">
+              <StyledCard>
+                <img
+                  src="https://res.cloudinary.com/dbmnsavja/image/upload/v1567016421/entrance_wryv1v.png"
+                  alt={texts.village.arena.title[language]}
+                />
+              </StyledCard>
+            </Link>
+          </Col>
+          <Col sm={3}>
             <h3>{texts.village.battlefield.title[language]}</h3>
             <Link to="/field">
               <StyledCard>
@@ -51,7 +62,7 @@ export default () => {
               </StyledCard>
             </Link>
           </Col>
-          <Col sm={4}>
+          <Col sm={3}>
             <h3>{texts.village.shop.title[language]}</h3>
             <Link to="/shop">
               <StyledCard>
@@ -59,7 +70,7 @@ export default () => {
               </StyledCard>
             </Link>
           </Col>
-          <Col sm={4}>
+          <Col sm={3}>
             <h3>{texts.village.hospital.title[language]}</h3>
             <Link to="/hospital">
               <StyledCard>

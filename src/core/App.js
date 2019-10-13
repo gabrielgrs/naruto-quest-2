@@ -252,7 +252,7 @@ export default () => {
             )}
           </StyledChangeLanguage>
 
-          {!selectedCharacter.inBattle && (
+          {isAuthenticated && (
             <StyledChatButton to="/chat">Chat</StyledChatButton>
           )}
           {renderActionButton()}

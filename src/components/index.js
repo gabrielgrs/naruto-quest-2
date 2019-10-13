@@ -1,4 +1,4 @@
-export { default as Arena } from './arena'
+// export { default as Arena } from './arena'
 export { default as Bag } from './bag'
 export { default as Home } from './home'
 export { default as Hospital } from './hospital'

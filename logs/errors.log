@@ -10,3 +10,5 @@
 {"message":"TypeError: Cannot read property 'selectedCharacter' of null","status":500,"level":"error","date":"2019-10-07T12:56:32.937Z"}
 {"message":"TypeError: Cannot read property 'selectedCharacter' of null","status":500,"level":"error","date":"2019-10-07T17:07:54.229Z"}
 {"message":"TypeError: Cannot read property 'selectedCharacter' of null","status":500,"level":"error","date":"2019-10-07T17:45:15.909Z"}
+{"message":"TokenExpiredError: jwt expired","status":500,"level":"error","date":"2019-10-09T02:17:24.162Z"}
+{"message":"TypeError: Cannot read property 'level' of undefined","status":500,"level":"error","date":"2019-10-09T14:18:22.144Z"}

@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const SALT_KEY = 'game'
 
 const generateToken = async data => {
-  return jwt.sign(data, SALT_KEY, { expiresIn: '1d' })
+  return jwt.sign(data, SALT_KEY, { expiresIn: '7d' })
 }
 
 const decodeToken = async token => {

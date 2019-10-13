@@ -12,8 +12,8 @@ const createData = (index, name, element, image, inStory) => ({
   },
   inStory,
   element,
-  exp: (index + 1) * 20,
-  gold: index * 5
+  exp: (index + 1) * 15,
+  gold: index * 7
 })
 
 const generateEnemies = () =>

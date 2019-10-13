@@ -31,7 +31,9 @@ async function authenticate(req, res) {
     const token = await authService.generateToken({
       _id: response._id,
       email,
-      role: response.role
+      role: response.role,
+      level: response.selectedCharacter.level,
+      selectedCharacterId: response.selectedCharacter._id
     })
 
     const { characters } = response

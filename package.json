@@ -36,6 +36,7 @@
     "nodemailer": "^6.3.0",
     "pm2": "^3.5.1",
     "react-transition-group": "^4.3.0",
+    "socket.io": "^2.3.0",
     "winston": "^3.2.1",
     "youch": "^2.0.10"
   },
@@ -59,6 +60,7 @@
     "redux-thunk": "^2.3.0",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.87.3",
+    "socket.io-client": "^2.3.0",
     "styled-components": "^4.3.2"
   },
   "eslintConfig": {

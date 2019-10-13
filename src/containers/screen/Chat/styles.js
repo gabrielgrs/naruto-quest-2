@@ -6,7 +6,7 @@ export const StyledWrapper = styled.div`
 
 export const StyledChatPanel = styled.div`
   min-width: 100%;
-  height: 300px;
+  height: 500px;
   padding: 10px;
   overflow: auto;
   letter-spacing: 1px;

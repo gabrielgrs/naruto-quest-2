@@ -1,6 +1,17 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+
+const pageAnimation = keyframes`
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+`
 
 export const StyledWrapper = styled.div`
+  animation: ${pageAnimation} 1s;
   background-color: rgba(255, 255, 255, 0.8);
   font-size: 1.2em;
 

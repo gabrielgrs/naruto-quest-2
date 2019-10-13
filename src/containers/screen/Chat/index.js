@@ -38,7 +38,7 @@ export default () => {
     if (!messageList.length) {
       dispatch(
         getAll(() => {
-          setTimeout(() => scrollToBottom(), 1000)
+          setTimeout(() => scrollToBottom(), 300)
         })
       )
       // TODO: change to socket

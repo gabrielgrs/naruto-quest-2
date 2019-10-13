@@ -11,6 +11,12 @@ export default {
     pt: 'Escolha entre o campo de batalha, loja ou hospital!',
     us: 'Choose from the Field, Shop or Hospital!'
   },
+  arena: {
+    title: {
+      pt: 'Arena PVP',
+      us: 'PVP Arena'
+    }
+  },
   battlefield: {
     title: {
       pt: 'Campo de Batalha',
