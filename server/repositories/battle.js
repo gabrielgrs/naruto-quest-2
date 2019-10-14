@@ -9,7 +9,7 @@ const update = (
   return model.findOneAndUpdate(
     { _id },
     {
-      enemy: enemy._id,
+      enemy: enemy ? enemy._id : undefined,
       $set: { currentEnemyLife, delayedSkills, lastCharacterAction },
       $push: { log: log }
     }

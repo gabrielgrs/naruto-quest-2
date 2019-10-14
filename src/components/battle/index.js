@@ -25,7 +25,21 @@ export default ({
     !!selectedCharacter.currentBattle &&
     !!selectedCharacter.currentBattle.oponent
 
-  const { oponent, enemy } = selectedCharacter.currentBattle
+  const { enemy, currentEnemyLife } = selectedCharacter.currentBattle
+
+  const getOponent = ({ currentBattle }) => {
+    if (currentBattle.oponent) {
+      if (currentBattle.oponent._id === selectedCharacter._id) {
+        return currentBattle.character
+      }
+    } else {
+      return currentBattle.oponent
+    }
+
+    return undefined
+  }
+
+  const oponent = getOponent(selectedCharacter)
 
   return (
     <Container>
@@ -108,10 +122,16 @@ export default ({
               {loadingBattle ||
               lastActionIsAttack === undefined ||
               !lastActionIsAttack ? (
-                <Image src={isPvp ? '' : enemy.image} isSelected />
+                <Image
+                  src={isPvp ? oponent.selectedJob.image : enemy.image}
+                  isSelected
+                />
               ) : (
                 <StyledAttackEffectReverse>
-                  <Image src={isPvp ? '' : enemy.image} isSelected />
+                  <Image
+                    src={isPvp ? oponent.selectedJob.image : enemy.image}
+                    isSelected
+                  />
                 </StyledAttackEffectReverse>
               )}
             </Col>
@@ -119,9 +139,9 @@ export default ({
           <Row>
             {/* TODO: validate enemy max life */}
             <ProgressBar
-              current={selectedCharacter.currentBattle.currentEnemyLife}
+              current={isPvp ? oponent.attributes.life : currentEnemyLife}
               max={
-                selectedCharacter.currentBattle.enemy.attributes.vitality * 10
+                isPvp ? oponent.stats.maxLife : enemy.attributes.vitality * 10
               }
               label="HP"
               color="green"

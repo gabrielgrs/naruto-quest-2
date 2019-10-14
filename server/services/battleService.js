@@ -115,6 +115,19 @@ const getValueWithVariation = value => {
   return Math.floor(Math.random() * (+max - +min)) + +min
 }
 
+async function pvpBattleAction(character, oponent, action) {
+  return {
+    characterDamage: 100,
+    enemyDamage: 10,
+    expReceived: 0,
+    characterLife: 100,
+    characterMana: 100,
+    enemyLife: 100,
+    goldToReceive: 100,
+    log: []
+  }
+}
+
 async function battleAction(character, battle, action) {
   const actionTypeIsDamager = action.type === 'damager'
 
@@ -180,7 +193,7 @@ async function battleAction(character, battle, action) {
     })
   }
 
-  const data = {
+  return {
     characterDamage,
     enemyDamage,
     expReceived,
@@ -190,10 +203,9 @@ async function battleAction(character, battle, action) {
     goldToReceive,
     log
   }
-
-  return data
 }
 
 module.exports = {
-  battleAction
+  battleAction,
+  pvpBattleAction
 }

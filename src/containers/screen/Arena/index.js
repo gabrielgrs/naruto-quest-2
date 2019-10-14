@@ -115,21 +115,23 @@ export default () => {
       <Button onClick={() => onSearchBattle(!searchingBattle)}>
         {searchingBattle ? 'Cancelar Procurar' : 'Procurar Batalha'}
       </Button>
-      {isInBattle && !!selectedCharacter.currentBattle && (
-        <Battle
-          selectedCharacter={selectedCharacter}
-          onUseItem={onUseItem}
-          onUseSkill={onUseSkill}
-          lastActionIsAttack={lastActionIsAttack}
-          loadingBattle={loadingBattle}
-          battleResolver={battleResolver}
-          selectedSkillToUse={selectedSkillToUse}
-          setSelectedSkillToUse={setSelectedSkillToUse}
-          selectedItemToUse={selectedItemToUse}
-          setSelectedItemToUse={setSelectedItemToUse}
-          onLeaveBattle={onLeaveBattle}
-        />
-      )}
+      {isInBattle &&
+        selectedCharacter.currentBattle &&
+        (selectedCharacter.enemy || selectedCharacter.oponent)(
+          <Battle
+            selectedCharacter={selectedCharacter}
+            onUseItem={onUseItem}
+            onUseSkill={onUseSkill}
+            lastActionIsAttack={lastActionIsAttack}
+            loadingBattle={loadingBattle}
+            battleResolver={battleResolver}
+            selectedSkillToUse={selectedSkillToUse}
+            setSelectedSkillToUse={setSelectedSkillToUse}
+            selectedItemToUse={selectedItemToUse}
+            setSelectedItemToUse={setSelectedItemToUse}
+            onLeaveBattle={onLeaveBattle}
+          />
+        )}
     </Page>
   )
 }

@@ -2,8 +2,10 @@ const battleRepository = require('../repositories/battle')
 const characterReponsitory = require('../repositories/character')
 const authService = require('./auth')
 
-const findBattle = (characterId, pvpList) => {
-  const oponent = pvpList.find(x => x._id != characterId)
+const findBattle = ({ selectedCharacterId }, pvpList) => {
+  const oponent = pvpList.find(
+    x => x.selectedCharacterId != selectedCharacterId
+  )
   return oponent
 }
 
@@ -39,8 +41,9 @@ function manipulateSocket(socket, io, socketInfos) {
           { selectedCharacterId, level },
           socketInfos.usersWaitingForPVP
         )
+        // console.log('info', selectedCharacterId)
         if (oponent) {
-          await createBattle(selectedCharacterId, oponent._id)
+          await createBattle(selectedCharacterId, oponent.selectedCharacterId)
           io.emit('foundBattle', {
             characterToken: userInfo.token,
             oponentToken: oponent.token

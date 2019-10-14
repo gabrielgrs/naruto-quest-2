@@ -26,7 +26,31 @@ const dynamicPopulate = model => {
       populate: {
         path: 'currentBattle',
         populate: {
-          path: 'oponent'
+          path: 'oponent',
+          populate: {
+            path: 'selectedJob'
+          }
+        }
+      }
+    })
+    .populate({
+      path: 'selectedCharacter',
+      populate: {
+        path: 'currentBattle',
+        populate: {
+          path: 'character'
+        }
+      }
+    })
+    .populate({
+      path: 'selectedCharacter',
+      populate: {
+        path: 'currentBattle',
+        populate: {
+          path: 'character',
+          populate: {
+            path: 'selectedJob'
+          }
         }
       }
     })

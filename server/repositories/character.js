@@ -64,12 +64,22 @@ const leaveQuest = _id =>
   model.findOneAndUpdate({ _id }, { $set: { currentQuest: null } })
 
 const updateUserAttributes = (_id, life, mana) => {
-  return model.findOneAndUpdate(
-    { _id },
-    {
-      $set: { 'attributes.life': life, 'attributes.mana': mana }
-    }
-  )
+  if (!!mana) {
+    return model.findOneAndUpdate(
+      { _id },
+      {
+        $set: { 'attributes.life': life, 'attributes.mana': mana }
+      }
+    )
+  } else {
+    // OPONENT
+    return model.findOneAndUpdate(
+      { _id },
+      {
+        $set: { 'attributes.life': life }
+      }
+    )
+  }
 }
 
 const levelUp = (_id, characterLevel) => {

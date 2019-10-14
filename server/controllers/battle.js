@@ -63,25 +63,50 @@ async function battleAction(req, res) {
       return res.status(400).send({ message: errorMessage })
     }
 
-    const battleResolver = await battleService.battleAction(
-      selectedCharacter,
-      selectedBattle,
-      action
-    )
+    const isPvp = !!selectedBattle.oponent
+
+    const oponentId =
+      selectedBattle.character === selectedCharacter._id
+        ? selectedBattle.oponent
+        : selectedBattle.character
+
+    const oponent = isPvp
+      ? await characterRepository.getById(oponentId)
+      : undefined
+
+    const battleResolver = isPvp
+      ? await battleService.pvpBattleAction(selectedCharacter, oponent, action)
+      : await battleService.battleAction(
+          selectedCharacter,
+          selectedBattle,
+          action
+        )
 
     const delayedSkills = getDelayedSkills(
+      selectedCharacter,
       selectedBattle.delayedSkills,
       req.body.action
     )
 
-    await repository.update(battleId, {
-      enemy: selectedBattle.enemy,
-      lastCharacterAction: Date.now(),
-      // lastOponentAction: Date.now(),
-      currentEnemyLife: battleResolver.enemyLife,
-      log: battleResolver.log,
-      delayedSkills
-    })
+    if (isPvp) {
+      await repository.update(battleId, {
+        log: battleResolver.log,
+        delayedSkills
+      })
+      // UPDATE OPONENT ATTRIBUTES
+      await characterRepository.updateUserAttributes(
+        oponent._id,
+        battleResolver.enemyLife,
+        battleResolver.characterMana
+      )
+    } else {
+      await repository.update(battleId, {
+        enemy: selectedBattle.enemy,
+        currentEnemyLife: battleResolver.enemyLife,
+        log: battleResolver.log,
+        delayedSkills
+      })
+    }
 
     await characterRepository.updateUserAttributes(
       selectedCharacter._id,

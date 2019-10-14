@@ -1,12 +1,18 @@
-const getDelayedSkills = (delayedSkills, currentAction) => {
+const getDelayedSkills = (character, delayedSkills, currentAction) => {
   if (!delayedSkills && !currentAction.price)
-    return { code: +currentAction.code, delay: +currentAction.delay }
+    return {
+      characterId: character._id,
+      code: +currentAction.code,
+      delay: +currentAction.delay
+    }
 
-  const hasItem = !!delayedSkills.find(x => +x.code === +currentAction.code)
+  const hasItem = !!delayedSkills.find(
+    x => +x.code === +currentAction.code && x._id === character._id
+  )
 
   let cleanedArray = []
   delayedSkills.forEach(x => {
-    if (x.delay > 1) {
+    if (x.delay > 1 && x.characterId === character._id) {
       return cleanedArray.push({ delay: x.delay - 1, code: x.code })
     }
   })
@@ -14,7 +20,11 @@ const getDelayedSkills = (delayedSkills, currentAction) => {
   if (!hasItem && !currentAction.price) {
     return [
       ...(cleanedArray || []),
-      { code: +currentAction.code, delay: +currentAction.delay }
+      {
+        characterId: character._id,
+        code: +currentAction.code,
+        delay: +currentAction.delay
+      }
     ]
   }
 

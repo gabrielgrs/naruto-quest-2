@@ -28,13 +28,20 @@ async function authenticate(req, res) {
     if (!response)
       return res.status(400).send({ message: 'Login ou senha inválido' })
 
-    const token = await authService.generateToken({
-      _id: response._id,
-      email,
-      role: response.role,
-      level: response.selectedCharacter.level,
-      selectedCharacterId: response.selectedCharacter._id
-    })
+    // TODO
+    const token = response.selectedCharacter
+      ? await authService.generateToken({
+          _id: response._id,
+          email,
+          role: response.role,
+          level: response.selectedCharacter.level,
+          selectedCharacterId: response.selectedCharacter._id
+        })
+      : await authService.generateToken({
+          _id: response._id,
+          email,
+          role: response.role
+        })
 
     const { characters } = response
 
