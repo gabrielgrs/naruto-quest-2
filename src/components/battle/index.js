@@ -23,7 +23,8 @@ export default ({
 }) => {
   const { enemy, currentEnemyLife, ...battle } = selectedCharacter.currentBattle
 
-  if (!battle.oponent && !!enemy) return null
+  debugger
+  if (!battle.oponent && !enemy) return null
   const isPvp = !!battle.oponent
 
   const oponent =

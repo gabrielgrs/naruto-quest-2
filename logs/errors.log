@@ -29,3 +29,17 @@
 {"message":"TypeError: Cannot read property 'find' of undefined","status":500,"level":"error","date":"2019-10-15T17:40:15.990Z"}
 {"message":"TypeError: Cannot read property 'find' of undefined","status":500,"level":"error","date":"2019-10-15T17:40:30.519Z"}
 {"message":"ReferenceError: res is not defined","status":500,"level":"error","date":"2019-10-15T17:45:45.385Z"}
+{"message":"TypeError: Cannot read property 'log' of undefined","status":500,"level":"error","date":"2019-10-15T18:47:03.018Z"}
+{"message":"TypeError: Cannot read property 'log' of undefined","status":500,"level":"error","date":"2019-10-15T18:47:32.548Z"}
+{"message":"TypeError: Cannot read property 'log' of undefined","status":500,"level":"error","date":"2019-10-15T18:48:08.366Z"}
+{"message":"TypeError: Cannot read property 'log' of undefined","status":500,"level":"error","date":"2019-10-15T18:48:48.341Z"}
+{"message":"TypeError: Cannot read property 'log' of undefined","status":500,"level":"error","date":"2019-10-15T18:49:43.149Z"}
+{"message":"TypeError: Cannot read property 'log' of undefined","status":500,"level":"error","date":"2019-10-15T18:50:25.797Z"}
+{"message":"TypeError: Cannot read property 'log' of undefined","status":500,"level":"error","date":"2019-10-15T18:50:46.679Z"}
+{"message":"TypeError: Cannot read property 'log' of undefined","status":500,"level":"error","date":"2019-10-15T18:53:17.978Z"}
+{"message":"TypeError: Cannot read property 'log' of undefined","status":500,"level":"error","date":"2019-10-15T18:53:34.043Z"}
+{"message":"TypeError: Cannot read property 'actionType' of undefined","status":500,"level":"error","date":"2019-10-15T18:58:44.112Z"}
+{"message":"TypeError: Cannot read property 'actionType' of undefined","status":500,"level":"error","date":"2019-10-15T18:58:44.112Z"}
+{"message":"TypeError: Cannot read property '_id' of undefined","status":500,"level":"error","date":"2019-10-15T19:02:18.985Z"}
+{"message":"TypeError: Cannot read property '_id' of undefined","status":500,"level":"error","date":"2019-10-15T19:02:18.985Z"}
+{"message":"TypeError: Cannot read property 'actionType' of undefined","status":500,"level":"error","date":"2019-10-15T19:10:13.231Z"}

@@ -33,6 +33,7 @@ const schema = new Schema({
     {
       actionType: String,
       description: String,
+      value: Number,
       who: {
         type: Schema.Types.ObjectId,
         ref: 'Character'

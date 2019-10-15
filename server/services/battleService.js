@@ -115,7 +115,7 @@ const getValueWithVariation = value => {
   return Math.floor(Math.random() * (+max - +min)) + +min
 }
 
-async function pvpBattleAction(character, oponent, action) {
+async function pvpBattleAction(character, oponent, action, battleLog) {
   const actionTypeIsDamager = action.type === 'damager'
 
   // Initial Status
@@ -124,7 +124,6 @@ async function pvpBattleAction(character, oponent, action) {
   let enemyLife = oponent.attributes.life
   let expReceived = 0
   let firstDescription = ''
-  let secondDescription = ''
   let goldToReceive = 0
 
   const characterDamage = getValueWithVariation(
@@ -136,11 +135,10 @@ async function pvpBattleAction(character, oponent, action) {
 
   if (actionTypeIsDamager) {
     enemyLife = enemyLife - characterDamage
-    firstDescription = `Você causou ${characterDamage} dano no inimigo`
+    firstDescription = `${character._id} causou ${characterDamage} dano no inimigo`
   } else {
     characterLife = recoverCharacterHp(action, character)
-    firstDescription = `Você recuperou ${action.lifeRecovery} da sua vida`
-    // Verify if is item
+    firstDescription = `${character._id} recuperou ${action.lifeRecovery} da sua vida`
   }
 
   characterMana = action.cost ? characterMana - action.cost : characterMana
@@ -152,12 +150,8 @@ async function pvpBattleAction(character, oponent, action) {
     {
       actionType: actionTypeIsDamager ? action.type : 'recovery',
       description: firstDescription,
+      value: actionTypeIsDamager ? characterDamage : undefined,
       who: character._id
-    },
-    {
-      actionType: 'damager',
-      description: secondDescription,
-      who: oponent._id
     }
   ]
 
@@ -166,7 +160,7 @@ async function pvpBattleAction(character, oponent, action) {
     goldToReceive = 0
     log.push({
       actionType: 'death',
-      description: 'Monstro morreu',
+      description: 'Inimigo morreu',
       who: oponent._id
     })
   }
@@ -180,13 +174,20 @@ async function pvpBattleAction(character, oponent, action) {
     })
   }
 
+  const lastAction = battleLog
+    .slice(battleLog.length - 2, battleLog.length)
+    .find(x => String(x.who) !== String(character._id))
+
   const data = {
     characterDamage,
-    enemyDamage,
+    enemyDamage:
+      lastAction && lastAction.actionType === 'damager'
+        ? lastAction.value
+        : undefined,
     expReceived,
-    characterLife: 100,
+    characterLife,
     characterMana,
-    enemyLife: 100,
+    enemyLife,
     goldToReceive,
     log
   }

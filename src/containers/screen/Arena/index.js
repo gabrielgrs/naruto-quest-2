@@ -117,7 +117,7 @@ export default () => {
       </Button>
       {isInBattle &&
         selectedCharacter.currentBattle &&
-        (selectedCharacter.enemy || selectedCharacter.oponent)(
+        (selectedCharacter.enemy || selectedCharacter.oponent) && (
           <Battle
             selectedCharacter={selectedCharacter}
             onUseItem={onUseItem}

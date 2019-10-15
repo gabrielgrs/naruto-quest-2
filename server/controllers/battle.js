@@ -77,7 +77,12 @@ async function battleAction(req, res) {
       : undefined
 
     const battleResolver = isPvp
-      ? await battleService.pvpBattleAction(selectedCharacter, oponent, action)
+      ? await battleService.pvpBattleAction(
+          selectedCharacter,
+          oponent,
+          action,
+          selectedBattle.log
+        )
       : await battleService.battleAction(
           selectedCharacter,
           selectedBattle,
@@ -156,7 +161,7 @@ async function battleAction(req, res) {
       }
 
       await characterRepository.leaveFromBattle(selectedCharacter._id)
-      await characterRepository.leaveFromBattle(oponent._id)
+      if (!!oponent) await characterRepository.leaveFromBattle(oponent._id)
       await characterRepository.receivedGold(
         selectedCharacter._id,
         goldWithBonus
