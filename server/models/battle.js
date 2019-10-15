@@ -23,6 +23,7 @@ const schema = new Schema({
   },
   delayedSkills: [
     {
+      characterId: { type: Schema.Types.ObjectId, ref: 'Character' },
       code: Number,
       delay: Number
     }

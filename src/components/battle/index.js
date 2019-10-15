@@ -21,25 +21,15 @@ export default ({
   selectedItemToUse,
   setSelectedItemToUse
 }) => {
-  const isPvp =
-    !!selectedCharacter.currentBattle &&
-    !!selectedCharacter.currentBattle.oponent
+  const { enemy, currentEnemyLife, ...battle } = selectedCharacter.currentBattle
 
-  const { enemy, currentEnemyLife } = selectedCharacter.currentBattle
+  if (!battle.oponent && !!enemy) return null
+  const isPvp = !!battle.oponent
 
-  const getOponent = ({ currentBattle }) => {
-    if (currentBattle.oponent) {
-      if (currentBattle.oponent._id === selectedCharacter._id) {
-        return currentBattle.character
-      }
-    } else {
-      return currentBattle.oponent
-    }
-
-    return undefined
-  }
-
-  const oponent = getOponent(selectedCharacter)
+  const oponent =
+    battle.character._id === selectedCharacter._id
+      ? battle.oponent
+      : battle.character
 
   return (
     <Container>

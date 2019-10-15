@@ -16,3 +16,16 @@
 {"message":"TypeError: Cannot read property 'level' of undefined","status":500,"level":"error","date":"2019-10-13T22:01:06.685Z"}
 {"message":"TypeError: Cannot read property '_id' of undefined","status":500,"level":"error","date":"2019-10-14T20:58:08.678Z"}
 {"message":"TypeError: Cannot read property '_id' of undefined","status":500,"level":"error","date":"2019-10-14T21:13:06.862Z"}
+{"message":"TypeError: Cannot read property 'log' of undefined","status":500,"level":"error","date":"2019-10-14T21:25:27.906Z"}
+{"message":"ReferenceError: battle is not defined","status":500,"level":"error","date":"2019-10-14T21:27:07.255Z"}
+{"message":"ReferenceError: battle is not defined","status":500,"level":"error","date":"2019-10-14T21:28:29.654Z"}
+{"message":"MongoError: E11000 duplicate key error index: narutogame_validations.users.$email_1 dup key: { : \"gabriel3@gmail.com\" }","status":500,"level":"error","date":"2019-10-15T16:22:01.869Z"}
+{"message":"MongoError: Modifiers operate on fields but we found type array instead. For example: {$mod: {<field>: ...}} not {$set: [ null, null ]}","status":500,"level":"error","date":"2019-10-15T17:17:32.341Z"}
+{"message":"ReferenceError: battle is not defined","status":500,"level":"error","date":"2019-10-15T17:37:01.256Z"}
+{"message":"ReferenceError: battle is not defined","status":500,"level":"error","date":"2019-10-15T17:37:01.256Z"}
+{"message":"TypeError: Cannot read property 'find' of undefined","status":500,"level":"error","date":"2019-10-15T17:37:33.384Z"}
+{"message":"TypeError: Cannot read property 'find' of undefined","status":500,"level":"error","date":"2019-10-15T17:38:29.434Z"}
+{"message":"TypeError: Cannot read property 'find' of undefined","status":500,"level":"error","date":"2019-10-15T17:38:46.123Z"}
+{"message":"TypeError: Cannot read property 'find' of undefined","status":500,"level":"error","date":"2019-10-15T17:40:15.990Z"}
+{"message":"TypeError: Cannot read property 'find' of undefined","status":500,"level":"error","date":"2019-10-15T17:40:30.519Z"}
+{"message":"ReferenceError: res is not defined","status":500,"level":"error","date":"2019-10-15T17:45:45.385Z"}

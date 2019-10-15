@@ -116,16 +116,82 @@ const getValueWithVariation = value => {
 }
 
 async function pvpBattleAction(character, oponent, action) {
-  return {
-    characterDamage: 100,
-    enemyDamage: 10,
-    expReceived: 0,
-    characterLife: 100,
-    characterMana: 100,
-    enemyLife: 100,
-    goldToReceive: 100,
-    log: []
+  const actionTypeIsDamager = action.type === 'damager'
+
+  // Initial Status
+  let characterLife = character.attributes.life
+  let characterMana = character.attributes.mana
+  let enemyLife = oponent.attributes.life
+  let expReceived = 0
+  let firstDescription = ''
+  let secondDescription = ''
+  let goldToReceive = 0
+
+  const characterDamage = getValueWithVariation(
+    getCharacterDamage(action, character, oponent)
+  )
+  const enemyDamage = getValueWithVariation(
+    getEnemyDamage(action, character, oponent)
+  )
+
+  if (actionTypeIsDamager) {
+    enemyLife = enemyLife - characterDamage
+    firstDescription = `Você causou ${characterDamage} dano no inimigo`
+  } else {
+    characterLife = recoverCharacterHp(action, character)
+    firstDescription = `Você recuperou ${action.lifeRecovery} da sua vida`
+    // Verify if is item
   }
+
+  characterMana = action.cost ? characterMana - action.cost : characterMana
+
+  characterLife = characterLife - enemyDamage
+  secondDescription = `Você recebeu ${enemyDamage} de dano`
+
+  let log = [
+    {
+      actionType: actionTypeIsDamager ? action.type : 'recovery',
+      description: firstDescription,
+      who: character._id
+    },
+    {
+      actionType: 'damager',
+      description: secondDescription,
+      who: oponent._id
+    }
+  ]
+
+  if (enemyLife < 1) {
+    expReceived = 0
+    goldToReceive = 0
+    log.push({
+      actionType: 'death',
+      description: 'Monstro morreu',
+      who: oponent._id
+    })
+  }
+
+  if (characterLife < 1) {
+    characterLife = 0
+    log.push({
+      actionType: 'death',
+      description: 'Você morreu',
+      who: character._id
+    })
+  }
+
+  const data = {
+    characterDamage,
+    enemyDamage,
+    expReceived,
+    characterLife: 100,
+    characterMana,
+    enemyLife: 100,
+    goldToReceive,
+    log
+  }
+
+  return data
 }
 
 async function battleAction(character, battle, action) {

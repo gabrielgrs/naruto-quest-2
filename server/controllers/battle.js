@@ -30,8 +30,7 @@ async function enterInBattle(req, res) {
     const data = await repository.insert({
       character: selectedCharacter._id,
       enemy: enemyId,
-      currentEnemyLife: attributes.vitality * 10,
-      lastCharacterAction: Date.now()
+      currentEnemyLife: attributes.vitality * 10
     })
 
     await characterRepository.enterInBattle(selectedCharacter._id, data._id)
@@ -54,9 +53,17 @@ async function battleAction(req, res) {
 
     const selectedBattle = await repository.getById(battleId)
 
+    const isCharacterAction =
+      String(selectedBattle.character) === String(selectedCharacter._id)
+
+    const oponentId = isCharacterAction
+      ? selectedBattle.oponent
+      : selectedBattle.character
+
     const errorMessage = await battleValidator.battleAction(
       req.body.action,
-      selectedBattle.delayedSkills
+      selectedBattle,
+      isCharacterAction
     )
 
     if (errorMessage) {
@@ -64,11 +71,6 @@ async function battleAction(req, res) {
     }
 
     const isPvp = !!selectedBattle.oponent
-
-    const oponentId =
-      selectedBattle.character === selectedCharacter._id
-        ? selectedBattle.oponent
-        : selectedBattle.character
 
     const oponent = isPvp
       ? await characterRepository.getById(oponentId)
@@ -89,10 +91,19 @@ async function battleAction(req, res) {
     )
 
     if (isPvp) {
-      await repository.update(battleId, {
-        log: battleResolver.log,
-        delayedSkills
-      })
+      if (isCharacterAction) {
+        await repository.update(battleId, {
+          log: battleResolver.log,
+          delayedSkills,
+          lastCharacterAction: Date.now()
+        })
+      } else {
+        await repository.update(battleId, {
+          log: battleResolver.log,
+          delayedSkills,
+          lastOponentAction: Date.now()
+        })
+      }
       // UPDATE OPONENT ATTRIBUTES
       await characterRepository.updateUserAttributes(
         oponent._id,
@@ -145,6 +156,7 @@ async function battleAction(req, res) {
       }
 
       await characterRepository.leaveFromBattle(selectedCharacter._id)
+      await characterRepository.leaveFromBattle(oponent._id)
       await characterRepository.receivedGold(
         selectedCharacter._id,
         goldWithBonus

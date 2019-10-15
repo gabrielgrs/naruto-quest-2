@@ -13,7 +13,11 @@ const getDelayedSkills = (character, delayedSkills, currentAction) => {
   let cleanedArray = []
   delayedSkills.forEach(x => {
     if (x.delay > 1 && x.characterId === character._id) {
-      return cleanedArray.push({ delay: x.delay - 1, code: x.code })
+      return cleanedArray.push({
+        characterId: character._id,
+        delay: x.delay - 1,
+        code: x.code
+      })
     }
   })
 
